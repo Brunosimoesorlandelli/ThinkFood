@@ -5,12 +5,12 @@ import java.sql.Date;
 public class Pagamento {
 	private int cod;
 	private Date data;
-	private Status status;
+	private StatusPagamento status;
 	private double valorPago;
 	private int codTipoPagamento;
 	private int codNotaFiscal;
 
-	public Pagamento(int cod, Date data, Status status, double valorPago, int codTipoPagamento, int codNotaFiscal) {
+	public Pagamento(int cod, Date data, StatusPagamento status, double valorPago, int codTipoPagamento, int codNotaFiscal) {
 
 		this.cod = cod;
 		this.data = data;
@@ -37,11 +37,11 @@ public class Pagamento {
 		this.data = data;
 	}
 
-	public Status getStatus() {
+	public StatusPagamento getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(StatusPagamento status) {
 		this.status = status;
 	}
 
