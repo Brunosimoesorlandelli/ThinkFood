@@ -1,16 +1,15 @@
 package dados;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import beans.Endereco;
 import beans.Fornecedor;
 
 public class RepositorioFornecedores implements  Serializable, IRepositorioFornecedores{
@@ -22,6 +21,7 @@ public class RepositorioFornecedores implements  Serializable, IRepositorioForne
 	/**
 	 *
 	 */
+	private static Connection connection;
 	private static IRepositorioFornecedores instanceUser;
 	private ArrayList<Fornecedor> fornecedores;
 	private int next;
@@ -36,6 +36,10 @@ public class RepositorioFornecedores implements  Serializable, IRepositorioForne
 			instanceUser = new RepositorioFornecedores();
 		}
 		return instanceUser;
+	}
+	
+	public void conectar(Connection connect) {
+		RepositorioFornecedores.connection = connect;
 	}
 
 	
@@ -92,57 +96,47 @@ public class RepositorioFornecedores implements  Serializable, IRepositorioForne
 	 * @see dados.IRepositorioFornecedores#cadastrar(beans.Fornecedor)
 	 */
 	@Override
-	public boolean cadastrar(Fornecedor p){
-		if (p != null) {
-			fornecedores.add(p);
-			this.next = next + 1;
-			//RepositorioFornecedores.salvar();
-			return true;
-		}
-		return false;
-	}
-
-	private int procurarIndice(String cnpj) {
-		int indice = 0;
-		boolean found = false;
-		while (found != true && indice < this.next) {
-			if (cnpj.equals(this.fornecedores.get(indice).getCnpj())) {
-				found = true;
-			} else {
-				indice = indice + 1;
-			}
-		}
-		return indice;
+	public boolean cadastrar(Fornecedor p) throws Exception{
+		String query = "insert into fornecedor (cnpj, email, razao, endereco, fone)values(?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, p.getCnpj());
+		ps.setString(2, p.getEmail());
+		ps.setString(3, p.getRazaoSocial());
+		ps.setString(4, p.getEndereco().getCep());
+		ps.setInt(5, p.getFone());
+		
+		ps.executeUpdate();
+		return true;
 	}
 
 	/* (non-Javadoc)
 	 * @see dados.IRepositorioFornecedores#procurar(java.lang.String)
 	 */
 	@Override
-	public Fornecedor procurar(String cnpj) {
-		int i = this.procurarIndice(cnpj);
-		Fornecedor saida = null;
-		if (i != this.next) {
-			saida = this.fornecedores.get(i);
-		} else {
-			System.out.println("O FORNECEDOR NAO FOI ENCONTRADO!");
+	public Fornecedor procurar(String cnpj) throws Exception {
+		Fornecedor f = null;
+		String query = "select * from fornecedor where cnpj_fornecedor = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, cnpj);
+		ResultSet rs = ps.executeQuery();
+		
+		
+		while(rs.next()) {
+			//f = new Fornecedor(rs.getString("cnpj_fornecedor"), rs.getString("email_fornecedor"), rs.getString("razao_fornecedor"), rs.getString("fornecedor_end"), rs.getInt("fone") );
 		}
-
-		return saida;
+		return null;
+		
 	}
 
 	/* (non-Javadoc)
 	 * @see dados.IRepositorioFornecedores#remover(java.lang.String)
 	 */
-	@Override
-	public boolean remover(String cnpj) {
-		if (existe(cnpj)) {
-			Fornecedor p = procurar(cnpj);
-			this.fornecedores.remove(p);
-			//RepositorioFornecedores.salvar();
-			return true;
-		}
-		return false;
+	public boolean remover(Fornecedor f) throws SQLException {
+		String query = "delete from fornecedor where cnpj =?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, f.getCnpj());
+		ps.executeUpdate();
+		return true;
 	}
 	/*
 	@Override
@@ -161,7 +155,7 @@ public class RepositorioFornecedores implements  Serializable, IRepositorioForne
 	/* (non-Javadoc)
 	 * @see dados.IRepositorioFornecedores#existe(java.lang.String)
 	 */
-	@Override
+	/*
 	public boolean existe(String cnpj) {
 		boolean existe = false;
 		Fornecedor u = this.procurar(cnpj);
@@ -172,7 +166,7 @@ public class RepositorioFornecedores implements  Serializable, IRepositorioForne
 			System.out.println("Fornecedor nao existe!");
 		}
 		return existe;
-	}
+	}*/
 
 	
 	/* (non-Javadoc)

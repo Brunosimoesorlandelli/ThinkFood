@@ -5,13 +5,28 @@ public class Fornecedor {
 	private String email;
 	private String razaoSocial;
 	private Endereco endereco;
+	private int fone;
 	
-	public Fornecedor(String cnpj, String email, String razaoSocial, Endereco endereco) {
+	public Fornecedor(String cnpj, String email, String razaoSocial, Endereco endereco, int fone) {
 		this.cnpj = cnpj;
 		this.email = email;
 		this.razaoSocial = razaoSocial;
 		this.endereco = endereco;
+		this.fone = fone;
 	}
+
+	
+	public int getFone() {
+		return fone;
+	}
+
+
+
+	public void setFone(int fone) {
+		this.fone = fone;
+	}
+
+
 
 	public String getCnpj() {
 		return cnpj;

@@ -1,16 +1,17 @@
 package dados;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Fornecedor;
 
 public interface IRepositorioFornecedores {
 
-	boolean cadastrar(Fornecedor p);
+	boolean cadastrar(Fornecedor p) throws Exception;
 
-	Fornecedor procurar(String cnpj);
+	Fornecedor procurar(String cnpj) throws Exception;
 
-	boolean remover(String cnpj);
+	boolean remover(Fornecedor f) throws SQLException;
 	/*
 	@Override
 	public boolean alterarProduto(String nome) {
