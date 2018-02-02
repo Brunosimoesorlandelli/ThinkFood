@@ -1,4 +1,4 @@
-package Negocio.beans;
+package Beans;
 
 //VERIFICAR SE TA CERTO.
 
