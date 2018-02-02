@@ -1,4 +1,4 @@
-package Negocio;
+package Negocio.beans;
 
 import java.sql.Date;
 import java.sql.Time;

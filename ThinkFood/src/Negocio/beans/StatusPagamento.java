@@ -1,4 +1,4 @@
-package Negocio;
+package Negocio.beans;
 
 public enum StatusPagamento {
 	PAGO,

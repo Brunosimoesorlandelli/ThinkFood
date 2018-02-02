@@ -1,4 +1,4 @@
-package Negocio;
+package Negocio.beans;
 //
 //TALVEZ TENHA ALGO FALTANDO
 //

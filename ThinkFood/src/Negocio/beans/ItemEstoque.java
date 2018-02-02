@@ -1,4 +1,4 @@
-package Negocio;
+package Negocio.beans;
 
 //VERIFICAR SE TA CERTO.
 
