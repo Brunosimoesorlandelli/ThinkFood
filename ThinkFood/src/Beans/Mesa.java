@@ -1,4 +1,4 @@
-package Negocio.beans;
+package Beans;
 //TEM MAIS COISA PRA IMPLEMENTAR EU ACHO.
 
 public class Mesa {
