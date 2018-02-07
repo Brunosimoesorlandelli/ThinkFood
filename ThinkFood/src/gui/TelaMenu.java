@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import java.awt.SystemColor;
 
 public class TelaMenu extends JFrame {
 
@@ -41,6 +42,7 @@ public class TelaMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaMenu() {
+		setResizable(false);
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -63,7 +65,7 @@ public class TelaMenu extends JFrame {
 		JMenuItem mntmReserva = new JMenuItem("Reserva");
 		mnMenu.add(mntmReserva);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
