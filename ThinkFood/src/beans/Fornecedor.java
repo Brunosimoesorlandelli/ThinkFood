@@ -4,29 +4,24 @@ public class Fornecedor {
 	private String cnpj;
 	private String email;
 	private String razaoSocial;
-	private Endereco endereco;
+	private String CEP;
 	private int fone;
-	
-	public Fornecedor(String cnpj, String email, String razaoSocial, Endereco endereco, int fone) {
+
+	public Fornecedor(String cnpj, String email, String razaoSocial, String CEP, int fone) {
 		this.cnpj = cnpj;
 		this.email = email;
 		this.razaoSocial = razaoSocial;
-		this.endereco = endereco;
+		this.CEP = CEP;
 		this.fone = fone;
 	}
 
-	
 	public int getFone() {
 		return fone;
 	}
 
-
-
 	public void setFone(int fone) {
 		this.fone = fone;
 	}
-
-
 
 	public String getCnpj() {
 		return cnpj;
@@ -52,12 +47,12 @@ public class Fornecedor {
 		this.razaoSocial = razaoSocial;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public String getCEP() {
+		return CEP;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setCEP(String CEP) {
+		this.CEP = CEP;
 	}
 
 }
