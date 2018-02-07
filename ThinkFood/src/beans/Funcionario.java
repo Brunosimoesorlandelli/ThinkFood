@@ -7,15 +7,15 @@ public class Funcionario {
 	private String nome;
 	private String cpf;
 	private Date dataNasc;
-	private Endereco endereco;
+	private String CEP;
 	private double salario;
 	private int numero;
 
-	public Funcionario(String nome, String cpf, Date dataNasc, Endereco endereco, double salario, int numero) {
+	public Funcionario(String nome, String cpf, Date dataNasc, String CEP, double salario, int numero) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNasc = dataNasc;
-		this.endereco = endereco;
+		this.CEP = CEP;
 		this.salario = salario;
 		this.numero = numero;
 
@@ -45,12 +45,13 @@ public class Funcionario {
 		this.dataNasc = dataNasc;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	
+	public String getCEP() {
+		return CEP;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setCEP(String cEP) {
+		CEP = cEP;
 	}
 
 	public double getSalario() {

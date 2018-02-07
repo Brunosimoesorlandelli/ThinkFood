@@ -9,11 +9,9 @@ public interface IRepositorioProdutos {
 
 	boolean cadastrar(Produto p) throws SQLException;
 
-	Produto procurar(int id);
+	Produto procurar(int id) throws SQLException;
 
-	boolean remover(int id);
-
-	boolean existe(int id);
+	boolean remover(Produto p) throws SQLException;
 
 	void printar(Produto p);
 

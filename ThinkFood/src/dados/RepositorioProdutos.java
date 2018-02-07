@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -71,7 +72,7 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 */
 	@Override
 	public boolean cadastrar(Produto p) throws SQLException {
-		String query = "insert into produtoref (unidade, codigo, descricao, qtdMinStk, dtInicio, dtFim)values(?,?,?,?,?,?)";
+		String query = "insert into produtoref (unidade, codigo, descricao, qtdMinStk, dtInicio, dtFim, cnpj_fornecedor, cod_categ, preco_ult_compra, qtd_atual_estoque, freq_pedido)values(?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, p.getUnidade());
 		ps.setInt(2, p.getCodigo());
@@ -79,40 +80,48 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 		ps.setInt(4, p.getQtdMinStk());
 		ps.setDate(5, p.getDt_inicio());
 		ps.setDate(6, p.getDt_fim());
+		ps.setString(7, p.getCnpj_fornecedor());
+		ps.setInt(8, p.getCod_categ());
+		ps.setDouble(9, p.getPreco_ult_compra());
+		ps.setInt(10, p.getQtd_atual_estoque());
+		ps.setInt(11, p.getFreq_pedido());
 
 		ps.executeUpdate();
 		return true;
 	}
 
-	private int procurarIndice(int id) {
-		int indice = 0;
-		boolean found = false;
-		while (found != true && indice < this.next) {
-			if (id == produtos.get(indice).getCodigo()) {
-				found = true;
-			} else {
-				indice = indice + 1;
-			}
-		}
-		return indice;
-	}
+//	private int procurarIndice(int id) {
+//		int indice = 0;
+//		boolean found = false;
+//		while (found != true && indice < this.next) {
+//			if (id == produtos.get(indice).getCodigo()) {
+//				found = true;
+//			} else {
+//				indice = indice + 1;
+//			}
+//		}
+//		return indice;
+//	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see Dados.IRepositorioProdutos#procurar(int)
 	 */
-	@Override
-	public Produto procurar(int id) {
-		int i = this.procurarIndice(id);
-		Produto saida = null;
-		if (i != this.next) {
-			saida = this.produtos.get(i);
-		} else {
-			System.out.println("O PRODUTO NAO FOI ENCONTRADO!");
-		}
+	
+	public Produto procurar(int id) throws SQLException {
+		Produto p = null;
+		String query = "select * from produtoRef where produtoRef_cod = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setInt(2, id);
+		ResultSet rs = ps.executeQuery();
 
-		return saida;
+		while (rs.next()) {
+			p = new Produto(rs.getInt("produtoRef_unit"), rs.getInt("produtoRef_cod"),
+					rs.getString("produtoRef_desc"),rs.getInt("produtoRef_qtdMinStk"), rs.getDate("fornece_dtInicio"), rs.getDate("fornece_dtFim"), rs.getString("cnpj_fornecedor"), rs.getInt("cod_categ"), rs.getDouble("preco_ult_compra"), rs.getInt("qtd_atual_estoque"), rs.getInt("freq_pedido"));
+		}
+		return p;
+
 	}
 
 	/*
@@ -120,15 +129,13 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#remover(int)
 	 */
-	@Override
-	public boolean remover(int id) {
-		if (existe(id)) {
-			Produto p = procurar(id);
-			this.produtos.remove(p);
-			// RepositorioProdutos.salvar();
-			return true;
-		}
-		return false;
+	
+	public boolean remover(Produto p) throws SQLException {
+		String query = "delete from produtoRef where cnpj =?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setInt(2, p.getCodigo());
+		ps.executeUpdate();
+		return true;
 	}
 
 	/*
@@ -144,18 +151,18 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#existe(int)
 	 */
-	@Override
-	public boolean existe(int id) {
-		boolean existe = false;
-		Produto u = this.procurar(id);
-		if (u != null) {
-			existe = true;
-			System.out.println("Produto existe!");
-		} else {
-			System.out.println("Produto nao existe!");
-		}
-		return existe;
-	}
+//	@Override
+//	public boolean existe(int id) {
+//		boolean existe = false;
+//		Produto u = this.procurar(id);
+//		if (u != null) {
+//			existe = true;
+//			System.out.println("Produto existe!");
+//		} else {
+//			System.out.println("Produto nao existe!");
+//		}
+//		return existe;
+//	}
 
 	/*
 	 * (non-Javadoc)

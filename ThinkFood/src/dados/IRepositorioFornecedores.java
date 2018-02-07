@@ -25,7 +25,7 @@ public interface IRepositorioFornecedores {
 	
 	}*/
 
-	boolean existe(String cnpj);
+	//boolean existe(String cnpj);
 
 	void printar(Fornecedor p);
 
