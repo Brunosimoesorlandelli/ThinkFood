@@ -16,6 +16,9 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.JPasswordField;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class TelaLogin extends JFrame {
 
@@ -48,6 +51,24 @@ public class TelaLogin extends JFrame {
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 320, 200);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnCadastrar = new JMenu("Cadastrar");
+		menuBar.add(mnCadastrar);
+		
+		JMenuItem mntmEntregador = new JMenuItem("Entregador");
+		mnCadastrar.add(mntmEntregador);
+		
+		JMenuItem mntmGarom = new JMenuItem("Gar\u00E7om");
+		mnCadastrar.add(mntmGarom);
+		
+		JMenuItem mntmSecretrio = new JMenuItem("Secret\u00E1rio");
+		mnCadastrar.add(mntmSecretrio);
+		
+		JMenuItem mntmGerente = new JMenuItem("Gerente");
+		mnCadastrar.add(mntmGerente);
 		contentPane = new JPanel();
 		contentPane.setBorder(null);
 		contentPane.setBackground(Color.WHITE);
@@ -68,7 +89,7 @@ public class TelaLogin extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(108, 128, 89, 23);
+		btnEntrar.setBounds(109, 100, 89, 23);
 		contentPane.add(btnEntrar);
 		
 		passwordField = new JPasswordField();

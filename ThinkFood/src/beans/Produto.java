@@ -9,7 +9,7 @@ public class Produto {
 	private int qtdMinStk;
 	private Date dt_inicio;
 	private Date dt_fim;
-	
+
 	public Produto(int unidade, int codigo, String descr, int qtdMinStk, Date dt_inicio, Date dt_fim) {
 		this.unidade = unidade;
 		this.codigo = codigo;
@@ -67,6 +67,4 @@ public class Produto {
 		this.dt_fim = dt_fim;
 	}
 
-	
-	
 }
