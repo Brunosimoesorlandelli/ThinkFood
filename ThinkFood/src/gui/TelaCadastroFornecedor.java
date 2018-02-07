@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.SystemColor;
 
 public class TelaCadastroFornecedor extends JFrame {
 
@@ -41,9 +42,12 @@ public class TelaCadastroFornecedor extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroFornecedor() {
+		setTitle("ThinkFood");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 559, 405);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -112,7 +116,7 @@ public class TelaCadastroFornecedor extends JFrame {
 		contentPane.add(lblTelefone);
 		
 		JButton btnNewButton = new JButton("Cadastrar");
-		btnNewButton.setBounds(229, 332, 89, 23);
+		btnNewButton.setBounds(247, 332, 89, 23);
 		contentPane.add(btnNewButton);
 	}
 

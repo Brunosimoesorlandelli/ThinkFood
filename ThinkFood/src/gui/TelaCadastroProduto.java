@@ -15,6 +15,9 @@ import javax.swing.JComboBox;
 import java.awt.Cursor;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class TelaCadastroProduto extends JFrame {
 
@@ -44,51 +47,59 @@ public class TelaCadastroProduto extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroProduto() {
+		setBackground(SystemColor.inactiveCaption);
+		setTitle("ThinkFood");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 637, 270);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(80, 55, 86, 20);
+		textField.setBounds(80, 110, 209, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(10, 58, 46, 14);
+		lblCdigo.setBounds(10, 113, 46, 14);
 		contentPane.add(lblCdigo);
 		
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o:");
-		lblDescrio.setBounds(10, 116, 60, 14);
+		lblDescrio.setBounds(10, 181, 60, 14);
 		contentPane.add(lblDescrio);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(80, 116, 210, 70);
+		textField_1.setBounds(80, 181, 494, 117);
 		contentPane.add(textField_1);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(273, 197, 89, 23);
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnCadastrar.setBounds(247, 328, 89, 23);
 		contentPane.add(btnCadastrar);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(398, 11, 86, 20);
+		textField_2.setBounds(355, 66, 209, 20);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
 		JLabel lblPreo = new JLabel("Pre\u00E7o:");
-		lblPreo.setBounds(342, 14, 46, 14);
+		lblPreo.setBounds(299, 69, 46, 14);
 		contentPane.add(lblPreo);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(80, 11, 86, 20);
+		textField_3.setBounds(80, 66, 209, 20);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(10, 14, 46, 14);
+		lblNome.setBounds(10, 69, 46, 14);
 		contentPane.add(lblNome);
 	}
 }

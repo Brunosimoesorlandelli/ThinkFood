@@ -10,26 +10,27 @@ import javax.swing.JOptionPane;
 
 import beans.Fornecedor;
 import beans.Funcionario_Garcon;
+import beans.Funcionario_Secretario;
 
-public class RepositorioGarcom implements IRepositorioGarcom {
+public class RepositorioSecretario implements IRepositorioSecretario {
 
 	private static final long serialVersionUID = 1L;
 	/**
 	 *
 	 */
 	private static Connection connection;
-	private static IRepositorioGarcom instanceUser;
-	private ArrayList<Funcionario_Garcon> garcons;
+	private static IRepositorioSecretario instanceUser;
+	private ArrayList<Funcionario_Secretario> secretarios;
 	private int next;
 
-	public RepositorioGarcom() {
-		this.garcons = new ArrayList<Funcionario_Garcon>();
+	public RepositorioSecretario() {
+		this.secretarios = new ArrayList<Funcionario_Secretario>();
 		this.next = 0;
 	}
 
-	public static synchronized IRepositorioGarcom getInstance() {
+	public static synchronized IRepositorioSecretario getInstance() {
 		if (instanceUser == null) {
-			instanceUser = new RepositorioGarcom();
+			instanceUser = new RepositorioSecretario();
 		}
 		return instanceUser;
 	}
@@ -41,7 +42,7 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 */
 	@Override
 	public void conectar(Connection connect) {
-		RepositorioGarcom.connection = connect;
+		RepositorioSecretario.connection = connect;
 	}
 
 	/*
@@ -79,8 +80,8 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 * @see dados.IRepositorioGarcom#cadastrar(beans.Funcionario_Garcon)
 	 */
 	@Override
-	public boolean cadastrar(Funcionario_Garcon p) throws Exception {
-		String query = "insert into funcionario_garcon (nome, cpf, dataNasc, cep, salario, numero)values(?,?,?,?,?,?)";
+	public boolean cadastrar(Funcionario_Secretario p) throws Exception {
+		String query = "insert into funcionario_secretario (nome, cpf, dataNasc, cep, salario, numero)values(?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, p.getNome());
 		ps.setString(2, p.getCpf());
@@ -104,15 +105,15 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 * @see dados.IRepositorioGarcom#procurar(java.lang.String)
 	 */
 	@Override
-	public Funcionario_Garcon procurar(String cnpj) throws Exception {
-		Funcionario_Garcon f = null;
-		String query = "select * from funcionario_garcon where cnpj_fornecedor = ?";
+	public Funcionario_Secretario procurar(String cpf) throws Exception {
+		Funcionario_Secretario f = null;
+		String query = "select * from funcionario_secretario where cpf_funcionario = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, cnpj);
+		ps.setString(1, cpf);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
-			f = new Funcionario_Garcon(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
+			f = new Funcionario_Secretario(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
 					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("seq_loja"));
 		}
 		return f;
@@ -130,8 +131,8 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 * @see dados.IRepositorioGarcom#remover(beans.Funcionario_Garcon)
 	 */
 	@Override
-	public boolean remover(Funcionario_Garcon f) throws SQLException {
-		String query = "delete from funcionario_garcon where cpf =?";
+	public boolean remover(Funcionario_Secretario f) throws SQLException {
+		String query = "delete from funcionario_secretario where cpf =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, f.getCpf());
 		ps.executeUpdate();
@@ -170,7 +171,7 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 * @see dados.IRepositorioGarcom#printar(beans.Funcionario_Garcon)
 	 */
 	@Override
-	public void printar(Funcionario_Garcon p) {
+	public void printar(Funcionario_Secretario p) {
 		try {
 			JOptionPane.showMessageDialog(null, p.toString());
 		} catch (Exception e) {
@@ -190,8 +191,8 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 * @see dados.IRepositorioGarcom#listar()
 	 */
 	@Override
-	public ArrayList<Funcionario_Garcon> listar() {
-		return this.garcons;
+	public ArrayList<Funcionario_Secretario> listar() {
+		return this.secretarios;
 
 	}
 	/*
