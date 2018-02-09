@@ -1,5 +1,8 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,6 +54,15 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(lblReserva);
 		
 		JButton btnFazerReserva = new JButton("Fazer Reserva");
+		btnFazerReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaReserva tela = new TelaReserva(f);
+				dispose();
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
+			}
+		});
 		btnFazerReserva.setBounds(344, 183, 103, 23);
 		contentPane.add(btnFazerReserva);
 	}

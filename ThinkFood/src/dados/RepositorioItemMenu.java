@@ -71,13 +71,14 @@ public class RepositorioItemMenu implements IRepositorioItemMenu, Serializable {
 	 * @see Dados.IRepositorioProdutos#cadastrar(Beans.Produto)
 	 */
 	public boolean cadastrar(ItemMenu p) throws SQLException {
-		String query = "insert into item_menu (id, preço, descr, detalhes, nome_curto) values(?,?,?,?,?)";
+		String query = "insert into item_menu (id, preço, descr, detalhes, nome_curto, cod_menu) values(?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, p.getId());
 		ps.setDouble(2, p.getPreco());
 		ps.setString(3, p.getDescr());
 		ps.setString(4, p.getDetalhes());
 		ps.setString(5, p.getNome_curto());
+		ps.setInt(6, p.getCod_Menu());
 
 		ps.executeUpdate();
 		return true;
@@ -111,7 +112,7 @@ public class RepositorioItemMenu implements IRepositorioItemMenu, Serializable {
 
 		while (rs.next()) {
 			p = new ItemMenu(rs.getInt("id"), rs.getDouble("preço"), rs.getString("descr"), rs.getString("detalhes"),
-					rs.getString("nome_curto"));
+					rs.getString("nome_curto"), rs.getInt("cod_menu"));
 		}
 		return p;
 

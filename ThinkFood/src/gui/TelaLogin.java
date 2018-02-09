@@ -88,6 +88,18 @@ public class TelaLogin extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JMenuItem mntmFornecedor = new JMenuItem("Fornecedor");
+		mntmFornecedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroFornecedor tela = new TelaCadastroFornecedor();
+				dispose();
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
+			}
+		});
+		mnCadastrar.add(mntmFornecedor);
 
 		JLabel lblNewLabel = new JLabel("CPF");
 		lblNewLabel.setBounds(10, 47, 46, 14);

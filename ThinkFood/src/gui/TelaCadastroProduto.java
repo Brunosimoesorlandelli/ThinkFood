@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
+import beans.Funcionario_Gerente;
 import beans.ItemMenu;
 
 public class TelaCadastroProduto extends JFrame {
@@ -32,7 +33,7 @@ public class TelaCadastroProduto extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroProduto() {
+	public TelaCadastroProduto(Funcionario_Gerente FG) {
 		IFachada f = Fachada.getInstance();
 		setBackground(SystemColor.inactiveCaption);
 		setTitle("ThinkFood");
@@ -67,7 +68,12 @@ public class TelaCadastroProduto extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					f.cadastrarItemMenu(new ItemMenu(Integer.parseInt(codigo.getText()), Double.parseDouble(preco.getText()), desc.getText(), detalhes.getText(), nome.getText()));
+					f.cadastrarItemMenu(new ItemMenu(Integer.parseInt(codigo.getText()), Double.parseDouble(preco.getText()), desc.getText(), detalhes.getText(), nome.getText(), 678901234));
+					TelaGerente tela = new TelaGerente(FG);
+					dispose();
+					tela.setVisible(true);
+					tela.setLocationRelativeTo(null);
+					tela.setResizable(false);
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -76,7 +76,7 @@ public class TelaGerente extends JFrame {
 		JButton button_2 = new JButton("Adicionar");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroProduto tela = new TelaCadastroProduto();
+				TelaCadastroProduto tela = new TelaCadastroProduto(FG);
 				dispose();
 				tela.setVisible(true);
 				tela.setLocationRelativeTo(null);
