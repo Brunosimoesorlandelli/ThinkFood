@@ -319,6 +319,16 @@ public class Fachada implements IFachada, Serializable {
 	public ArrayList<ClientePJ> listarClientePJ() {
 		return cClientePJ.listar();
 	}
+	
+	
+
+	public ArrayList<Funcionario_Garcon> listarGarcon() {
+		return cGarcom.listarGarcon();
+	}
+
+	public ArrayList<Funcionario_Secretario> listarSecretario() {
+		return cSecretario.listarSecretario();
+	}
 
 	public Funcionario logar(String cpf) throws Exception {
 		Conectar(conexaoLogin);

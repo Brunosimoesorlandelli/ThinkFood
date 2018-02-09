@@ -83,7 +83,7 @@ public class RepositorioGerente implements IRepositorioGerente {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Gerente p) throws Exception {
-		String query = "insert into funcionario_gerente (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
+		String query = "insert into funcionario (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(2, p.getNome());
 		ps.setString(1, p.getCpf());
@@ -112,20 +112,17 @@ public class RepositorioGerente implements IRepositorioGerente {
 	@Override
 	public Funcionario_Gerente procurar(String cpf) throws Exception {
 		Funcionario_Gerente f = null;
-		String query = "select * from funcionario_gerente where cpf_funcionario = ?";
-		if (query == null) {
-			System.out.println("Não existe este funcionario gerente");
-		} else {
-			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, cpf);
-			ResultSet rs = ps.executeQuery();
+		String query = "select * from (funcionario join funcionario_gerente on funcionario.cpf = funcionario_gerente.cpf_funcionario) where cpf_funcionario = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, cpf);
+		ResultSet rs = ps.executeQuery();
 
-			while (rs.next()) {
-				f = new Funcionario_Gerente(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
-						rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("numero"),
-						rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
-			}
+		while (rs.next()) {
+			f = new Funcionario_Gerente(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
+					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("numero"),
+					rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
 		}
+
 		return f;
 
 	}

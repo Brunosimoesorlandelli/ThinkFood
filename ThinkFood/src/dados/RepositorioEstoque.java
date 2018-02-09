@@ -38,7 +38,7 @@ public class RepositorioEstoque implements Serializable, IRepositorioEstoque {
 	}
 
 	public void conectar(Connection connect) {
-		RepositorioEstoque.connection = connect;
+		this.connection = connect;
 	}
 
 	/*

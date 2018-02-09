@@ -41,7 +41,7 @@ public class RepositorioClientePJ implements IRepositorioClientePJ {
 	 */
 	@Override
 	public void conectar(Connection connect) {
-		RepositorioClientePJ.connection = connect;
+		this.connection = connect;
 	}
 
 	/*

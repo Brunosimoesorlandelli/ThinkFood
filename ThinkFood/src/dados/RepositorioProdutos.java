@@ -39,14 +39,8 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	}
 
 	public void conectar(Connection connect) {
-		try {
-			if (this.connection != null)
-				this.connection.close();
+		this.connection = connect;
 
-			this.connection = connect;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/*

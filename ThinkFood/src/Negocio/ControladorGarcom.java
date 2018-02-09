@@ -38,7 +38,7 @@ public class ControladorGarcom implements  IControladorGarcom, Serializable{
 		repositorio.printar(p);
 	}
 
-	public ArrayList<Funcionario_Garcon> listar() {
+	public ArrayList<Funcionario_Garcon> listarGarcon() {
 		return repositorio.listar();
 	}
 	

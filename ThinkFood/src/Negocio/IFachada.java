@@ -140,5 +140,9 @@ public interface IFachada {
 	public void printarClientePJ(ClientePJ p);
 
 	public ArrayList<ClientePJ> listarClientePJ();
+	
+	public ArrayList<Funcionario_Secretario> listarSecretario();
+	
+	public ArrayList<Funcionario_Garcon> listarGarcon();
 
 }

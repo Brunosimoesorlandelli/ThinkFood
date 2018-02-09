@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConexaoDB {
 	private String host = "localhost";
-	private String projeto = "jdbc:mysql://" + host + ":3306/ThinkFood";
+	private String projeto = "jdbc:mysql://" + host + ":3306/thinkfood";
 
 	public Connection getConexao(String cpf, String senha) throws Exception {
 

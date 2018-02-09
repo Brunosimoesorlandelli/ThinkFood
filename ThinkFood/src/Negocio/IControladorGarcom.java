@@ -18,5 +18,5 @@ public interface IControladorGarcom {
 
 	public void printar(Funcionario_Garcon p);
 
-	public ArrayList<Funcionario_Garcon> listar();
+	public ArrayList<Funcionario_Garcon> listarGarcon();
 }

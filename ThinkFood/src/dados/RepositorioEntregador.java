@@ -19,7 +19,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	/**
 	 *
 	 */
-	private Connection connection;
+	private static Connection connection;
 	private static IRepositorioEntregador instanceUser;
 	private ArrayList<Funcionario_Entregador> entregadores;
 	private int next;
@@ -43,14 +43,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	 */
 	@Override
 	public void conectar(Connection connect) {
-		try {
-			if (this.connection != null)
-				this.connection.close();
-
-			this.connection = connect;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		this.connection = connect;
 	}
 
 	/*
@@ -89,7 +82,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Entregador p) throws Exception {
-		String query = "insert into funcionario_entregador (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
+		String query = "insert into funcionario (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(2, p.getNome());
 		ps.setString(1, p.getCpf());
@@ -118,8 +111,8 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	@Override
 	public Funcionario_Entregador procurar(String cpf) throws Exception {
 		Funcionario_Entregador f = null;
-		String query = "select * from funcionario_entregador where cpf_funcionario = ?";
-		PreparedStatement ps = (PreparedStatement) connection.prepareStatement(query);
+		String query = "select * from (funcionario join funcionario_entregador on funcionario.cpf = funcionario_entregador.funcionario_cpf) where funcionario_cpf = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, cpf);
 		ResultSet rs = ps.executeQuery();
 
@@ -129,8 +122,6 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 					rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
 
 		}
-		ps.close();
-		rs.close();
 		return f;
 
 	}

@@ -81,7 +81,7 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Secretario p) throws Exception {
-		String query = "insert into funcionario_secretario (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
+		String query = "insert into funcionario (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(2, p.getNome());
 		ps.setString(1, p.getCpf());
@@ -110,20 +110,18 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	@Override
 	public Funcionario_Secretario procurar(String cpf) throws Exception {
 		Funcionario_Secretario f = null;
-		String query = "select * from funcionario_secretario where cpf_funcionario = ?";
-		if (query == null) {
-			System.out.println("Não existe este funcionario secretario");
-		} else {
-			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, cpf);
-			ResultSet rs = ps.executeQuery();
+		String query = "select * from (funcionario join funcionario_secretario on funcionario.cpf = funcionario_secretario.cpf_funcionarioS) where cpf_funcionarioS = ?";
 
-			while (rs.next()) {
-				f = new Funcionario_Secretario(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
-						rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("numero"),
-						rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
-			}
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, cpf);
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			f = new Funcionario_Secretario(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
+					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("numero"),
+					rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
 		}
+
 		return f;
 
 	}

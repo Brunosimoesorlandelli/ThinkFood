@@ -18,5 +18,5 @@ public interface IControladorSecretario {
 
 	public void printar(Funcionario_Secretario p);
 
-	public ArrayList<Funcionario_Secretario> listar();
+	public ArrayList<Funcionario_Secretario> listarSecretario();
 }

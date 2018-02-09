@@ -38,7 +38,7 @@ public class ControladorSecretario implements IControladorSecretario, Serializab
 		repositorio.printar(p);
 	}
 
-	public ArrayList<Funcionario_Secretario> listar() {
+	public ArrayList<Funcionario_Secretario> listarSecretario() {
 		return repositorio.listar();
 	}
 	

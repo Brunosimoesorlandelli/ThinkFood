@@ -41,7 +41,7 @@ public class RepositorioClientePF implements IRepositorioClientePF {
 	 */
 	@Override
 	public void conectar(Connection connect) {
-		RepositorioClientePF.connection = connect;
+		this.connection = connect;
 	}
 
 	/*

@@ -80,7 +80,7 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Garcon p) throws Exception {
-		String query = "insert into funcionario_garcon (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
+		String query = "insert into funcionario (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(2, p.getNome());
 		ps.setString(1, p.getCpf());
@@ -109,20 +109,18 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	@Override
 	public Funcionario_Garcon procurar(String cpf) throws Exception {
 		Funcionario_Garcon f = null;
-		String query = "select * from funcionario_garcon where cpf_funcionario = ?";
-		if (query == null) {
-			System.out.println("Não existe este funcionario garcom");
-		} else {
-			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, cpf);
-			ResultSet rs = ps.executeQuery();
+		String query = "select * from (funcionario join funcionario_garcon on funcionario.cpf = funcionario_garcon.cpf_funcionario) where cpf_funcionario = ?";
 
-			while (rs.next()) {
-				f = new Funcionario_Garcon(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
-						rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("numero"),
-						rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
-			}
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, cpf);
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			f = new Funcionario_Garcon(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
+					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("numero"),
+					rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
 		}
+
 		return f;
 
 	}

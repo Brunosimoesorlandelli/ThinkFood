@@ -1,14 +1,22 @@
 package gui;
 
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import Negocio.Fachada;
+import Negocio.IFachada;
+import beans.Funcionario;
 import beans.Funcionario_Gerente;
 
 public class TelaGerente extends JFrame {
@@ -19,6 +27,7 @@ public class TelaGerente extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaGerente(Funcionario_Gerente FG) {
+		IFachada f = Fachada.getInstance();
 		setResizable(false);
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,12 +38,6 @@ public class TelaGerente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setLineWrap(true);
-		textArea.setBounds(10, 36, 185, 127);
-		contentPane.add(textArea);
-
 		JLabel lblUnidadeLoja = new JLabel("Unidade Loja");
 		lblUnidadeLoja.setBounds(10, 11, 75, 14);
 		contentPane.add(lblUnidadeLoja);
@@ -43,12 +46,6 @@ public class TelaGerente extends JFrame {
 		lblEstoque.setBounds(317, 11, 46, 14);
 		contentPane.add(lblEstoque);
 
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setLineWrap(true);
-		textArea_1.setEditable(false);
-		textArea_1.setBounds(317, 36, 185, 127);
-		contentPane.add(textArea_1);
-
 		JButton btnNewButton = new JButton("Adicionar");
 		btnNewButton.setBounds(314, 174, 89, 23);
 		contentPane.add(btnNewButton);
@@ -56,12 +53,6 @@ public class TelaGerente extends JFrame {
 		JButton btnNewButton_1 = new JButton("Remover");
 		btnNewButton_1.setBounds(413, 174, 89, 23);
 		contentPane.add(btnNewButton_1);
-
-		JTextArea textArea_2 = new JTextArea();
-		textArea_2.setEditable(false);
-		textArea_2.setLineWrap(true);
-		textArea_2.setBounds(10, 272, 185, 127);
-		contentPane.add(textArea_2);
 
 		JLabel lblFuncionarios = new JLabel("Funcionarios");
 		lblFuncionarios.setBounds(10, 247, 75, 14);
@@ -74,41 +65,59 @@ public class TelaGerente extends JFrame {
 		JButton button_1 = new JButton("Adicionar");
 		button_1.setBounds(10, 411, 89, 23);
 		contentPane.add(button_1);
-
-		JTextArea textArea_3 = new JTextArea();
-		textArea_3.setEditable(false);
-		textArea_3.setLineWrap(true);
-		textArea_3.setBounds(317, 272, 185, 127);
-		contentPane.add(textArea_3);
+		
+		
+		
 
 		JLabel lblMenu = new JLabel("Cardapio");
 		lblMenu.setBounds(317, 247, 46, 14);
 		contentPane.add(lblMenu);
 
 		JButton button_2 = new JButton("Adicionar");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroProduto tela = new TelaCadastroProduto();
+				dispose();
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
+			}
+		});
 		button_2.setBounds(314, 411, 89, 23);
 		contentPane.add(button_2);
 
 		JButton button_3 = new JButton("Remover");
 		button_3.setBounds(413, 411, 89, 23);
 		contentPane.add(button_3);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(317, 272, 185, 127);
+		contentPane.add(scrollPane);
+		
+		JList cardapioLista = new JList();
+		scrollPane.setViewportView(cardapioLista);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(10, 272, 185, 128);
+		contentPane.add(scrollPane_3);
+		
+		JList funcionariosLista = new JList();
+		scrollPane_3.setViewportView(funcionariosLista);
+		
 
-		JTextArea textArea_4 = new JTextArea();
-		textArea_4.setLineWrap(true);
-		textArea_4.setEditable(false);
-		textArea_4.setBounds(599, 36, 185, 127);
-		contentPane.add(textArea_4);
-
-		JLabel label = new JLabel("Estoque");
-		label.setBounds(599, 11, 46, 14);
-		contentPane.add(label);
-
-		JButton button_4 = new JButton("Adicionar");
-		button_4.setBounds(599, 174, 89, 23);
-		contentPane.add(button_4);
-
-		JButton button_5 = new JButton("Remover");
-		button_5.setBounds(695, 174, 89, 23);
-		contentPane.add(button_5);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 36, 185, 128);
+		contentPane.add(scrollPane_1);
+		
+		JList unidlojaList = new JList();
+		scrollPane_1.setViewportView(unidlojaList);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(317, 35, 185, 128);
+		contentPane.add(scrollPane_2);
+		
+		JList estoqueList = new JList();
+		scrollPane_2.setViewportView(estoqueList);
 	}
 }
