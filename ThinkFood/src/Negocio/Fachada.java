@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import beans.ClientePF;
+import beans.ClientePJ;
 import beans.Estoque;
 import beans.Fornecedor;
 import beans.Funcionario;
@@ -15,6 +17,7 @@ import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
+import beans.Mesa;
 import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
@@ -31,6 +34,9 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorReserva cReserva;
 	private IControladorPedidoDel cPedidoDel;
 	private IControladorEstoque cEstoque;
+	private IControladorMesa cMesa;
+	private IControladorClientePF cClientePF;
+	private IControladorClientePJ cClientePJ;
 
 	private static IFachada instance;
 
@@ -45,6 +51,9 @@ public class Fachada implements IFachada, Serializable {
 		this.cReserva = new ControladorReserva();
 		this.cPedidoDel = new ControladorPedidoDel();
 		this.cEstoque = new ControladorEstoque();
+		this.cMesa = new ControladorMesa();
+		this.cClientePF = new ControladorClientePF();
+		this.cClientePJ = new ControladorClientePJ();
 	}
 
 	public static IFachada getInstance() {
@@ -210,7 +219,6 @@ public class Fachada implements IFachada, Serializable {
 		return cPedidoDel.listar();
 	}
 
-	
 	public boolean cadastrarEstoque(Estoque p) throws SQLException {
 		return cEstoque.cadastrar(p);
 	}
@@ -229,6 +237,66 @@ public class Fachada implements IFachada, Serializable {
 
 	public ArrayList<Estoque> listarEstoque() {
 		return cEstoque.listar();
+	}
+
+	public boolean cadastrarMesa(Mesa p) throws SQLException {
+		return cMesa.cadastrar(p);
+	}
+
+	public Mesa procurarMesa(int num) throws SQLException {
+		return cMesa.procurar(num);
+	}
+
+	public boolean removerMesa(Mesa p) throws SQLException {
+		return cMesa.remover(p);
+	}
+
+	public void printarMesa(Mesa p) {
+		cMesa.printar(p);
+	}
+
+	public ArrayList<Mesa> listarMesa() {
+		return cMesa.listar();
+	}
+
+	public boolean cadastrarClientePF(ClientePF p) throws Exception {
+		return cClientePF.cadastrar(p);
+	}
+
+	public ClientePF procurarClientePF(int id) throws Exception {
+		return cClientePF.procurar(id);
+	}
+
+	public boolean removerClientePF(ClientePF f) throws SQLException {
+		return cClientePF.remover(f);
+	}
+
+	public void printarClientePF(ClientePF p) {
+		cClientePF.printar(p);
+	}
+
+	public ArrayList<ClientePF> listarClientePF() {
+		return cClientePF.listar();
+	}
+
+	public boolean cadastrarClientePJ(ClientePJ p) throws Exception {
+		return cClientePJ.cadastrar(p);
+	}
+
+	public ClientePJ procurarClientePJ(int id) throws Exception {
+		return cClientePJ.procurar(id);
+	}
+
+	public boolean removerClientePJ(ClientePJ f) throws SQLException {
+		return cClientePJ.remover(f);
+	}
+
+	public void printarClientePJ(ClientePJ p) {
+		cClientePJ.printar(p);
+	}
+
+	public ArrayList<ClientePJ> listarClientePJ() {
+		return cClientePJ.listar();
 	}
 
 	public Funcionario logar(String cpf) throws Exception {

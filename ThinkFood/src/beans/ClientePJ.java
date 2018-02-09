@@ -6,7 +6,7 @@ public class ClientePJ extends Cliente {
 	private String razaoSocial;
 	private String cnpj;
 
-	public ClientePJ(String nFanta, String rSocial, String cnpj, int id) {
+	public ClientePJ(int id, String cnpj, String rSocial, String nFanta) {
 		super(id);
 		this.nomeFantasia = nFanta;
 		this.razaoSocial = rSocial;

@@ -29,14 +29,12 @@ public class Mesa {
 		this.qtdLugares = qtdLugares;
 	}
 
-	public boolean isEstaLivre() {
+	public boolean getEstaLivre() {
 		return estaLivre;
 	}
 
 	public void setEstaLivre(boolean estaLivre) {
 		this.estaLivre = estaLivre;
 	}
-	
-	
 
 }
