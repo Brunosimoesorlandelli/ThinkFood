@@ -6,13 +6,13 @@ import java.sql.SQLException;
 
 public class ConexaoDB {
 	private String host = "localhost";
-	private String projeto = "jdbc:mysql://" + host + ":3306/sys";
+	private String projeto = "jdbc:mysql://" + host + ":3306/ThinkFood";
 
-	public Connection getConexao() throws Exception {
-	
+	public Connection getConexao(String cpf, String senha) throws Exception {
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			return DriverManager.getConnection(projeto, "root", "deadman123");
+			return DriverManager.getConnection(projeto, cpf, senha);
 
 		} catch (SQLException | ClassNotFoundException e) {
 			throw e;

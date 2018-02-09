@@ -81,15 +81,17 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Secretario p) throws Exception {
-		String query = "insert into funcionario_secretario (nome, cpf, dataNasc, cep, salario, numero, senha)values(?,?,?,?,?,?,?)";
+		String query = "insert into funcionario_secretario (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, p.getNome());
-		ps.setString(2, p.getCpf());
+		ps.setString(2, p.getNome());
+		ps.setString(1, p.getCpf());
 		ps.setDate(3, p.getDataNasc());
-		ps.setString(4, p.getCEP());
-		ps.setDouble(5, p.getSalario());
+		ps.setString(7, p.getCEP());
+		ps.setString(5, p.getCompl());
+		ps.setDouble(4, p.getSalario());
 		ps.setInt(6, p.getNumero());
-		ps.setString(7, p.getSenha());
+		ps.setInt(8, p.getSeq_loja());
+		ps.setString(9, p.getSenha());
 
 		ps.executeUpdate();
 		return true;
@@ -109,14 +111,18 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	public Funcionario_Secretario procurar(String cpf) throws Exception {
 		Funcionario_Secretario f = null;
 		String query = "select * from funcionario_secretario where cpf_funcionario = ?";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, cpf);
-		ResultSet rs = ps.executeQuery();
+		if (query == null) {
+			System.out.println("Não existe este funcionario secretario");
+		} else {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, cpf);
+			ResultSet rs = ps.executeQuery();
 
-		while (rs.next()) {
-			f = new Funcionario_Secretario(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
-					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("seq_loja"),
-					rs.getString("senha"));
+			while (rs.next()) {
+				f = new Funcionario_Secretario(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
+						rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("numero"),
+						rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
+			}
 		}
 		return f;
 

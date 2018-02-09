@@ -1,5 +1,6 @@
 package Negocio;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -8,6 +9,8 @@ import javax.swing.JOptionPane;
 import beans.Fornecedor;
 
 public interface IControladorFornecedor {
+
+	public void conectar(Connection connect);
 
 	public boolean cadastrar(Fornecedor p) throws Exception;
 

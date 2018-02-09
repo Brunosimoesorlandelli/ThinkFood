@@ -9,16 +9,21 @@ public class Funcionario {
 	private Date dataNasc;
 	private String CEP;
 	private double salario;
+	private String compl;
 	private int numero;
+	private int seq_loja;
 	private String senha;
 
-	public Funcionario(String nome, String cpf, Date dataNasc, String CEP, double salario, int numero, String senha) {
+	public Funcionario(String nome, String cpf, Date dataNasc, String CEP, double salario, int numero, String compl,
+			int seq_Loja, String senha) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNasc = dataNasc;
 		this.CEP = CEP;
 		this.salario = salario;
 		this.numero = numero;
+		this.compl = compl;
+		this.seq_loja = seq_Loja;
 		this.senha = senha;
 
 	}
@@ -77,6 +82,22 @@ public class Funcionario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getCompl() {
+		return compl;
+	}
+
+	public void setCompl(String compl) {
+		this.compl = compl;
+	}
+
+	public int getSeq_loja() {
+		return seq_loja;
+	}
+
+	public void setSeq_loja(int seq_loja) {
+		this.seq_loja = seq_loja;
 	}
 
 }

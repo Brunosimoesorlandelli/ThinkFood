@@ -1,6 +1,7 @@
 package Negocio;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,6 +16,10 @@ public class ControladorItemMenu implements IControladorItemMenu, Serializable {
 
 	public ControladorItemMenu() {
 		this.repositorio = RepositorioItemMenu.getInstance();
+	}
+
+	public void conectar(Connection connect) {
+		repositorio.conectar(connect);
 	}
 
 	public boolean cadastrar(ItemMenu p) throws SQLException {

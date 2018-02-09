@@ -1,6 +1,7 @@
 package Negocio;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,6 +18,10 @@ public class ControladorFornecedor implements IControladorFornecedor, Serializab
 
 	public ControladorFornecedor() {
 		this.repositorio = RepositorioFornecedores.getInstance();
+	}
+
+	public void conectar(Connection connect) {
+		repositorio.conectar(connect);
 	}
 
 	public boolean cadastrar(Fornecedor p) throws Exception {

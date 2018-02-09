@@ -1,6 +1,7 @@
 package Negocio;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,6 +18,10 @@ public class ControladorProduto implements IControladorProduto, Serializable {
 
 	public ControladorProduto() {
 		this.repositorio = RepositorioProdutos.getInstance();
+	}
+
+	public void conectar(Connection connect) {
+		repositorio.conectar(connect);
 	}
 
 	public boolean cadastrar(Produto p) throws SQLException {
@@ -38,6 +43,5 @@ public class ControladorProduto implements IControladorProduto, Serializable {
 	public ArrayList<Produto> listar() {
 		return repositorio.listar();
 	}
-
 
 }

@@ -38,6 +38,9 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorClientePF cClientePF;
 	private IControladorClientePJ cClientePJ;
 
+	private static Connection connect;
+	private static Connection conexaoLogin;
+	private ConexaoDB conex;
 	private static IFachada instance;
 
 	public Fachada() {
@@ -54,6 +57,12 @@ public class Fachada implements IFachada, Serializable {
 		this.cMesa = new ControladorMesa();
 		this.cClientePF = new ControladorClientePF();
 		this.cClientePJ = new ControladorClientePJ();
+		this.conex = new ConexaoDB();
+		try {
+			this.conexaoLogin = conex.getConexao("God", "senha");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static IFachada getInstance() {
@@ -63,8 +72,20 @@ public class Fachada implements IFachada, Serializable {
 		return instance;
 	}
 
-	public void conectar(Connection connect) {
-		cEntregador.conectar(connect);
+	public void Conectar(Connection connect) {
+		this.cGarcom.conectar(connect);
+		this.cEntregador.conectar(connect);
+		this.cFornecedor.conectar(connect);
+		this.cGerente.conectar(connect);
+		this.cProduto.conectar(connect);
+		this.cSecretario.conectar(connect);
+		this.cItemMenu.conectar(connect);
+		this.cReserva.conectar(connect);
+		this.cPedidoDel.conectar(connect);
+		this.cEstoque.conectar(connect);
+		this.cMesa.conectar(connect);
+		this.cClientePF.conectar(connect);
+		this.cClientePJ.conectar(connect);
 	}
 
 	public boolean cadastrarEntregador(Funcionario_Entregador p) throws Exception {
@@ -300,18 +321,28 @@ public class Fachada implements IFachada, Serializable {
 	}
 
 	public Funcionario logar(String cpf) throws Exception {
+		Conectar(conexaoLogin);
 		Funcionario func = null;
 		if (procurarEntregador(cpf) != null) {
 			func = procurarEntregador(cpf);
+			this.connect = conex.getConexao("Entregador", "senha");
+			Conectar(connect);
 		} else if (procurarGarcom(cpf) != null) {
 			func = procurarGarcom(cpf);
+			this.connect = conex.getConexao("Garcom", "senha");
+			Conectar(connect);
 		} else if (procurarGerente(cpf) != null) {
 			func = procurarGerente(cpf);
+			this.connect = conex.getConexao("Gerente", "senha");
+			Conectar(connect);
 		} else if (procurarSecretario(cpf) != null) {
 			func = procurarSecretario(cpf);
+			this.connect = conex.getConexao("Secretario", "senha");
+			Conectar(connect);
 		} else {
 			JOptionPane.showMessageDialog(null, "Esta combinação de CPF e Senha não existe. Tente novamente.");
 		}
+
 		return func;
 	}
 

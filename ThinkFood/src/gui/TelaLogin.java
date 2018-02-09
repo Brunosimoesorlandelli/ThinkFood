@@ -72,17 +72,17 @@ public class TelaLogin extends JFrame {
 		JMenu mnCadastrar = new JMenu("Cadastrar");
 		menuBar.add(mnCadastrar);
 
-		JMenuItem mntmEntregador = new JMenuItem("Entregador");
+		JMenuItem mntmEntregador = new JMenuItem("Funcionario");
+		mntmEntregador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
+				dispose();
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
+			}
+		});
 		mnCadastrar.add(mntmEntregador);
-
-		JMenuItem mntmGarom = new JMenuItem("Gar\u00E7om");
-		mnCadastrar.add(mntmGarom);
-
-		JMenuItem mntmSecretrio = new JMenuItem("Secret\u00E1rio");
-		mnCadastrar.add(mntmSecretrio);
-
-		JMenuItem mntmGerente = new JMenuItem("Gerente");
-		mnCadastrar.add(mntmGerente);
 		contentPane = new JPanel();
 		contentPane.setBorder(null);
 		contentPane.setBackground(Color.WHITE);
@@ -117,13 +117,23 @@ public class TelaLogin extends JFrame {
 
 				try {
 					if (fachada.logar(textField.getText()) instanceof Funcionario_Gerente) {
+						TelaGerente tela = new TelaGerente((Funcionario_Gerente) fachada.logar(textField.getText()));
+						dispose();
+						tela.setVisible(true);
+						tela.setLocationRelativeTo(null);
+						tela.setResizable(false);
 
 					} else if (fachada.logar(textField.getText()) instanceof Funcionario_Garcon) {
 
 					} else if (fachada.logar(textField.getText()) instanceof Funcionario_Entregador) {
 
 					} else if (fachada.logar(textField.getText()) instanceof Funcionario_Secretario) {
-
+						TelaSecretario tela = new TelaSecretario(
+								(Funcionario_Secretario) fachada.logar(textField.getText()));
+						dispose();
+						tela.setVisible(true);
+						tela.setLocationRelativeTo(null);
+						tela.setResizable(false);
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

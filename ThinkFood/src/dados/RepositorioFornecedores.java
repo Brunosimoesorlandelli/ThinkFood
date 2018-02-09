@@ -39,7 +39,14 @@ public class RepositorioFornecedores implements Serializable, IRepositorioFornec
 	}
 
 	public void conectar(Connection connect) {
-		RepositorioFornecedores.connection = connect;
+		try {
+			if (this.connection != null)
+				this.connection.close();
+
+			this.connection = connect;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*

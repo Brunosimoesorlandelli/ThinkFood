@@ -21,7 +21,7 @@ import beans.Reserva;
 
 public interface IFachada {
 
-	public void conectar(Connection connect);
+	public void Conectar(Connection connect);
 
 	public boolean cadastrarEntregador(Funcionario_Entregador p) throws Exception;
 

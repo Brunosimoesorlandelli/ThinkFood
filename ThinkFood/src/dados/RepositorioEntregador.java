@@ -19,7 +19,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	/**
 	 *
 	 */
-	private static Connection connection;
+	private Connection connection;
 	private static IRepositorioEntregador instanceUser;
 	private ArrayList<Funcionario_Entregador> entregadores;
 	private int next;
@@ -43,7 +43,14 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	 */
 	@Override
 	public void conectar(Connection connect) {
-		RepositorioEntregador.connection = connect;
+		try {
+			if (this.connection != null)
+				this.connection.close();
+
+			this.connection = connect;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -82,15 +89,17 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Entregador p) throws Exception {
-		String query = "insert into funcionario_entregador (nome, cpf, dataNasc, cep, salario, numero, senha)values(?,?,?,?,?,?,?)";
+		String query = "insert into funcionario_entregador (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, p.getNome());
-		ps.setString(2, p.getCpf());
+		ps.setString(2, p.getNome());
+		ps.setString(1, p.getCpf());
 		ps.setDate(3, p.getDataNasc());
-		ps.setString(4, p.getCEP());
-		ps.setDouble(5, p.getSalario());
+		ps.setString(7, p.getCEP());
+		ps.setString(5, p.getCompl());
+		ps.setDouble(4, p.getSalario());
 		ps.setInt(6, p.getNumero());
-		ps.setString(7, p.getSenha());
+		ps.setInt(8, p.getSeq_loja());
+		ps.setString(9, p.getSenha());
 
 		ps.executeUpdate();
 		return true;
@@ -110,14 +119,18 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	public Funcionario_Entregador procurar(String cpf) throws Exception {
 		Funcionario_Entregador f = null;
 		String query = "select * from funcionario_entregador where cpf_funcionario = ?";
-		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps = (PreparedStatement) connection.prepareStatement(query);
 		ps.setString(1, cpf);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
 			f = new Funcionario_Entregador(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
-					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("seq_loja"), rs.getString("senha"));
+					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("numero"),
+					rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
+
 		}
+		ps.close();
+		rs.close();
 		return f;
 
 	}
