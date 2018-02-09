@@ -17,5 +17,4 @@ public interface IControladorProduto {
 
 	public ArrayList<Produto> listar();
 
-	public void salvarProduto();
 }

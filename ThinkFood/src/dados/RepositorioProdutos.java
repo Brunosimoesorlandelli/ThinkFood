@@ -194,9 +194,5 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#salvarProduto()
 	 */
-	@Override
-	public void salvarProduto() {
-		// salvar();
-	}
 
 }

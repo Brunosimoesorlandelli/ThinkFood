@@ -39,8 +39,5 @@ public class ControladorProduto implements IControladorProduto, Serializable {
 		return repositorio.listar();
 	}
 
-	public void salvarProduto() {
-		repositorio.salvarProduto();
-	}
 
 }

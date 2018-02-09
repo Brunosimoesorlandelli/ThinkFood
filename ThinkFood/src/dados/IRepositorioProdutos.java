@@ -17,6 +17,5 @@ public interface IRepositorioProdutos {
 
 	ArrayList<Produto> listar();
 
-	void salvarProduto();
 
 }

@@ -12,71 +12,80 @@ import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
 import beans.Produto;
+import beans.Reserva;
 
 public interface IFachada {
 
 	public void conectar(Connection connect);
 
-	public boolean cadastrar(Funcionario_Entregador p) throws Exception;
+	public boolean cadastrarEntregador(Funcionario_Entregador p) throws Exception;
 
 	public Funcionario_Entregador procurarEntregador(String cpf) throws Exception;
 
-	public boolean remover(Funcionario_Entregador f) throws SQLException;
+	public boolean removerEntregador(Funcionario_Entregador f) throws SQLException;
 
-	public void printar(Funcionario_Entregador p);
+	public void printarEntregador(Funcionario_Entregador p);
 
-	public ArrayList<Funcionario_Entregador> listar();
+	public ArrayList<Funcionario_Entregador> listarEntregador();
 
-	public boolean cadastrar(Fornecedor p) throws Exception;
+	public boolean cadastrarFornecedor(Fornecedor p) throws Exception;
 
 	public Fornecedor procurarFornecedor(String cnpj) throws Exception;
 
-	public boolean remover(Fornecedor f) throws SQLException;
+	public boolean removerFornecedor(Fornecedor f) throws SQLException;
 
-	public void printar(Fornecedor p);
+	public void printarFornecedor(Fornecedor p);
 
-	public boolean cadastrar(Funcionario_Garcon p) throws Exception;
+	public boolean cadastrarGarcon(Funcionario_Garcon p) throws Exception;
 
 	public Funcionario_Garcon procurarGarcom(String cnpj) throws Exception;
 
-	public boolean remover(Funcionario_Garcon f) throws SQLException;
+	public boolean removerGarcon(Funcionario_Garcon f) throws SQLException;
 
-	public void printar(Funcionario_Garcon p);
+	public void printarGarcon(Funcionario_Garcon p);
 
-	public boolean cadastrar(Funcionario_Gerente p) throws Exception;
+	public boolean cadastrarGerente(Funcionario_Gerente p) throws Exception;
 
 	public Funcionario_Gerente procurarGerente(String cpf) throws Exception;
 
-	public boolean remover(Funcionario_Gerente f) throws SQLException;
+	public boolean removerGerente(Funcionario_Gerente f) throws SQLException;
 
-	public void printar(Funcionario_Gerente p);
+	public void printarGerente(Funcionario_Gerente p);
 
-	public boolean cadastrar(Produto p) throws SQLException;
+	public boolean cadastrarProduto(Produto p) throws SQLException;
 
-	public Produto procurar(int id) throws SQLException;
+	public Produto procurarProduto(int id) throws SQLException;
 
-	public boolean remover(Produto p) throws SQLException;
+	public boolean removerProduto(Produto p) throws SQLException;
 
-	public void printar(Produto p);
+	public void printarProduto(Produto p);
 
-	public void salvarProduto();
-
-	public boolean cadastrar(Funcionario_Secretario p) throws Exception;
+	public boolean cadastrarSecretario(Funcionario_Secretario p) throws Exception;
 
 	public Funcionario_Secretario procurarSecretario(String cpf) throws Exception;
 
-	public boolean remover(Funcionario_Secretario f) throws SQLException;
+	public boolean removerSecretario(Funcionario_Secretario f) throws SQLException;
 
-	public void printar(Funcionario_Secretario p);
+	public void printarSecretario(Funcionario_Secretario p);
 
-	public boolean cadastrar(ItemMenu p) throws SQLException;
+	public boolean cadastrarItemMenu(ItemMenu p) throws SQLException;
 
 	public ItemMenu procurarItemMenu(int id) throws SQLException;
 
-	public boolean remover(ItemMenu p) throws SQLException;
+	public boolean removerItemMenu(ItemMenu p) throws SQLException;
 
-	public void printar(ItemMenu p);
+	public void printarItemMenu(ItemMenu p);
+	
+	public boolean cadastrarReserva(Reserva r) throws SQLException;
+	
+	public Reserva procurarReserva(int seq) throws SQLException;
+	
+	public boolean removerReserva(Reserva r) throws SQLException;
+	
+	public void printarReserva(Reserva r);
 
 	public Funcionario logar(String cpf) throws Exception;
+	
+	
 
 }

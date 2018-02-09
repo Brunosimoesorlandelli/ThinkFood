@@ -15,6 +15,7 @@ import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
 import beans.Produto;
+import beans.Reserva;
 
 public class Fachada implements IFachada, Serializable {
 
@@ -25,6 +26,7 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorProduto cProduto;
 	private IControladorSecretario cSecretario;
 	private IControladorItemMenu cItemMenu;
+	private IControladorReserva cReserva;
 
 	private static IFachada instance;
 
@@ -36,6 +38,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cProduto = new ControladorProduto();
 		this.cSecretario = new ControladorSecretario();
 		this.cItemMenu = new ControladorItemMenu();
+		this.cReserva = new ControladorReserva();
 	}
 
 	public static IFachada getInstance() {
@@ -49,7 +52,7 @@ public class Fachada implements IFachada, Serializable {
 		cEntregador.conectar(connect);
 	}
 
-	public boolean cadastrar(Funcionario_Entregador p) throws Exception {
+	public boolean cadastrarEntregador(Funcionario_Entregador p) throws Exception {
 		return cEntregador.cadastrar(p);
 	}
 
@@ -57,19 +60,19 @@ public class Fachada implements IFachada, Serializable {
 		return cEntregador.procurar(cpf);
 	}
 
-	public boolean remover(Funcionario_Entregador f) throws SQLException {
+	public boolean removerEntregador(Funcionario_Entregador f) throws SQLException {
 		return cEntregador.remover(f);
 	}
 
-	public void printar(Funcionario_Entregador p) {
+	public void printarEntregador(Funcionario_Entregador p) {
 		cEntregador.printar(p);
 	}
 
-	public ArrayList<Funcionario_Entregador> listar() {
+	public ArrayList<Funcionario_Entregador> listarEntregador() {
 		return cEntregador.listar();
 	}
 
-	public boolean cadastrar(Fornecedor p) throws Exception {
+	public boolean cadastrarFornecedor(Fornecedor p) throws Exception {
 		return cFornecedor.cadastrar(p);
 	}
 
@@ -77,15 +80,15 @@ public class Fachada implements IFachada, Serializable {
 		return cFornecedor.procurar(cnpj);
 	}
 
-	public boolean remover(Fornecedor f) throws SQLException {
+	public boolean removerFornecedor(Fornecedor f) throws SQLException {
 		return cFornecedor.remover(f);
 	}
 
-	public void printar(Fornecedor p) {
+	public void printarFornecedor(Fornecedor p) {
 		cFornecedor.printar(p);
 	}
 
-	public boolean cadastrar(Funcionario_Garcon p) throws Exception {
+	public boolean cadastrarGarcon(Funcionario_Garcon p) throws Exception {
 		return cGarcom.cadastrar(p);
 	}
 
@@ -93,15 +96,15 @@ public class Fachada implements IFachada, Serializable {
 		return cGarcom.procurar(cnpj);
 	}
 
-	public boolean remover(Funcionario_Garcon f) throws SQLException {
+	public boolean removerGarcon(Funcionario_Garcon f) throws SQLException {
 		return cGarcom.remover(f);
 	}
 
-	public void printar(Funcionario_Garcon p) {
+	public void printarGarcon(Funcionario_Garcon p) {
 		cGarcom.printar(p);
 	}
 
-	public boolean cadastrar(Funcionario_Gerente p) throws Exception {
+	public boolean cadastrarGerente(Funcionario_Gerente p) throws Exception {
 		return cGerente.cadastrar(p);
 	}
 
@@ -109,35 +112,32 @@ public class Fachada implements IFachada, Serializable {
 		return cGerente.procurar(cpf);
 	}
 
-	public boolean remover(Funcionario_Gerente f) throws SQLException {
+	public boolean removerGerente(Funcionario_Gerente f) throws SQLException {
 		return cGerente.remover(f);
 	}
 
-	public void printar(Funcionario_Gerente p) {
+	public void printarGerente(Funcionario_Gerente p) {
 		cGerente.printar(p);
 	}
 
-	public boolean cadastrar(Produto p) throws SQLException {
+	public boolean cadastrarProduto(Produto p) throws SQLException {
 		return cProduto.cadastrar(p);
 	}
 
-	public Produto procurar(int id) throws SQLException {
+	public Produto procurarProduto(int id) throws SQLException {
 		return cProduto.procurar(id);
 	}
 
-	public boolean remover(Produto p) throws SQLException {
+	public boolean removerProduto(Produto p) throws SQLException {
 		return cProduto.remover(p);
 	}
 
-	public void printar(Produto p) {
+	public void printarProduto(Produto p) {
 		cProduto.printar(p);
 	}
 
-	public void salvarProduto() {
-		cProduto.salvarProduto();
-	}
 
-	public boolean cadastrar(Funcionario_Secretario p) throws Exception {
+	public boolean cadastrarSecretario(Funcionario_Secretario p) throws Exception {
 		return cSecretario.cadastrar(p);
 	}
 
@@ -145,15 +145,15 @@ public class Fachada implements IFachada, Serializable {
 		return cSecretario.procurar(cpf);
 	}
 
-	public boolean remover(Funcionario_Secretario f) throws SQLException {
+	public boolean removerSecretario(Funcionario_Secretario f) throws SQLException {
 		return cSecretario.remover(f);
 	}
 
-	public void printar(Funcionario_Secretario p) {
+	public void printarSecretario(Funcionario_Secretario p) {
 		cSecretario.printar(p);
 	}
 
-	public boolean cadastrar(ItemMenu p) throws SQLException {
+	public boolean cadastrarItemMenu(ItemMenu p) throws SQLException {
 		return cItemMenu.cadastrar(p);
 	}
 
@@ -161,12 +161,29 @@ public class Fachada implements IFachada, Serializable {
 		return cItemMenu.procurar(id);
 	}
 
-	public boolean remover(ItemMenu p) throws SQLException {
+	public boolean removerItemMenu(ItemMenu p) throws SQLException {
 		return cItemMenu.remover(p);
 	}
 
-	public void printar(ItemMenu p) {
+	public void printarItemMenu(ItemMenu p) {
 		cItemMenu.printar(p);
+	}
+	
+
+	public boolean cadastrarReserva(Reserva p) throws SQLException {
+		return cReserva.cadastrar(p);
+	}
+
+	public Reserva procurarReserva(int seq) throws SQLException {
+		return cReserva.procurar(seq);
+	}
+
+	public boolean removerReserva(Reserva f) throws SQLException {
+		return cReserva.remover(f);
+	}
+
+	public void printarReserva(Reserva r) {
+		cReserva.printar(r);
 	}
 
 	public Funcionario logar(String cpf) throws Exception {
@@ -184,5 +201,7 @@ public class Fachada implements IFachada, Serializable {
 		}
 		return func;
 	}
+	
+	
 
 }
