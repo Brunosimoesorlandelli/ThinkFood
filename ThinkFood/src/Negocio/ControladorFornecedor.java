@@ -10,7 +10,7 @@ import beans.Fornecedor;
 import dados.IRepositorioFornecedores;
 import dados.RepositorioFornecedores;
 
-public class ControladorFornecedor implements Serializable {
+public class ControladorFornecedor implements IControladorFornecedor, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private IRepositorioFornecedores repositorio;
@@ -19,15 +19,8 @@ public class ControladorFornecedor implements Serializable {
 		this.repositorio = RepositorioFornecedores.getInstance();
 	}
 
-	public boolean cadastrar(Fornecedor f) throws Exception {
-		boolean retorno = false;
-		if (f == null) {
-			JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
-		} else {
-			repositorio.cadastrar(f);
-			retorno = true;
-		}
-		return retorno;
+	public boolean cadastrar(Fornecedor p) throws Exception {
+		return repositorio.cadastrar(p);
 	}
 
 	public Fornecedor procurar(String cnpj) throws Exception {
@@ -35,11 +28,11 @@ public class ControladorFornecedor implements Serializable {
 	}
 
 	public boolean remover(Fornecedor f) throws SQLException {
-		boolean retorno = false;
-		if (repositorio.remover(f)) {
-			retorno = true;
-		}
-		return retorno;
+		return repositorio.remover(f);
+	}
+
+	public void printar(Fornecedor p) {
+		repositorio.printar(p);
 	}
 
 	public ArrayList<Fornecedor> listar() {
