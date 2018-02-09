@@ -10,6 +10,7 @@ import beans.Funcionario_Entregador;
 import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
+import beans.ItemMenu;
 import beans.Produto;
 
 public class Fachada implements IFachada, Serializable {
@@ -20,6 +21,7 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorGerente cGerente;
 	private IControladorProduto cProduto;
 	private IControladorSecretario cSecretario;
+	private IControladorItemMenu cItemMenu;
 
 	public Fachada() {
 		this.cEntregador = new ControladorEntregador();
@@ -28,6 +30,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cGerente = new ControladorGerente();
 		this.cProduto = new ControladorProduto();
 		this.cSecretario = new ControladorSecretario();
+		this.cItemMenu = new ControladorItemMenu();
 	}
 
 	public void conectar(Connection connect) {
@@ -136,6 +139,22 @@ public class Fachada implements IFachada, Serializable {
 
 	public void printar(Funcionario_Secretario p) {
 		cSecretario.printar(p);
+	}
+
+	public boolean cadastrar(ItemMenu p) throws SQLException {
+		return cItemMenu.cadastrar(p);
+	}
+
+	public ItemMenu procurarItemMenu(int id) throws SQLException {
+		return cItemMenu.procurar(id);
+	}
+
+	public boolean remover(ItemMenu p) throws SQLException {
+		return cItemMenu.remover(p);
+	}
+
+	public void printar(ItemMenu p) {
+		cItemMenu.printar(p);
 	}
 
 }

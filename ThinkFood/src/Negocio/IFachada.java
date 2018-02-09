@@ -9,6 +9,7 @@ import beans.Funcionario_Entregador;
 import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
+import beans.ItemMenu;
 import beans.Produto;
 
 public interface IFachada {
@@ -66,5 +67,13 @@ public interface IFachada {
 	public boolean remover(Funcionario_Secretario f) throws SQLException;
 
 	public void printar(Funcionario_Secretario p);
+
+	public boolean cadastrar(ItemMenu p) throws SQLException;
+
+	public ItemMenu procurarItemMenu(int id) throws SQLException;
+
+	public boolean remover(ItemMenu p) throws SQLException;
+
+	public void printar(ItemMenu p);
 
 }
