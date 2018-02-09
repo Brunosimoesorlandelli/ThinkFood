@@ -10,14 +10,16 @@ public class Funcionario {
 	private String CEP;
 	private double salario;
 	private int numero;
+	private String senha;
 
-	public Funcionario(String nome, String cpf, Date dataNasc, String CEP, double salario, int numero) {
+	public Funcionario(String nome, String cpf, Date dataNasc, String CEP, double salario, int numero, String senha) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNasc = dataNasc;
 		this.CEP = CEP;
 		this.salario = salario;
 		this.numero = numero;
+		this.senha = senha;
 
 	}
 
@@ -45,7 +47,6 @@ public class Funcionario {
 		this.dataNasc = dataNasc;
 	}
 
-	
 	public String getCEP() {
 		return CEP;
 	}
@@ -68,6 +69,14 @@ public class Funcionario {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

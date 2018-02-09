@@ -11,6 +11,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
+
+import Negocio.Fachada;
+import Negocio.IFachada;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
@@ -19,6 +23,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaLogin extends JFrame {
 
@@ -46,6 +52,7 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		IFachada fachada = Fachada.getInstance();
 		setResizable(false);
 		setBackground(Color.WHITE);
 		setTitle("ThinkFood");
@@ -75,7 +82,7 @@ public class TelaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Usu\u00E1rio");
+		JLabel lblNewLabel = new JLabel("CPF");
 		lblNewLabel.setBounds(10, 47, 46, 14);
 		contentPane.add(lblNewLabel);
 		
@@ -89,6 +96,11 @@ public class TelaLogin extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnEntrar.setBounds(109, 100, 89, 23);
 		contentPane.add(btnEntrar);
 		

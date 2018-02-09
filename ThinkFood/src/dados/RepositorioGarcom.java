@@ -80,7 +80,7 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Garcon p) throws Exception {
-		String query = "insert into funcionario_garcon (nome, cpf, dataNasc, cep, salario, numero)values(?,?,?,?,?,?)";
+		String query = "insert into funcionario_garcon (nome, cpf, dataNasc, cep, salario, numero, senha)values(?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, p.getNome());
 		ps.setString(2, p.getCpf());
@@ -88,6 +88,7 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 		ps.setString(4, p.getCEP());
 		ps.setDouble(5, p.getSalario());
 		ps.setInt(6, p.getNumero());
+		ps.setString(7, p.getSenha());
 
 		ps.executeUpdate();
 		return true;
@@ -106,14 +107,15 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	@Override
 	public Funcionario_Garcon procurar(String cnpj) throws Exception {
 		Funcionario_Garcon f = null;
-		String query = "select * from funcionario_garcon where cnpj_fornecedor = ?";
+		String query = "select * from funcionario_garcon where cpf_funcionario = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, cnpj);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
 			f = new Funcionario_Garcon(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
-					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("seq_loja"));
+					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("seq_loja"),
+					rs.getString("senha"));
 		}
 		return f;
 

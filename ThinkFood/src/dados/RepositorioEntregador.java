@@ -82,7 +82,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Entregador p) throws Exception {
-		String query = "insert into funcionario_entregador (nome, cpf, dataNasc, cep, salario, numero)values(?,?,?,?,?,?)";
+		String query = "insert into funcionario_entregador (nome, cpf, dataNasc, cep, salario, numero, senha)values(?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, p.getNome());
 		ps.setString(2, p.getCpf());
@@ -90,6 +90,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 		ps.setString(4, p.getCEP());
 		ps.setDouble(5, p.getSalario());
 		ps.setInt(6, p.getNumero());
+		ps.setString(7, p.getSenha());
 
 		ps.executeUpdate();
 		return true;
@@ -115,7 +116,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 
 		while (rs.next()) {
 			f = new Funcionario_Entregador(rs.getString("nome"), rs.getString("cpf"), rs.getDate("data_nasc"),
-					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("seq_loja"));
+					rs.getString("cep_endereco"), rs.getDouble("salario"), rs.getInt("seq_loja"), rs.getString("senha"));
 		}
 		return f;
 

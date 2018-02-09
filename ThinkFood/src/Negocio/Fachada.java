@@ -12,6 +12,8 @@ import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
 import beans.Produto;
+import negocio.Fachada;
+import negocio.IFachada;
 
 public class Fachada implements IFachada, Serializable {
 
@@ -23,6 +25,8 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorSecretario cSecretario;
 	private IControladorItemMenu cItemMenu;
 
+	private static IFachada instance;
+
 	public Fachada() {
 		this.cEntregador = new ControladorEntregador();
 		this.cFornecedor = new ControladorFornecedor();
@@ -31,6 +35,13 @@ public class Fachada implements IFachada, Serializable {
 		this.cProduto = new ControladorProduto();
 		this.cSecretario = new ControladorSecretario();
 		this.cItemMenu = new ControladorItemMenu();
+	}
+
+	public static IFachada getInstance() {
+		if (instance == null) {
+			instance = new Fachada();
+		}
+		return instance;
 	}
 
 	public void conectar(Connection connect) {
