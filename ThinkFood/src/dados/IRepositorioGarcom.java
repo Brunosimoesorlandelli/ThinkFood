@@ -17,7 +17,7 @@ public interface IRepositorioGarcom {
 	 * 
 	 * @see dados.IRepositorioFornecedores#procurar(java.lang.String)
 	 */
-	Funcionario_Garcon procurar(String cnpj) throws Exception;
+	Funcionario_Garcon procurar(String cpf) throws Exception;
 
 	/*
 	 * (non-Javadoc)

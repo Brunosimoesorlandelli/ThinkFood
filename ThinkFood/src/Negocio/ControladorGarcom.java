@@ -26,8 +26,8 @@ public class ControladorGarcom implements  IControladorGarcom, Serializable{
 		return repositorio.cadastrar(p);
 	}
 
-	public Funcionario_Garcon procurar(String cnpj) throws Exception {
-		return repositorio.procurar(cnpj);
+	public Funcionario_Garcon procurar(String cpf) throws Exception {
+		return repositorio.procurar(cpf);
 	}
 
 	public boolean remover(Funcionario_Garcon f) throws SQLException {

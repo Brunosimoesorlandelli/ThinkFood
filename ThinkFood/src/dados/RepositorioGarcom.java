@@ -105,11 +105,11 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 * @see dados.IRepositorioGarcom#procurar(java.lang.String)
 	 */
 	@Override
-	public Funcionario_Garcon procurar(String cnpj) throws Exception {
+	public Funcionario_Garcon procurar(String cpf) throws Exception {
 		Funcionario_Garcon f = null;
 		String query = "select * from funcionario_garcon where cpf_funcionario = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, cnpj);
+		ps.setString(1, cpf);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {

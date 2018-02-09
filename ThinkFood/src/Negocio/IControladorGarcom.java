@@ -12,7 +12,7 @@ public interface IControladorGarcom {
 
 	public boolean cadastrar(Funcionario_Garcon p) throws Exception;
 
-	public Funcionario_Garcon procurar(String cnpj) throws Exception;
+	public Funcionario_Garcon procurar(String cpf) throws Exception;
 
 	public boolean remover(Funcionario_Garcon f) throws SQLException;
 

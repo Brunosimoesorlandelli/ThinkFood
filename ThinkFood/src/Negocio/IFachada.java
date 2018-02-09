@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Fornecedor;
+import beans.Funcionario;
 import beans.Funcionario_Entregador;
 import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
@@ -75,5 +76,7 @@ public interface IFachada {
 	public boolean remover(ItemMenu p) throws SQLException;
 
 	public void printar(ItemMenu p);
+
+	public Funcionario logar(String cpf) throws Exception;
 
 }

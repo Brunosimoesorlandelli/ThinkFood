@@ -5,15 +5,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import beans.Fornecedor;
+import beans.Funcionario;
 import beans.Funcionario_Entregador;
 import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
 import beans.Produto;
-import negocio.Fachada;
-import negocio.IFachada;
 
 public class Fachada implements IFachada, Serializable {
 
@@ -166,6 +167,22 @@ public class Fachada implements IFachada, Serializable {
 
 	public void printar(ItemMenu p) {
 		cItemMenu.printar(p);
+	}
+
+	public Funcionario logar(String cpf) throws Exception {
+		Funcionario func = null;
+		if (procurarEntregador(cpf) != null) {
+			func = procurarEntregador(cpf);
+		} else if (procurarGarcom(cpf) != null) {
+			func = procurarGarcom(cpf);
+		} else if (procurarGerente(cpf) != null) {
+			func = procurarGerente(cpf);
+		} else if (procurarSecretario(cpf) != null) {
+			func = procurarSecretario(cpf);
+		} else {
+			JOptionPane.showMessageDialog(null, "Esta combinação de CPF e Senha não existe. Tente novamente.");
+		}
+		return func;
 	}
 
 }
