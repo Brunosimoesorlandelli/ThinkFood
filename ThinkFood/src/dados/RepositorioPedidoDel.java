@@ -2,7 +2,6 @@ package dados;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,9 +9,10 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import beans.Produto;
+import beans.PedidoDelivery;
+import beans.StatusDelivery;
 
-public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
+public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable {
 
 	/**
 	 *
@@ -22,24 +22,24 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 *
 	 */
 	private static Connection connection;
-	private static IRepositorioProdutos instanceUser;
-	private ArrayList<Produto> produtos;
+	private static IRepositorioPedidoDel instanceUser;
+	private ArrayList<PedidoDelivery> pedidos;
 	private int next;
 
-	public RepositorioProdutos() {
-		this.produtos = new ArrayList<Produto>();
+	public RepositorioPedidoDel() {
+		this.pedidos = new ArrayList<PedidoDelivery>();
 		this.next = 0;
 	}
 
-	public static synchronized IRepositorioProdutos getInstance() {
+	public static synchronized IRepositorioPedidoDel getInstance() {
 		if (instanceUser == null) {
-			instanceUser = new RepositorioProdutos();
+			instanceUser = new RepositorioPedidoDel();
 		}
 		return instanceUser;
 	}
 
 	public void conectar(Connection connect) {
-		RepositorioProdutos.connection = connect;
+		RepositorioPedidoDel.connection = connect;
 	}
 
 	/*
@@ -70,21 +70,17 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#cadastrar(Beans.Produto)
 	 */
-	@Override
-	public boolean cadastrar(Produto p) throws SQLException {
-		String query = "insert into produtoref (unidade, codigo, descricao, qtdMinStk, dtInicio, dtFim, cnpj_fornecedor, cod_categ, preco_ult_compra, qtd_atual_estoque, freq_pedido)values(?,?,?,?,?,?,?,?,?,?,?)";
+	public boolean cadastrar(PedidoDelivery p) throws SQLException {
+		String query = "insert into pedidodel (pedidoDel_id, pedidoDel_Status, endereco_cep, entrega_hrSaida, entrega_data, entregador_cpf, complemento, taxa) values(?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, p.getUnidade());
-		ps.setInt(2, p.getCodigo());
-		ps.setString(3, p.getDescr());
-		ps.setInt(4, p.getQtdMinStk());
-		ps.setDate(5, p.getDt_inicio());
-		ps.setDate(6, p.getDt_fim());
-		ps.setString(7, p.getCnpj_fornecedor());
-		ps.setInt(8, p.getCod_categ());
-		ps.setDouble(9, p.getPreco_ult_compra());
-		ps.setInt(10, p.getQtd_atual_estoque());
-		ps.setInt(11, p.getFreq_pedido());
+		ps.setInt(1, p.getNumero());
+		ps.setString(2, p.getStatus().name());
+		ps.setString(3, p.getCEP());
+		ps.setTime(4, p.getHoraSaida());
+		ps.setDate(5, p.getData());
+		ps.setString(6, p.getCpfEntregador());
+		ps.setString(7, p.getComplemento());
+		ps.setInt(8, p.getTaxa());
 
 		ps.executeUpdate();
 		return true;
@@ -109,18 +105,17 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * @see Dados.IRepositorioProdutos#procurar(int)
 	 */
 
-	public Produto procurar(int id) throws SQLException {
-		Produto p = null;
-		String query = "select * from produtoRef where produtoRef_cod = ?";
+	public PedidoDelivery procurar(int id) throws SQLException {
+		PedidoDelivery p = null;
+		String query = "select * from pedidoDel where pedidoDel_id = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(2, id);
+		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
-			p = new Produto(rs.getInt("produtoRef_unit"), rs.getInt("produtoRef_cod"), rs.getString("produtoRef_desc"),
-					rs.getInt("produtoRef_qtdMinStk"), rs.getDate("fornece_dtInicio"), rs.getDate("fornece_dtFim"),
-					rs.getString("cnpj_fornecedor"), rs.getInt("cod_categ"), rs.getDouble("preco_ult_compra"),
-					rs.getInt("qtd_atual_estoque"), rs.getInt("freq_pedido"));
+			p = new PedidoDelivery(rs.getInt("taxa"), StatusDelivery.valueOf(rs.getString("pedidoDel_status")),
+					rs.getString("endereco_cep"), rs.getTime("entrega_hrSaida"), rs.getDate("entrega_data"),
+					rs.getInt("pedidoDel_id"), rs.getString("complemento"), rs.getString("entregador_cpf"));
 		}
 		return p;
 
@@ -132,10 +127,10 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * @see Dados.IRepositorioProdutos#remover(int)
 	 */
 
-	public boolean remover(Produto p) throws SQLException {
-		String query = "delete from produtoRef where produtoRef_cod =?";
+	public boolean remover(PedidoDelivery p) throws SQLException {
+		String query = "delete from pedidodel where pedidoDel_id =?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(2, p.getCodigo());
+		ps.setInt(1, p.getNumero());
 		ps.executeUpdate();
 		return true;
 	}
@@ -166,13 +161,7 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	// return existe;
 	// }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Dados.IRepositorioProdutos#printar(Beans.Produto)
-	 */
-	@Override
-	public void printar(Produto p) {
+	public void printar(PedidoDelivery p) {
 		try {
 			JOptionPane.showMessageDialog(null, p.toString());
 		} catch (Exception e) {
@@ -185,9 +174,8 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#listar()
 	 */
-	@Override
-	public ArrayList<Produto> listar() {
-		return this.produtos;
+	public ArrayList<PedidoDelivery> listar() {
+		return this.pedidos;
 
 	}
 

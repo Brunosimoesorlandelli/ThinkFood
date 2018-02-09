@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import beans.Estoque;
 import beans.Fornecedor;
 import beans.Funcionario;
 import beans.Funcionario_Entregador;
@@ -14,6 +15,7 @@ import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
+import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
 
@@ -27,6 +29,8 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorSecretario cSecretario;
 	private IControladorItemMenu cItemMenu;
 	private IControladorReserva cReserva;
+	private IControladorPedidoDel cPedidoDel;
+	private IControladorEstoque cEstoque;
 
 	private static IFachada instance;
 
@@ -39,6 +43,8 @@ public class Fachada implements IFachada, Serializable {
 		this.cSecretario = new ControladorSecretario();
 		this.cItemMenu = new ControladorItemMenu();
 		this.cReserva = new ControladorReserva();
+		this.cPedidoDel = new ControladorPedidoDel();
+		this.cEstoque = new ControladorEstoque();
 	}
 
 	public static IFachada getInstance() {
@@ -136,7 +142,6 @@ public class Fachada implements IFachada, Serializable {
 		cProduto.printar(p);
 	}
 
-
 	public boolean cadastrarSecretario(Funcionario_Secretario p) throws Exception {
 		return cSecretario.cadastrar(p);
 	}
@@ -168,7 +173,6 @@ public class Fachada implements IFachada, Serializable {
 	public void printarItemMenu(ItemMenu p) {
 		cItemMenu.printar(p);
 	}
-	
 
 	public boolean cadastrarReserva(Reserva p) throws SQLException {
 		return cReserva.cadastrar(p);
@@ -186,6 +190,47 @@ public class Fachada implements IFachada, Serializable {
 		cReserva.printar(r);
 	}
 
+	public boolean cadastrarPedidoDel(PedidoDelivery p) throws SQLException {
+		return cPedidoDel.cadastrar(p);
+	}
+
+	public PedidoDelivery procurarPedidoDel(int id) throws SQLException {
+		return cPedidoDel.procurar(id);
+	}
+
+	public boolean removerPedidoDel(PedidoDelivery p) throws SQLException {
+		return cPedidoDel.remover(p);
+	}
+
+	public void printarPedidoDel(PedidoDelivery p) {
+		cPedidoDel.printar(p);
+	}
+
+	public ArrayList<PedidoDelivery> listarPedidoDel() {
+		return cPedidoDel.listar();
+	}
+
+	
+	public boolean cadastrarEstoque(Estoque p) throws SQLException {
+		return cEstoque.cadastrar(p);
+	}
+
+	public Estoque procurarEstoque(int id) throws SQLException {
+		return cEstoque.procurar(id);
+	}
+
+	public boolean removerEstoque(Estoque p) throws SQLException {
+		return cEstoque.remover(p);
+	}
+
+	public void printarEstoque(Estoque p) {
+		cEstoque.printar(p);
+	}
+
+	public ArrayList<Estoque> listarEstoque() {
+		return cEstoque.listar();
+	}
+
 	public Funcionario logar(String cpf) throws Exception {
 		Funcionario func = null;
 		if (procurarEntregador(cpf) != null) {
@@ -201,7 +246,5 @@ public class Fachada implements IFachada, Serializable {
 		}
 		return func;
 	}
-	
-	
 
 }

@@ -7,21 +7,23 @@ public class PedidoDelivery {
 
 	private int taxa;
 	private StatusDelivery status;
-	private Endereco endereco;
+	private String CEP;
 	private Time horaSaida;
 	private Date data;
 	private int numero;
 	private String complemento;
+	private String cpfEntregador;
 
-	public PedidoDelivery(int taxa, StatusDelivery status, Endereco endereco, Time hSaida, Date data, int numero,
-			String cmplt) {
+	public PedidoDelivery(int taxa, StatusDelivery status, String CEP, Time hSaida, Date data, int numero, String cmplt,
+			String cpfEntregador) {
 		this.taxa = taxa;
 		this.status = status;
-		this.endereco = endereco;
+		this.CEP = CEP;
 		this.horaSaida = hSaida;
 		this.data = data;
 		this.numero = numero;
 		this.complemento = cmplt;
+		this.cpfEntregador = cpfEntregador;
 	}
 
 	public int getTaxa() {
@@ -40,12 +42,12 @@ public class PedidoDelivery {
 		this.status = status;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public String getCEP() {
+		return CEP;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setCEP(String cEP) {
+		CEP = cEP;
 	}
 
 	public Time getHoraSaida() {
@@ -78,6 +80,14 @@ public class PedidoDelivery {
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	public String getCpfEntregador() {
+		return cpfEntregador;
+	}
+
+	public void setCpfEntregador(String cpfEntregador) {
+		this.cpfEntregador = cpfEntregador;
 	}
 
 }

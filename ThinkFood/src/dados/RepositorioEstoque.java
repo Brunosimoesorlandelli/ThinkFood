@@ -2,7 +2,6 @@ package dados;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,9 +9,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import beans.Produto;
+import beans.Estoque;
 
-public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
+public class RepositorioEstoque implements Serializable, IRepositorioEstoque {
 
 	/**
 	 *
@@ -22,24 +21,24 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 *
 	 */
 	private static Connection connection;
-	private static IRepositorioProdutos instanceUser;
-	private ArrayList<Produto> produtos;
+	private static IRepositorioEstoque instanceUser;
+	private ArrayList<Estoque> estoques;
 	private int next;
 
-	public RepositorioProdutos() {
-		this.produtos = new ArrayList<Produto>();
+	public RepositorioEstoque() {
+		this.estoques = new ArrayList<Estoque>();
 		this.next = 0;
 	}
 
-	public static synchronized IRepositorioProdutos getInstance() {
+	public static synchronized IRepositorioEstoque getInstance() {
 		if (instanceUser == null) {
-			instanceUser = new RepositorioProdutos();
+			instanceUser = new RepositorioEstoque();
 		}
 		return instanceUser;
 	}
 
 	public void conectar(Connection connect) {
-		RepositorioProdutos.connection = connect;
+		RepositorioEstoque.connection = connect;
 	}
 
 	/*
@@ -70,21 +69,12 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#cadastrar(Beans.Produto)
 	 */
-	@Override
-	public boolean cadastrar(Produto p) throws SQLException {
-		String query = "insert into produtoref (unidade, codigo, descricao, qtdMinStk, dtInicio, dtFim, cnpj_fornecedor, cod_categ, preco_ult_compra, qtd_atual_estoque, freq_pedido)values(?,?,?,?,?,?,?,?,?,?,?)";
+	public boolean cadastrar(Estoque p) throws SQLException {
+		String query = "insert into estoque (id, descr, dt_ultima_entrada)values(?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, p.getUnidade());
-		ps.setInt(2, p.getCodigo());
-		ps.setString(3, p.getDescr());
-		ps.setInt(4, p.getQtdMinStk());
-		ps.setDate(5, p.getDt_inicio());
-		ps.setDate(6, p.getDt_fim());
-		ps.setString(7, p.getCnpj_fornecedor());
-		ps.setInt(8, p.getCod_categ());
-		ps.setDouble(9, p.getPreco_ult_compra());
-		ps.setInt(10, p.getQtd_atual_estoque());
-		ps.setInt(11, p.getFreq_pedido());
+		ps.setInt(1, p.getId());
+		ps.setString(2, p.getDescr());
+		ps.setDate(3, p.getDtUltimaEntrada());
 
 		ps.executeUpdate();
 		return true;
@@ -109,18 +99,15 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * @see Dados.IRepositorioProdutos#procurar(int)
 	 */
 
-	public Produto procurar(int id) throws SQLException {
-		Produto p = null;
+	public Estoque procurar(int id) throws SQLException {
+		Estoque p = null;
 		String query = "select * from produtoRef where produtoRef_cod = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(2, id);
+		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
-			p = new Produto(rs.getInt("produtoRef_unit"), rs.getInt("produtoRef_cod"), rs.getString("produtoRef_desc"),
-					rs.getInt("produtoRef_qtdMinStk"), rs.getDate("fornece_dtInicio"), rs.getDate("fornece_dtFim"),
-					rs.getString("cnpj_fornecedor"), rs.getInt("cod_categ"), rs.getDouble("preco_ult_compra"),
-					rs.getInt("qtd_atual_estoque"), rs.getInt("freq_pedido"));
+			p = new Estoque(rs.getInt("id"), rs.getString("descr"), rs.getDate("dt_ultima_entrada"));
 		}
 		return p;
 
@@ -132,10 +119,10 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * @see Dados.IRepositorioProdutos#remover(int)
 	 */
 
-	public boolean remover(Produto p) throws SQLException {
-		String query = "delete from produtoRef where produtoRef_cod =?";
+	public boolean remover(Estoque p) throws SQLException {
+		String query = "delete from estoque where  id=?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(2, p.getCodigo());
+		ps.setInt(2, p.getId());
 		ps.executeUpdate();
 		return true;
 	}
@@ -171,8 +158,7 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#printar(Beans.Produto)
 	 */
-	@Override
-	public void printar(Produto p) {
+	public void printar(Estoque p) {
 		try {
 			JOptionPane.showMessageDialog(null, p.toString());
 		} catch (Exception e) {
@@ -185,9 +171,8 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#listar()
 	 */
-	@Override
-	public ArrayList<Produto> listar() {
-		return this.produtos;
+	public ArrayList<Estoque> listar() {
+		return this.estoques;
 
 	}
 

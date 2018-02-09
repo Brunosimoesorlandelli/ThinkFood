@@ -30,6 +30,7 @@ public class TelaGerente extends JFrame {
 		contentPane.setLayout(null);
 
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setBounds(10, 36, 185, 127);
 		contentPane.add(textArea);
@@ -57,6 +58,7 @@ public class TelaGerente extends JFrame {
 		contentPane.add(btnNewButton_1);
 
 		JTextArea textArea_2 = new JTextArea();
+		textArea_2.setEditable(false);
 		textArea_2.setLineWrap(true);
 		textArea_2.setBounds(10, 272, 185, 127);
 		contentPane.add(textArea_2);
@@ -74,6 +76,7 @@ public class TelaGerente extends JFrame {
 		contentPane.add(button_1);
 
 		JTextArea textArea_3 = new JTextArea();
+		textArea_3.setEditable(false);
 		textArea_3.setLineWrap(true);
 		textArea_3.setBounds(317, 272, 185, 127);
 		contentPane.add(textArea_3);

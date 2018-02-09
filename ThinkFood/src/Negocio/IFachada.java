@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.Estoque;
 import beans.Fornecedor;
 import beans.Funcionario;
 import beans.Funcionario_Entregador;
@@ -11,6 +12,7 @@ import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
+import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
 
@@ -75,17 +77,35 @@ public interface IFachada {
 	public boolean removerItemMenu(ItemMenu p) throws SQLException;
 
 	public void printarItemMenu(ItemMenu p);
-	
+
 	public boolean cadastrarReserva(Reserva r) throws SQLException;
-	
+
 	public Reserva procurarReserva(int seq) throws SQLException;
-	
+
 	public boolean removerReserva(Reserva r) throws SQLException;
-	
+
 	public void printarReserva(Reserva r);
 
 	public Funcionario logar(String cpf) throws Exception;
-	
-	
+
+	public boolean cadastrarPedidoDel(PedidoDelivery p) throws SQLException;
+
+	public PedidoDelivery procurarPedidoDel(int id) throws SQLException;
+
+	public boolean removerPedidoDel(PedidoDelivery p) throws SQLException;
+
+	public void printarPedidoDel(PedidoDelivery p);
+
+	public ArrayList<PedidoDelivery> listarPedidoDel();
+
+	public boolean cadastrarEstoque(Estoque p) throws SQLException;
+
+	public Estoque procurarEstoque(int id) throws SQLException;
+
+	public boolean removerEstoque(Estoque p) throws SQLException;
+
+	public void printarEstoque(Estoque p);
+
+	public ArrayList<Estoque> listarEstoque();
 
 }
