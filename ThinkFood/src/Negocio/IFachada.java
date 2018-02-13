@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import beans.ClientePF;
 import beans.ClientePJ;
 import beans.Estoque;
+import beans.FazReserva;
 import beans.Fornecedor;
 import beans.Funcionario;
 import beans.Funcionario_Entregador;
@@ -140,9 +141,19 @@ public interface IFachada {
 	public void printarClientePJ(ClientePJ p);
 
 	public ArrayList<ClientePJ> listarClientePJ();
-	
+
 	public ArrayList<Funcionario_Secretario> listarSecretario();
-	
+
 	public ArrayList<Funcionario_Garcon> listarGarcon();
+
+	public boolean cadastrarFazReserva(FazReserva r) throws SQLException;
+
+	public FazReserva procurarFazReserva(int seq) throws SQLException;
+
+	public boolean removerFazReserva(FazReserva f) throws SQLException;
+
+	public void printarFazReserva(FazReserva p);
+
+	public ArrayList<FazReserva> listarFazReserva();
 
 }

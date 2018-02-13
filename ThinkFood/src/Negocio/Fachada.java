@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import beans.ClientePF;
 import beans.ClientePJ;
 import beans.Estoque;
+import beans.FazReserva;
 import beans.Fornecedor;
 import beans.Funcionario;
 import beans.Funcionario_Entregador;
@@ -37,6 +38,7 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorMesa cMesa;
 	private IControladorClientePF cClientePF;
 	private IControladorClientePJ cClientePJ;
+	private IControladorFazReserva cFazReserva;
 
 	private static Connection connect;
 	private static Connection conexaoLogin;
@@ -57,6 +59,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cMesa = new ControladorMesa();
 		this.cClientePF = new ControladorClientePF();
 		this.cClientePJ = new ControladorClientePJ();
+		this.cFazReserva = new ControladorFazReserva();
 		this.conex = new ConexaoDB();
 		try {
 			this.conexaoLogin = conex.getConexao("God", "senha");
@@ -86,6 +89,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cMesa.conectar(connect);
 		this.cClientePF.conectar(connect);
 		this.cClientePJ.conectar(connect);
+		this.cFazReserva.conectar(connect);
 	}
 
 	public boolean cadastrarEntregador(Funcionario_Entregador p) throws Exception {
@@ -319,8 +323,6 @@ public class Fachada implements IFachada, Serializable {
 	public ArrayList<ClientePJ> listarClientePJ() {
 		return cClientePJ.listar();
 	}
-	
-	
 
 	public ArrayList<Funcionario_Garcon> listarGarcon() {
 		return cGarcom.listarGarcon();
@@ -328,6 +330,30 @@ public class Fachada implements IFachada, Serializable {
 
 	public ArrayList<Funcionario_Secretario> listarSecretario() {
 		return cSecretario.listarSecretario();
+	}
+
+	public void conectar(Connection connect) {
+		cFazReserva.conectar(connect);
+	}
+
+	public boolean cadastrar(FazReserva r) throws SQLException {
+		return cFazReserva.cadastrar(r);
+	}
+
+	public FazReserva procurar(int seq) throws SQLException {
+		return cFazReserva.procurar(seq);
+	}
+
+	public boolean remover(FazReserva f) throws SQLException {
+		return cFazReserva.remover(f);
+	}
+
+	public void printar(FazReserva p) {
+		cFazReserva.printar(p);
+	}
+
+	public ArrayList<FazReserva> listar() {
+		return cFazReserva.listar();
 	}
 
 	public Funcionario logar(String cpf) throws Exception {

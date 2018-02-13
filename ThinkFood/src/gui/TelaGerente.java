@@ -39,38 +39,38 @@ public class TelaGerente extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblUnidadeLoja = new JLabel("Unidade Loja");
-		lblUnidadeLoja.setBounds(10, 11, 75, 14);
+		lblUnidadeLoja.setBounds(146, 66, 75, 14);
 		contentPane.add(lblUnidadeLoja);
 
 		JLabel lblEstoque = new JLabel("Estoque");
-		lblEstoque.setBounds(317, 11, 46, 14);
+		lblEstoque.setBounds(453, 66, 46, 14);
 		contentPane.add(lblEstoque);
 
 		JButton btnNewButton = new JButton("Adicionar");
-		btnNewButton.setBounds(314, 174, 89, 23);
+		btnNewButton.setBounds(450, 229, 89, 23);
 		contentPane.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Remover");
-		btnNewButton_1.setBounds(413, 174, 89, 23);
+		btnNewButton_1.setBounds(549, 229, 89, 23);
 		contentPane.add(btnNewButton_1);
 
 		JLabel lblFuncionarios = new JLabel("Funcionarios");
-		lblFuncionarios.setBounds(10, 247, 75, 14);
+		lblFuncionarios.setBounds(146, 302, 75, 14);
 		contentPane.add(lblFuncionarios);
 
 		JButton button = new JButton("Remover");
-		button.setBounds(106, 411, 89, 23);
+		button.setBounds(242, 466, 89, 23);
 		contentPane.add(button);
 
 		JButton button_1 = new JButton("Adicionar");
-		button_1.setBounds(10, 411, 89, 23);
+		button_1.setBounds(146, 466, 89, 23);
 		contentPane.add(button_1);
 		
 		
 		
 
 		JLabel lblMenu = new JLabel("Cardapio");
-		lblMenu.setBounds(317, 247, 46, 14);
+		lblMenu.setBounds(453, 302, 46, 14);
 		contentPane.add(lblMenu);
 
 		JButton button_2 = new JButton("Adicionar");
@@ -83,22 +83,22 @@ public class TelaGerente extends JFrame {
 				tela.setResizable(false);
 			}
 		});
-		button_2.setBounds(314, 411, 89, 23);
+		button_2.setBounds(450, 466, 89, 23);
 		contentPane.add(button_2);
 
 		JButton button_3 = new JButton("Remover");
-		button_3.setBounds(413, 411, 89, 23);
+		button_3.setBounds(549, 466, 89, 23);
 		contentPane.add(button_3);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(317, 272, 185, 127);
+		scrollPane.setBounds(453, 327, 185, 127);
 		contentPane.add(scrollPane);
 		
 		JList cardapioLista = new JList();
 		scrollPane.setViewportView(cardapioLista);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(10, 272, 185, 128);
+		scrollPane_3.setBounds(146, 327, 185, 128);
 		contentPane.add(scrollPane_3);
 		
 		JList funcionariosLista = new JList();
@@ -107,14 +107,14 @@ public class TelaGerente extends JFrame {
 
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 36, 185, 128);
+		scrollPane_1.setBounds(146, 91, 185, 128);
 		contentPane.add(scrollPane_1);
 		
 		JList unidlojaList = new JList();
 		scrollPane_1.setViewportView(unidlojaList);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(317, 35, 185, 128);
+		scrollPane_2.setBounds(453, 90, 185, 128);
 		contentPane.add(scrollPane_2);
 		
 		JList estoqueList = new JList();

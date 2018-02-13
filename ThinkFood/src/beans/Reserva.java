@@ -15,7 +15,7 @@ public class Reserva {
 		this.hora_fim = hora_fim;
 		this.status = status;
 		this.num_pessoas = num_pessoas;
-		
+
 	}
 
 	public int getSeq() {
@@ -57,7 +57,5 @@ public class Reserva {
 	public void setNum_pessoas(int num_pessoas) {
 		this.num_pessoas = num_pessoas;
 	}
-	
-	
 
 }
