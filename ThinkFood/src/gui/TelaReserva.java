@@ -3,9 +3,11 @@ package gui;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,151 +18,159 @@ import javax.swing.border.EmptyBorder;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
-import beans.Funcionario;
+import beans.FazReserva;
+import beans.Funcionario_Secretario;
 import beans.Reserva;
-import beans.StatusReserva;
 
 public class TelaReserva extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField seq;
-	private JTextField numPessoas;
-	private JTextField preco;
-	private JTextField nome;
-	private JTextField detalhes;
-	private JTextField horaInicio;
-	private JLabel lblDataIncio;
-	private JTextField horaFim;
-	private JLabel lblHoraFim;
-	private JLabel lblStatus;
-	private JButton cadastrarReservaButton;
-
-	/**
-	 * Launch the application.
-	 */
-
+	private JTextField CPFFunc;
+	private JTextField IdCliente;
+	private JTextField HoraInicio;
+	private JTextField HoraFim;
+	private JTextField NumPessoas;
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaReserva(Funcionario func) {
-		IFachada f = Fachada.getInstance();
-		setBackground(SystemColor.inactiveCaption);
-		setTitle("ThinkFood");
+	public TelaReserva(Funcionario_Secretario FS) {
 		setResizable(false);
+		IFachada fachada = Fachada.getInstance();
+		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		seq = new JTextField();
-		seq.setBounds(79, 40, 209, 20);
-		contentPane.add(seq);
-		seq.setColumns(10);
-		
-		JLabel lblCdigo = new JLabel("Seq:");
-		lblCdigo.setBounds(31, 43, 46, 14);
-		contentPane.add(lblCdigo);
-		
-		JLabel lblDescrio = new JLabel("Numero de Pessoas:");
-		lblDescrio.setBounds(10, 139, 106, 14);
-		contentPane.add(lblDescrio);
-		
-		numPessoas = new JTextField();
-		numPessoas.setColumns(10);
-		numPessoas.setBounds(126, 136, 86, 20);
-		contentPane.add(numPessoas);
-		
-		horaInicio = new JTextField();
-		horaInicio.setColumns(10);
-		horaInicio.setBounds(79, 84, 209, 20);
-		contentPane.add(horaInicio);
-		
-		lblDataIncio = new JLabel("Hora In\u00EDcio:");
-		lblDataIncio.setBounds(10, 87, 67, 14);
-		contentPane.add(lblDataIncio);
-		
-		horaFim = new JTextField();
-		horaFim.setColumns(10);
-		horaFim.setBounds(365, 84, 209, 20);
-		contentPane.add(horaFim);
-		
-		lblHoraFim = new JLabel("Hora Fim:");
-		lblHoraFim.setBounds(317, 87, 46, 14);
-		contentPane.add(lblHoraFim);
-		
-		lblStatus = new JLabel("Status:");
-		lblStatus.setBounds(317, 139, 46, 14);
-		contentPane.add(lblStatus);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(365, 136, 126, 20);
-		contentPane.add(comboBox);
-		StatusReserva status = null;
-		comboBox.addItem(status.LIVRE);
-		comboBox.addItem(status.OCUPADO);
-		comboBox.addItem(status.RESERVA_EXPIRADA);
-		comboBox.addItem(status.RESERVADO);
-		
-		cadastrarReservaButton = new JButton("Cadastrar Reserva");
-		cadastrarReservaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			switch (comboBox.getSelectedIndex()) {
-			case 0:
-				try {
-					f.cadastrarReserva(new Reserva(Integer.parseInt(seq.getText()), Time.valueOf(horaInicio.getText()), Time.valueOf(horaFim.getText()), StatusReserva.LIVRE, Integer.parseInt(numPessoas.getText())));
-				} catch (NumberFormatException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				break;
 
-			case 1:
+		CPFFunc = new JTextField();
+		CPFFunc.setText(FS.getCpf());
+		CPFFunc.setBounds(290, 172, 268, 20);
+		contentPane.add(CPFFunc);
+		CPFFunc.setColumns(10);
+
+		JLabel lblCpfFuncion = new JLabel("CPF funcionario:");
+		lblCpfFuncion.setBounds(194, 175, 86, 14);
+		contentPane.add(lblCpfFuncion);
+
+		JLabel lblIdCliente = new JLabel("ID cliente:");
+		lblIdCliente.setBounds(194, 199, 86, 14);
+		contentPane.add(lblIdCliente);
+
+		IdCliente = new JTextField();
+		IdCliente.setColumns(10);
+		IdCliente.setBounds(290, 196, 268, 20);
+		contentPane.add(IdCliente);
+
+		JLabel lblDataReserva = new JLabel("Data Reserva:");
+		lblDataReserva.setBounds(194, 328, 86, 14);
+		contentPane.add(lblDataReserva);
+
+		JComboBox Dia = new JComboBox();
+		Dia.setBackground(SystemColor.inactiveCaption);
+		Dia.setModel(new DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+				"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
+				"28", "29", "30", "31" }));
+		Dia.setBounds(331, 325, 61, 20);
+		contentPane.add(Dia);
+
+		JComboBox Mes = new JComboBox();
+		Mes.setBackground(SystemColor.inactiveCaption);
+		Mes.setModel(new DefaultComboBoxModel(
+				new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+		Mes.setBounds(443, 325, 61, 20);
+		contentPane.add(Mes);
+
+		JComboBox Ano = new JComboBox();
+		Ano.setBackground(SystemColor.inactiveCaption);
+		Ano.setModel(new DefaultComboBoxModel(new String[] { "2030", "2029", "2028", "2027", "2026", "2025", "2024",
+				"2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011",
+				"2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+		Ano.setBounds(555, 325, 61, 20);
+		contentPane.add(Ano);
+
+		JComboBox status = new JComboBox();
+		status.setBackground(SystemColor.inactiveCaption);
+		status.setModel(new DefaultComboBoxModel(new String[] { "LIVRE", "OCUPADO", "RESERVADO", "RESERVA_EXPIRADA" }));
+		status.setBounds(290, 297, 268, 20);
+		contentPane.add(status);
+
+		JButton btnFazerReserva = new JButton("Fazer Reserva");
+		btnFazerReserva.setBackground(SystemColor.inactiveCaption);
+		btnFazerReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Reserva r = new Reserva(0, Time.valueOf(HoraInicio.getText()), Time.valueOf(HoraFim.getText()),
+						Enum.valueOf(null, status.getSelectedItem().toString()),
+						Integer.parseInt(NumPessoas.getText()));
+				FazReserva fr = new FazReserva(CPFFunc.getText(), 0, Integer.parseInt(IdCliente.getText()),
+						Date.valueOf(Dia.getName() + "/" + Mes.getName() + "/" + Ano.getName()),
+						Date.valueOf(Dia.getName() + "/" + Mes.getName() + "/" + Ano.getName()));
 				try {
-					f.cadastrarReserva(new Reserva(Integer.parseInt(seq.getText()), Time.valueOf(horaInicio.getText()), Time.valueOf(horaFim.getText()), StatusReserva.OCUPADO, Integer.parseInt(numPessoas.getText())));
-				} catch (NumberFormatException | SQLException e1) {
+					fachada.cadastrarReserva(r);
+					fachada.cadastrarFazReserva(fr);
+				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e.printStackTrace();
 				}
-				
-				break;
-				
-			case 2:
-				try {
-					f.cadastrarReserva(new Reserva(Integer.parseInt(seq.getText()), Time.valueOf(horaInicio.getText()), Time.valueOf(horaFim.getText()), StatusReserva.RESERVA_EXPIRADA, Integer.parseInt(numPessoas.getText())));
-				} catch (NumberFormatException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				break;
-				
-			case 3:
-				try {
-					f.cadastrarReserva(new Reserva(Integer.parseInt(seq.getText()), Time.valueOf(horaInicio.getText()), Time.valueOf(horaFim.getText()), StatusReserva.RESERVADO, Integer.parseInt(numPessoas.getText())));
-				} catch (NumberFormatException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				break;
-			default:
-				break;
-			}
-			
-			TelaFuncionario tela = new TelaFuncionario(func);
-			dispose();
-			tela.setVisible(true);
-			tela.setLocationRelativeTo(null);
-			tela.setResizable(false);
-			
+
+				TelaSecretario tela = new TelaSecretario(FS);
+				dispose();
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
 			}
 		});
-		cadastrarReservaButton.setBounds(240, 233, 156, 33);
-		contentPane.add(cadastrarReservaButton);
+		btnFazerReserva.setBounds(326, 356, 107, 23);
+		contentPane.add(btnFazerReserva);
+
+		JLabel lblDia = new JLabel("Dia:");
+		lblDia.setBounds(290, 328, 31, 14);
+		contentPane.add(lblDia);
+
+		JLabel lblMs = new JLabel("M\u00EAs:");
+		lblMs.setBounds(402, 328, 31, 14);
+		contentPane.add(lblMs);
+
+		JLabel lblAno = new JLabel("Ano:");
+		lblAno.setBounds(514, 328, 31, 14);
+		contentPane.add(lblAno);
+
+		JLabel lblReserva = new JLabel("Reserva");
+		lblReserva.setBounds(326, 118, 46, 14);
+		contentPane.add(lblReserva);
+
+		JLabel lblHoraInicio = new JLabel("Hora Inicio:");
+		lblHoraInicio.setBounds(194, 224, 86, 14);
+		contentPane.add(lblHoraInicio);
+
+		JLabel lblHoraFim = new JLabel("Hora Fim:");
+		lblHoraFim.setBounds(194, 249, 86, 14);
+		contentPane.add(lblHoraFim);
+
+		HoraInicio = new JTextField();
+		HoraInicio.setColumns(10);
+		HoraInicio.setBounds(290, 221, 268, 20);
+		contentPane.add(HoraInicio);
+
+		HoraFim = new JTextField();
+		HoraFim.setColumns(10);
+		HoraFim.setBounds(290, 246, 268, 20);
+		contentPane.add(HoraFim);
+
+		JLabel lblNumPesooas = new JLabel("Num Pessoas:");
+		lblNumPesooas.setBounds(194, 274, 86, 14);
+		contentPane.add(lblNumPesooas);
+
+		NumPessoas = new JTextField();
+		NumPessoas.setColumns(10);
+		NumPessoas.setBounds(290, 271, 268, 20);
+		contentPane.add(NumPessoas);
+
+		JLabel lblStatus = new JLabel("Status:");
+		lblStatus.setBounds(194, 300, 86, 14);
+		contentPane.add(lblStatus);
 	}
 }

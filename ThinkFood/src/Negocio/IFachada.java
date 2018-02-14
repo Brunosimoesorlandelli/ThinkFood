@@ -16,6 +16,7 @@ import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
 import beans.Mesa;
+import beans.Pedido;
 import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
@@ -155,5 +156,13 @@ public interface IFachada {
 	public void printarFazReserva(FazReserva p);
 
 	public ArrayList<FazReserva> listarFazReserva();
+
+	public boolean cadastrarPedido(Pedido p) throws SQLException;
+
+	public Pedido procurarPedido(int id) throws SQLException;
+
+	public boolean removerPedido(Pedido p) throws SQLException;
+
+	public void printarPedido(Pedido p);
 
 }

@@ -19,6 +19,7 @@ import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 import beans.ItemMenu;
 import beans.Mesa;
+import beans.Pedido;
 import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
@@ -39,6 +40,7 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorClientePF cClientePF;
 	private IControladorClientePJ cClientePJ;
 	private IControladorFazReserva cFazReserva;
+	private IControladorPedido cPedido;
 
 	private static Connection connect;
 	private static Connection conexaoLogin;
@@ -60,6 +62,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cClientePF = new ControladorClientePF();
 		this.cClientePJ = new ControladorClientePJ();
 		this.cFazReserva = new ControladorFazReserva();
+		this.cPedido = new ControladorPedido();
 		this.conex = new ConexaoDB();
 		try {
 			this.conexaoLogin = conex.getConexao("God", "senha");
@@ -332,28 +335,40 @@ public class Fachada implements IFachada, Serializable {
 		return cSecretario.listarSecretario();
 	}
 
-	public void conectar(Connection connect) {
-		cFazReserva.conectar(connect);
-	}
-
-	public boolean cadastrar(FazReserva r) throws SQLException {
+	public boolean cadastrarFazReserva(FazReserva r) throws SQLException {
 		return cFazReserva.cadastrar(r);
 	}
 
-	public FazReserva procurar(int seq) throws SQLException {
+	public FazReserva procurarFazReserva(int seq) throws SQLException {
 		return cFazReserva.procurar(seq);
 	}
 
-	public boolean remover(FazReserva f) throws SQLException {
+	public boolean removerFazReserva(FazReserva f) throws SQLException {
 		return cFazReserva.remover(f);
 	}
 
-	public void printar(FazReserva p) {
+	public void printarFazReserva(FazReserva p) {
 		cFazReserva.printar(p);
 	}
 
-	public ArrayList<FazReserva> listar() {
+	public ArrayList<FazReserva> listarFazReserva() {
 		return cFazReserva.listar();
+	}
+
+	public boolean cadastrarPedido(Pedido p) throws SQLException {
+		return cPedido.cadastrar(p);
+	}
+
+	public Pedido procurarPedido(int id) throws SQLException {
+		return cPedido.procurar(id);
+	}
+
+	public boolean removerPedido(Pedido p) throws SQLException {
+		return cPedido.remover(p);
+	}
+
+	public void printarPedido(Pedido p) {
+		cPedido.printar(p);
 	}
 
 	public Funcionario logar(String cpf) throws Exception {
