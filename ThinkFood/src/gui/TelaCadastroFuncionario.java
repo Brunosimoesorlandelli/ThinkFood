@@ -129,8 +129,8 @@ public class TelaCadastroFuncionario extends JFrame {
 					tela.setResizable(false);
 					break;
 				case 1:
-					Funcionario_Garcon funcGa = new Funcionario_Garcon(nome.getText(), CPF.getText(), data,
-							"67105072", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+					Funcionario_Garcon funcGa = new Funcionario_Garcon(nome.getText(), CPF.getText(), data, "67105072",
+							Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
 							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarGarcon(funcGa);
@@ -214,7 +214,7 @@ public class TelaCadastroFuncionario extends JFrame {
 		numero.setColumns(10);
 		numero.setBounds(116, 263, 197, 20);
 		contentPane.add(numero);
-		
+
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setBounds(514, 330, 70, 20);
 		contentPane.add(btnVoltar);

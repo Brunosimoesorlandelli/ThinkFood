@@ -46,7 +46,11 @@ public class TelaGarcom extends JFrame {
 		JButton btnNewButton = new JButton("Cadastrar Pedido");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				TelaPedidoPresencial tela = new TelaPedidoPresencial(FG);
+				dispose();
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
 			}
 		});
 		btnNewButton.setBackground(SystemColor.inactiveCaption);

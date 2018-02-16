@@ -106,8 +106,8 @@ public class TelaReserva extends JFrame {
 						Enum.valueOf(null, status.getSelectedItem().toString()),
 						Integer.parseInt(NumPessoas.getText()));
 				FazReserva fr = new FazReserva(CPFFunc.getText(), 0, Integer.parseInt(IdCliente.getText()),
-						Date.valueOf(Dia.getName() + "/" + Mes.getName() + "/" + Ano.getName()),
-						Date.valueOf(Dia.getName() + "/" + Mes.getName() + "/" + Ano.getName()));
+						Date.valueOf(Ano.getName() + "-" + Mes.getName() + "-" + Dia.getName()),
+						Date.valueOf(Ano.getName() + "-" + Mes.getName() + "-" + Dia.getName()));
 				try {
 					fachada.cadastrarReserva(r);
 					fachada.cadastrarFazReserva(fr);

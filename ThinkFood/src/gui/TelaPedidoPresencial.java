@@ -1,25 +1,23 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Negocio.Fachada;
-import Negocio.IFachada;
-import beans.Pedido;
-
 import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import Negocio.Fachada;
+import Negocio.IFachada;
+import beans.Funcionario_Garcon;
+import beans.Pedido;
 
 public class TelaPedidoPresencial extends JFrame {
 
@@ -31,7 +29,7 @@ public class TelaPedidoPresencial extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaPedidoPresencial() {
+	public TelaPedidoPresencial(Funcionario_Garcon FG) {
 		IFachada fachada = Fachada.getInstance();
 		setTitle("ThinkFood");
 		setResizable(false);
@@ -82,6 +80,11 @@ public class TelaPedidoPresencial extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				TelaGarcom tela = new TelaGarcom(FG);
+				dispose();
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
 			}
 		});
 		btnCadastrarPedido.setBackground(SystemColor.inactiveCaption);

@@ -24,7 +24,6 @@ public class TelaGerente extends JFrame {
 
 	private JPanel contentPane;
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -89,7 +88,7 @@ public class TelaGerente extends JFrame {
 		button_2.setBackground(SystemColor.inactiveCaption);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroProduto tela = new TelaCadastroProduto(FG);
+				TelaCadastroItemMenu tela = new TelaCadastroItemMenu(FG);
 				dispose();
 				tela.setVisible(true);
 				tela.setLocationRelativeTo(null);
@@ -118,8 +117,7 @@ public class TelaGerente extends JFrame {
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(57, 327, 185, 128);
 		contentPane.add(scrollPane_3);
-		
-		
+
 		JList funcionariosLista = new JList();
 		String[] funcionarios = new String[f.listarFuncionarios().length];
 		for (int j = 0; j < funcionarios.length; j++) {
@@ -127,8 +125,6 @@ public class TelaGerente extends JFrame {
 		}
 		funcionariosLista.setListData(funcionarios);
 		scrollPane_3.setViewportView(funcionariosLista);
-		
-		
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(146, 91, 185, 128);
@@ -181,8 +177,7 @@ public class TelaGerente extends JFrame {
 		JScrollPane scrollPane_4 = new JScrollPane();
 		scrollPane_4.setBounds(302, 327, 185, 128);
 		contentPane.add(scrollPane_4);
-		
-		
+
 		JList fornecedoresList = new JList();
 		String[] fornecedores = new String[f.listarFornecedores().length];
 		for (int j = 0; j < fornecedores.length; j++) {

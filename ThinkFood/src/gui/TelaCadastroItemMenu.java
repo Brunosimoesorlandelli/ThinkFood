@@ -17,7 +17,7 @@ import Negocio.IFachada;
 import beans.Funcionario_Gerente;
 import beans.ItemMenu;
 
-public class TelaCadastroProduto extends JFrame {
+public class TelaCadastroItemMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField codigo;
@@ -33,7 +33,7 @@ public class TelaCadastroProduto extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroProduto(Funcionario_Gerente FG) {
+	public TelaCadastroItemMenu(Funcionario_Gerente FG) {
 		IFachada f = Fachada.getInstance();
 		setBackground(SystemColor.inactiveCaption);
 		setTitle("ThinkFood");
