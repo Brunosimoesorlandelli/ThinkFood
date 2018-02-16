@@ -54,24 +54,6 @@ public class TelaLogin extends JFrame {
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 320, 200);
-
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-
-		JMenu mnCadastrar = new JMenu("Cadastrar");
-		menuBar.add(mnCadastrar);
-
-		JMenuItem mntmEntregador = new JMenuItem("Funcionario");
-		mntmEntregador.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
-				dispose();
-				tela.setVisible(true);
-				tela.setLocationRelativeTo(null);
-				tela.setResizable(false);
-			}
-		});
-		mnCadastrar.add(mntmEntregador);
 		contentPane = new JPanel();
 		contentPane.setBorder(null);
 		contentPane.setBackground(Color.WHITE);
@@ -90,7 +72,7 @@ public class TelaLogin extends JFrame {
 		textField.setBounds(66, 44, 228, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
-
+		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -135,6 +117,7 @@ public class TelaLogin extends JFrame {
 				}
 			}
 		});
+		
 		btnEntrar.setBounds(109, 100, 89, 23);
 		contentPane.add(btnEntrar);
 

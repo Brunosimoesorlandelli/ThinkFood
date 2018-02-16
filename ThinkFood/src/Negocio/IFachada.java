@@ -164,5 +164,9 @@ public interface IFachada {
 	public boolean removerPedido(Pedido p) throws SQLException;
 
 	public void printarPedido(Pedido p);
+	
+	public Funcionario[] listarFuncionarios();
+	
+	public ArrayList<Funcionario> getFuncionarios();
 
 }

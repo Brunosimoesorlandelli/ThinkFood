@@ -27,6 +27,10 @@ public class Funcionario {
 		this.senha = senha;
 
 	}
+	
+	public Funcionario() {
+		
+	}
 
 	public String getNome() {
 		return nome;

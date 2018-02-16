@@ -3,7 +3,6 @@ package gui;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import Negocio.ConexaoDB;
 import Negocio.Fachada;
 import Negocio.IFachada;
 import beans.Funcionario_Entregador;
@@ -37,21 +35,12 @@ public class TelaCadastroFuncionario extends JFrame {
 	private JTextField seq_loja;
 	private JTextField senha;
 	private JTextField numero;
-	private static Connection connect;
-	private ConexaoDB conex;
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroFuncionario() {
+	public TelaCadastroFuncionario(Funcionario_Gerente FG) {
 		IFachada fachada = Fachada.getInstance();
-		try {
-			connect = conex.getConexao("God", "senha");
-		} catch (Exception e2) {
-			e2.printStackTrace();
-		}
-		
-		fachada.Conectar(connect);
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -120,13 +109,13 @@ public class TelaCadastroFuncionario extends JFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaLogin tela = new TelaLogin();
+				TelaGerente tela = new TelaGerente(FG);
+				Date data = new Date(1988, 03, 16);
 				switch (comboBox.getSelectedIndex()) {
 				case 0:
-					Funcionario_Entregador funcEn = new Funcionario_Entregador(nome.getText(), CPF.getText(),
-							Date.valueOf(Dt_Nasc.getText()), CEP.getText(), Double.parseDouble(Salario.getText()),
-							Integer.parseInt(seq_loja.getText()), Complemento.getText(),
-							Integer.parseInt(numero.getText()), senha.getText());
+					Funcionario_Entregador funcEn = new Funcionario_Entregador(nome.getText(), CPF.getText(), data,
+							"37902028", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarEntregador(funcEn);
 					} catch (Exception e1) {
@@ -140,10 +129,9 @@ public class TelaCadastroFuncionario extends JFrame {
 					tela.setResizable(false);
 					break;
 				case 1:
-					Funcionario_Garcon funcGa = new Funcionario_Garcon(nome.getText(), CPF.getText(),
-							Date.valueOf(Dt_Nasc.getText()), CEP.getText(), Double.parseDouble(Salario.getText()),
-							Integer.parseInt(seq_loja.getText()), Complemento.getText(),
-							Integer.parseInt(numero.getText()), senha.getText());
+					Funcionario_Garcon funcGa = new Funcionario_Garcon(nome.getText(), CPF.getText(), data,
+							"67105072", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarGarcon(funcGa);
 					} catch (Exception e1) {
@@ -156,10 +144,9 @@ public class TelaCadastroFuncionario extends JFrame {
 					tela.setResizable(false);
 					break;
 				case 2:
-					Funcionario_Secretario funcSe = new Funcionario_Secretario(nome.getText(), CPF.getText(),
-							Date.valueOf(Dt_Nasc.getText()), CEP.getText(), Double.parseDouble(Salario.getText()),
-							Integer.parseInt(seq_loja.getText()), Complemento.getText(),
-							Integer.parseInt(numero.getText()), senha.getText());
+					Funcionario_Secretario funcSe = new Funcionario_Secretario(nome.getText(), CPF.getText(), data,
+							"64215317", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarSecretario(funcSe);
 					} catch (Exception e1) {
@@ -172,10 +159,9 @@ public class TelaCadastroFuncionario extends JFrame {
 					tela.setResizable(false);
 					break;
 				case 3:
-					Funcionario_Gerente funcGe = new Funcionario_Gerente(nome.getText(), CPF.getText(),
-							Date.valueOf(Dt_Nasc.getText()), CEP.getText(), Double.parseDouble(Salario.getText()),
-							Integer.parseInt(seq_loja.getText()), Complemento.getText(),
-							Integer.parseInt(numero.getText()), senha.getText());
+					Funcionario_Gerente funcGe = new Funcionario_Gerente(nome.getText(), CPF.getText(), data,
+							"38304274", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarGerente(funcGe);
 					} catch (Exception e1) {
@@ -228,5 +214,9 @@ public class TelaCadastroFuncionario extends JFrame {
 		numero.setColumns(10);
 		numero.setBounds(116, 263, 197, 20);
 		contentPane.add(numero);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(514, 330, 70, 20);
+		contentPane.add(btnVoltar);
 	}
 }

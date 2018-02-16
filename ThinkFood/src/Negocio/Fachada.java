@@ -2,7 +2,9 @@ package Negocio;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -396,5 +398,47 @@ public class Fachada implements IFachada, Serializable {
 
 		return func;
 	}
+	
+	public Funcionario[] listarFuncionarios() {
+		int tamanho = getFuncionarios().size();
+		Funcionario[] funcionarios = new Funcionario[tamanho];
+		for (int i = 0; i < tamanho; i++) {
+			if (getFuncionarios().get(i) != null) {
+				funcionarios[i] = getFuncionarios().get(i);
+			}
+		}
+		
+		return funcionarios;
+	}
+
+	public ArrayList<Funcionario> getFuncionarios() {
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        try {
+            Statement stmt = connect.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT * FROM funcionario");
+            while(result.next()){
+
+            	Funcionario funcionario = new Funcionario();
+            	funcionario.setCpf(result.getString(1));
+        		funcionario.setNome(result.getString(2));
+        		funcionario.setDataNasc(result.getDate(3));
+        		funcionario.setSalario(result.getFloat(4));
+        		funcionario.setCompl((result.getString(5)));
+        		funcionario.setNumero(result.getInt(6));
+        		funcionario.setCEP((result.getString(7)));
+        		funcionario.setSeq_loja(result.getInt(8));
+        		funcionario.setSenha(result.getString(9));
+        		
+        		funcionarios.add(funcionario);
+
+                }
+        }
+            catch (SQLException e){
+                 System.out.println(e.getMessage());
+             }
+        return funcionarios;
+    
+}
+	
 
 }

@@ -3,9 +3,8 @@ package gui;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Vector;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
-import beans.Funcionario;
 import beans.Funcionario_Gerente;
 
 public class TelaGerente extends JFrame {
@@ -68,7 +66,8 @@ public class TelaGerente extends JFrame {
 		JButton button_1 = new JButton("Adicionar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
+				dispose();
+				TelaCadastroFuncionario tela = new TelaCadastroFuncionario(FG);
 				tela.setVisible(true);
 				tela.setLocationRelativeTo(null);
 				tela.setResizable(false);
@@ -115,9 +114,18 @@ public class TelaGerente extends JFrame {
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(57, 327, 185, 128);
 		contentPane.add(scrollPane_3);
-
+		
+		DefaultListModel listModelFunc = new DefaultListModel();
+		
 		JList funcionariosLista = new JList();
+		funcionariosLista.setModel(listModelFunc);
+		for (int i = 0; i < f.listarFuncionarios().length; i++) {
+			listModelFunc.addElement(f.listarFuncionarios()[i].getNome());
+		}
+		
 		scrollPane_3.setViewportView(funcionariosLista);
+		
+		
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(146, 91, 185, 128);

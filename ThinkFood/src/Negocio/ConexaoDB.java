@@ -11,7 +11,7 @@ public class ConexaoDB {
 	public Connection getConexao(String cpf, String senha) throws Exception {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			return DriverManager.getConnection(projeto, cpf, senha);
 
 		} catch (SQLException | ClassNotFoundException e) {

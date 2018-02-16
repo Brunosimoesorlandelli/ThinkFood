@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import beans.Fornecedor;
-import beans.Funcionario_Garcon;
 import beans.Funcionario_Secretario;
 
 public class RepositorioSecretario implements IRepositorioSecretario {
@@ -81,7 +79,7 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Secretario p) throws Exception {
-		String query = "INSERT INTO funcionario (cpf, nome, data_nasc, salario, complemento, numero, cep_endereco, seq_loja, senha)VALUES(?,?,?,?,?,?,?,?,?)";
+		String query = "insert into funcionario (cpf, nome, data_nasc, salario,complemento, numero,cep_endereco,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(2, p.getNome());
 		ps.setString(1, p.getCpf());
@@ -93,13 +91,8 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 		ps.setInt(8, p.getSeq_loja());
 		ps.setString(9, p.getSenha());
 
-		int res = ps.executeUpdate();
-		if (res > 0) {
-			return true;
-		} else {
-			return false;
-		}
-
+		ps.executeUpdate();
+		return true;
 	}
 
 	/*
@@ -190,6 +183,11 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 		}
 	}
 
+	@Override
+	public ArrayList<Funcionario_Secretario> listar() {
+		return secretarios;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -201,11 +199,6 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	 * 
 	 * @see dados.IRepositorioGarcom#listar()
 	 */
-	@Override
-	public ArrayList<Funcionario_Secretario> listar() {
-		return this.secretarios;
-
-	}
 	/*
 	 * public void salvarFornecedor() { salvar(); }
 	 */
