@@ -122,6 +122,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 					rs.getString("complemento"), rs.getInt("seq_loja"), rs.getString("senha"));
 
 		}
+
 		return f;
 
 	}

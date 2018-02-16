@@ -81,7 +81,7 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	 */
 	@Override
 	public boolean cadastrar(Funcionario_Secretario p) throws Exception {
-		String query = "insert into funcionario (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO funcionario (cpf, nome, data_nasc, salario, complemento, numero, cep_endereco, seq_loja, senha)VALUES(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(2, p.getNome());
 		ps.setString(1, p.getCpf());
@@ -93,8 +93,13 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 		ps.setInt(8, p.getSeq_loja());
 		ps.setString(9, p.getSenha());
 
-		ps.executeUpdate();
-		return true;
+		int res = ps.executeUpdate();
+		if (res > 0) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	/*

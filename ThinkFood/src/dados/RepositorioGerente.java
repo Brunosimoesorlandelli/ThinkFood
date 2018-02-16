@@ -85,18 +85,23 @@ public class RepositorioGerente implements IRepositorioGerente {
 	public boolean cadastrar(Funcionario_Gerente p) throws Exception {
 		String query = "insert into funcionario (cpf, nome, dataNasc, salario,complemento, numero,cep,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(2, p.getNome());
 		ps.setString(1, p.getCpf());
+		ps.setString(2, p.getNome());
 		ps.setDate(3, p.getDataNasc());
-		ps.setString(7, p.getCEP());
-		ps.setString(5, p.getCompl());
 		ps.setDouble(4, p.getSalario());
+		ps.setString(5, p.getCompl());
 		ps.setInt(6, p.getNumero());
+		ps.setString(7, p.getCEP());
 		ps.setInt(8, p.getSeq_loja());
 		ps.setString(9, p.getSenha());
 
-		ps.executeUpdate();
-		return true;
+		int res = ps.executeUpdate();
+		if (res > 0) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	/*
