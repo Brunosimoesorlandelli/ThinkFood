@@ -144,7 +144,7 @@ public class RepositorioGerente implements IRepositorioGerente {
 	 */
 	@Override
 	public boolean remover(Funcionario_Gerente f) throws SQLException {
-		String query = "delete from funcionario_gerente where cpf =?";
+		String query = "delete from funcionario where cpf =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, f.getCpf());
 		ps.executeUpdate();

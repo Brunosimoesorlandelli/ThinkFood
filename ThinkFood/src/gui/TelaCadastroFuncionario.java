@@ -114,7 +114,7 @@ public class TelaCadastroFuncionario extends JFrame {
 				switch (comboBox.getSelectedIndex()) {
 				case 0:
 					Funcionario_Entregador funcEn = new Funcionario_Entregador(nome.getText(), CPF.getText(), data,
-							"37902028", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+							"37902028", Double.parseDouble(Salario.getText()), 1,
 							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarEntregador(funcEn);
@@ -130,7 +130,7 @@ public class TelaCadastroFuncionario extends JFrame {
 					break;
 				case 1:
 					Funcionario_Garcon funcGa = new Funcionario_Garcon(nome.getText(), CPF.getText(), data, "67105072",
-							Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+							Double.parseDouble(Salario.getText()), 1,
 							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarGarcon(funcGa);
@@ -145,7 +145,7 @@ public class TelaCadastroFuncionario extends JFrame {
 					break;
 				case 2:
 					Funcionario_Secretario funcSe = new Funcionario_Secretario(nome.getText(), CPF.getText(), data,
-							"64215317", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+							"64215317", Double.parseDouble(Salario.getText()), 1,
 							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarSecretario(funcSe);
@@ -160,7 +160,7 @@ public class TelaCadastroFuncionario extends JFrame {
 					break;
 				case 3:
 					Funcionario_Gerente funcGe = new Funcionario_Gerente(nome.getText(), CPF.getText(), data,
-							"38304274", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
+							"38304274", Double.parseDouble(Salario.getText()), 1,
 							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarGerente(funcGe);

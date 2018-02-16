@@ -3,26 +3,27 @@ package gui;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
-import beans.Funcionario;
 import beans.Funcionario_Gerente;
 
 public class TelaGerente extends JFrame {
 
 	private JPanel contentPane;
+	private static Connection connection;
 
 	/**
 	 * Create the frame.
@@ -61,10 +62,7 @@ public class TelaGerente extends JFrame {
 		lblFuncionarios.setBounds(57, 302, 75, 14);
 		contentPane.add(lblFuncionarios);
 
-		JButton button = new JButton("Remover");
-		button.setBackground(SystemColor.inactiveCaption);
-		button.setBounds(153, 466, 89, 23);
-		contentPane.add(button);
+	
 
 		JButton button_1 = new JButton("Adicionar");
 		button_1.addActionListener(new ActionListener() {
@@ -186,5 +184,19 @@ public class TelaGerente extends JFrame {
 
 		fornecedoresList.setListData(fornecedores);
 		scrollPane_4.setViewportView(fornecedoresList);
+		
+		JButton FuncRemoverButton = new JButton("Remover");
+		FuncRemoverButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int pos = funcionariosLista.getSelectedIndex();
+			
+				
+			}
+		});
+		FuncRemoverButton.setBackground(SystemColor.inactiveCaption);
+		FuncRemoverButton.setBounds(153, 466, 89, 23);
+		contentPane.add(FuncRemoverButton);
 	}
+	
+	
 }

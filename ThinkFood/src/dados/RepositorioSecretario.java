@@ -88,7 +88,7 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 		ps.setString(5, p.getCompl());
 		ps.setDouble(4, p.getSalario());
 		ps.setInt(6, p.getNumero());
-		ps.setInt(8, p.getSeq_loja());
+		ps.setInt(8,1);
 		ps.setString(9, p.getSenha());
 
 		ps.executeUpdate();
@@ -136,7 +136,7 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	 */
 	@Override
 	public boolean remover(Funcionario_Secretario f) throws SQLException {
-		String query = "delete from funcionario_secretario where cpf =?";
+		String query = "delete from funcionario where cpf =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, f.getCpf());
 		ps.executeUpdate();

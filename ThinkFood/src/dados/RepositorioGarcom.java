@@ -137,7 +137,7 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 */
 	@Override
 	public boolean remover(Funcionario_Garcon f) throws SQLException {
-		String query = "delete from funcionario_garcon where cpf =?";
+		String query = "delete from funcionario where cpf =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, f.getCpf());
 		ps.executeUpdate();
