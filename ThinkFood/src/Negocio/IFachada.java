@@ -14,12 +14,14 @@ import beans.Funcionario_Entregador;
 import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
+import beans.ItemEstoque;
 import beans.ItemMenu;
 import beans.Mesa;
 import beans.Pedido;
 import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
+import beans.UnidadeLoja;
 
 public interface IFachada {
 
@@ -167,6 +169,10 @@ public interface IFachada {
 	
 	public Funcionario[] listarFuncionarios();
 	
-	public ArrayList<Funcionario> getFuncionarios();
+	public Fornecedor[] listarFornecedores();
+	
+	public UnidadeLoja[] listarLojas();
+	
+	public ItemEstoque[] listarItemEstoque();
 
 }

@@ -19,12 +19,14 @@ import beans.Funcionario_Entregador;
 import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
+import beans.ItemEstoque;
 import beans.ItemMenu;
 import beans.Mesa;
 import beans.Pedido;
 import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
+import beans.UnidadeLoja;
 
 public class Fachada implements IFachada, Serializable {
 
@@ -398,47 +400,146 @@ public class Fachada implements IFachada, Serializable {
 
 		return func;
 	}
-	
+
 	public Funcionario[] listarFuncionarios() {
-		int tamanho = getFuncionarios().size();
-		Funcionario[] funcionarios = new Funcionario[tamanho];
-		for (int i = 0; i < tamanho; i++) {
-			if (getFuncionarios().get(i) != null) {
-				funcionarios[i] = getFuncionarios().get(i);
+		ArrayList<Funcionario> funcionariosList = new ArrayList<Funcionario>();
+		Funcionario[] funcionarios = null;
+		int tamanho = 0;
+		try {
+			Statement stmt1 = connect.createStatement();
+			ResultSet result1 = stmt1.executeQuery("SELECT * FROM funcionario");
+			while (result1.next()) {
+
+				Funcionario funcionario = new Funcionario();
+				funcionario.setCpf(result1.getString(1));
+				funcionario.setNome(result1.getString(2));
+				funcionario.setDataNasc(result1.getDate(3));
+				funcionario.setSalario(result1.getFloat(4));
+				funcionario.setCompl((result1.getString(5)));
+				funcionario.setNumero(result1.getInt(6));
+				funcionario.setCEP((result1.getString(7)));
+				funcionario.setSeq_loja(result1.getInt(8));
+				funcionario.setSenha(result1.getString(9));
+
+				funcionariosList.add(funcionario);
+
+				tamanho = funcionariosList.size();
+				funcionarios = new Funcionario[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (funcionariosList.get(i) != null)
+						funcionarios[i] = funcionariosList.get(i);
+				}
+
 			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
-		
 		return funcionarios;
+
 	}
 
-	public ArrayList<Funcionario> getFuncionarios() {
-        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
-        try {
-            Statement stmt = connect.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * FROM funcionario");
-            while(result.next()){
+	public Fornecedor[] listarFornecedores() {
+		ArrayList<Fornecedor> fornecedoresList = new ArrayList<Fornecedor>();
+		Fornecedor[] fornecedores = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM fornecedor");
+			while (result.next()) {
 
-            	Funcionario funcionario = new Funcionario();
-            	funcionario.setCpf(result.getString(1));
-        		funcionario.setNome(result.getString(2));
-        		funcionario.setDataNasc(result.getDate(3));
-        		funcionario.setSalario(result.getFloat(4));
-        		funcionario.setCompl((result.getString(5)));
-        		funcionario.setNumero(result.getInt(6));
-        		funcionario.setCEP((result.getString(7)));
-        		funcionario.setSeq_loja(result.getInt(8));
-        		funcionario.setSenha(result.getString(9));
-        		
-        		funcionarios.add(funcionario);
+				Fornecedor fornecedor = new Fornecedor();
+				fornecedor.setCnpj(result.getString(1));
+				fornecedor.setEmail(result.getString(2));
+				fornecedor.setRazaoSocial(result.getString(3));
+				fornecedor.setCEP((result.getString(4)));
+				fornecedor.setFone(result.getInt(5));
+				
 
-                }
-        }
-            catch (SQLException e){
-                 System.out.println(e.getMessage());
-             }
-        return funcionarios;
-    
-}
+				fornecedoresList.add(fornecedor);
+
+				tamanho = fornecedoresList.size();
+				fornecedores = new Fornecedor[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (fornecedoresList.get(i) != null)
+						fornecedores[i] = fornecedoresList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return fornecedores;
+
+	}
+	
+	public UnidadeLoja[] listarLojas() {
+		ArrayList<UnidadeLoja> unidadeLojaList = new ArrayList<UnidadeLoja>();
+		UnidadeLoja[] lojas = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM unidade_loja");
+			while (result.next()) {
+
+				UnidadeLoja loja = new UnidadeLoja();
+				loja.setTelefone(result.getString(5));
+				loja.setCep((result.getString(2)));
+				loja.setQtdFunc(result.getInt(4));
+				loja.setSeq(result.getInt(1));
+				
+
+				unidadeLojaList.add(loja);
+
+				tamanho = unidadeLojaList.size();
+				lojas = new UnidadeLoja[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (unidadeLojaList.get(i) != null)
+						lojas[i] = unidadeLojaList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return lojas;
+
+	}
+	
+	public ItemEstoque[] listarItemEstoque() {
+		ArrayList<ItemEstoque> estoqueList = new ArrayList<ItemEstoque>();
+		ItemEstoque[] estoque = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM item_estoque");
+			while (result.next()) {
+
+				ItemEstoque itemEstoque = new ItemEstoque();
+				itemEstoque.setId(result.getInt(1));
+				itemEstoque.setDataEntrada(result.getDate(3));
+				itemEstoque.setLote(result.getInt(4));
+				itemEstoque.setQtd(result.getInt(5));
+				itemEstoque.setDataValidade(result.getDate(6));
+				
+
+				estoqueList.add(itemEstoque);
+
+				tamanho = estoqueList.size();
+				estoque = new ItemEstoque[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (estoqueList.get(i) != null)
+						estoque[i] = estoqueList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return estoque;
+
+	}
+	
+
 	
 
 }

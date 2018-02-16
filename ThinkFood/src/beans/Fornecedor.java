@@ -14,6 +14,10 @@ public class Fornecedor {
 		this.CEP = CEP;
 		this.fone = fone;
 	}
+	
+	public Fornecedor() {
+		
+	}
 
 	public int getFone() {
 		return fone;

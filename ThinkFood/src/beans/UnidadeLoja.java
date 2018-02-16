@@ -3,17 +3,20 @@ package beans;
 public class UnidadeLoja {
 
 	private String telefone;
-	private Endereco endereco;
+	private String cep;
 	private int qtdFunc;
 	private int seq;
 
-	public UnidadeLoja(String telefone, Endereco endereco, int qtdFunc, int seq) {
+	public UnidadeLoja(String telefone, String cep, int qtdFunc, int seq) {
 		this.telefone = telefone;
-		this.endereco = endereco;
+		this.cep = cep;
 		this.qtdFunc = qtdFunc;
 		this.seq = seq;
 	}
 
+	public UnidadeLoja() {
+		
+	}
 	public String getTelefone() {
 		return telefone;
 	}
@@ -22,12 +25,14 @@ public class UnidadeLoja {
 		this.telefone = telefone;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	
+
+	public String getCep() {
+		return cep;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public int getQtdFunc() {

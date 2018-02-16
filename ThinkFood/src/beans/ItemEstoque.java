@@ -18,6 +18,10 @@ public class ItemEstoque extends Estoque {
 		this.qtd = qtd;
 		this.dataValidade = dataValidade;
 	}
+	
+	public ItemEstoque() {
+		
+	}
 
 	public Date getDataEntrada() {
 		return dataEntrada;

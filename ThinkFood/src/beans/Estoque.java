@@ -16,6 +16,9 @@ public class Estoque {
 		this.dtUltimaEntrada = dtUltimaEntrada;
 		
 	}
+	public Estoque() {
+		
+	}
 
 	public int getId() {
 		return id;
