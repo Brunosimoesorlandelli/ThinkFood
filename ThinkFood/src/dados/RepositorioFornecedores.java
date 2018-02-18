@@ -74,7 +74,7 @@ public class RepositorioFornecedores implements Serializable, IRepositorioFornec
 	 */
 	@Override
 	public boolean cadastrar(Fornecedor p) throws Exception {
-		String query = "insert into fornecedor (cnpj, email, razao, endereco, fone)values(?,?,?,?,?)";
+		String query = "insert into fornecedor (cnpj_fornecedor, email_fornecedor, razao_fornecedor, fornecedor_end, fone)values(?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, p.getCnpj());
 		ps.setString(2, p.getEmail());

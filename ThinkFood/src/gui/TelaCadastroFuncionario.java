@@ -110,11 +110,11 @@ public class TelaCadastroFuncionario extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaGerente tela = new TelaGerente(FG);
-				Date data = new Date(1988, 03, 16);
+				Date data = new Date(0, 00, 0000);
 				switch (comboBox.getSelectedIndex()) {
 				case 0:
 					Funcionario_Entregador funcEn = new Funcionario_Entregador(nome.getText(), CPF.getText(), data,
-							"37902028", Double.parseDouble(Salario.getText()), 1,
+							"37902028", Double.parseDouble(Salario.getText()), Integer.parseInt(seq_loja.getText()),
 							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarEntregador(funcEn);
@@ -130,8 +130,8 @@ public class TelaCadastroFuncionario extends JFrame {
 					break;
 				case 1:
 					Funcionario_Garcon funcGa = new Funcionario_Garcon(nome.getText(), CPF.getText(), data, "67105072",
-							Double.parseDouble(Salario.getText()), 1,
-							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
+							Double.parseDouble(Salario.getText()), 1, Complemento.getText(),
+							Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarGarcon(funcGa);
 					} catch (Exception e1) {
@@ -145,8 +145,8 @@ public class TelaCadastroFuncionario extends JFrame {
 					break;
 				case 2:
 					Funcionario_Secretario funcSe = new Funcionario_Secretario(nome.getText(), CPF.getText(), data,
-							"64215317", Double.parseDouble(Salario.getText()), 1,
-							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
+							"64215317", Double.parseDouble(Salario.getText()), 1, Complemento.getText(),
+							Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarSecretario(funcSe);
 					} catch (Exception e1) {
@@ -160,8 +160,8 @@ public class TelaCadastroFuncionario extends JFrame {
 					break;
 				case 3:
 					Funcionario_Gerente funcGe = new Funcionario_Gerente(nome.getText(), CPF.getText(), data,
-							"38304274", Double.parseDouble(Salario.getText()), 1,
-							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
+							"38304274", Double.parseDouble(Salario.getText()), 1, Complemento.getText(),
+							Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarGerente(funcGe);
 					} catch (Exception e1) {

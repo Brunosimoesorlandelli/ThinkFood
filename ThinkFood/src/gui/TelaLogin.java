@@ -72,7 +72,7 @@ public class TelaLogin extends JFrame {
 		textField.setBounds(66, 44, 228, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -117,7 +117,7 @@ public class TelaLogin extends JFrame {
 				}
 			}
 		});
-		
+
 		btnEntrar.setBounds(109, 100, 89, 23);
 		contentPane.add(btnEntrar);
 

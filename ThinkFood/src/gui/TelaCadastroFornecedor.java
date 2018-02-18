@@ -44,75 +44,76 @@ public class TelaCadastroFornecedor extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblCnpj = new JLabel("CNPJ:");
 		lblCnpj.setBounds(10, 14, 46, 14);
 		contentPane.add(lblCnpj);
-		
+
 		cnpj = new JTextField();
 		cnpj.setColumns(10);
 		cnpj.setBounds(85, 11, 143, 20);
 		contentPane.add(cnpj);
-		
+
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setBounds(10, 58, 46, 14);
 		contentPane.add(lblEmail);
-		
+
 		email = new JTextField();
 		email.setColumns(10);
 		email.setBounds(85, 55, 297, 20);
 		contentPane.add(email);
-		
+
 		JLabel lblRazoSocial = new JLabel("Raz\u00E3o Social:");
 		lblRazoSocial.setBounds(10, 102, 65, 14);
 		contentPane.add(lblRazoSocial);
-		
+
 		rSocial = new JTextField();
 		rSocial.setColumns(10);
 		rSocial.setBounds(85, 99, 253, 20);
 		contentPane.add(rSocial);
-		
+
 		JLabel lblEndereo = new JLabel("Endere\u00E7o:");
 		lblEndereo.setBounds(10, 150, 65, 14);
 		contentPane.add(lblEndereo);
-		
+
 		endereco = new JTextField();
 		endereco.setColumns(10);
 		endereco.setBounds(85, 144, 297, 20);
 		contentPane.add(endereco);
-		
+
 		JLabel lblCidade = new JLabel("Cidade:");
 		lblCidade.setBounds(10, 196, 46, 14);
 		contentPane.add(lblCidade);
-		
+
 		cidade = new JTextField();
 		cidade.setColumns(10);
 		cidade.setBounds(85, 190, 143, 20);
 		contentPane.add(cidade);
-		
+
 		JLabel lblEstado = new JLabel("Estado:");
 		lblEstado.setBounds(10, 245, 46, 14);
 		contentPane.add(lblEstado);
-		
+
 		estado = new JTextField();
 		estado.setColumns(10);
 		estado.setBounds(85, 239, 143, 20);
 		contentPane.add(estado);
-		
+
 		telefone = new JTextField();
 		telefone.setColumns(10);
 		telefone.setBounds(85, 286, 143, 20);
 		contentPane.add(telefone);
-		
+
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setBounds(10, 292, 46, 14);
 		contentPane.add(lblTelefone);
-		
+
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					f.cadastrarFornecedor(new Fornecedor(cnpj.getText(), email.getText(), rSocial.getText(), endereco.getText(), Integer.parseInt(telefone.getText())));
+					f.cadastrarFornecedor(new Fornecedor(cnpj.getText(), email.getText(), rSocial.getText(), "37902028",
+							Integer.parseInt(telefone.getText())));
 					TelaLogin tela = new TelaLogin();
 					dispose();
 					tela.setVisible(true);
