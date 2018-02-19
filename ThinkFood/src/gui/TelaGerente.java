@@ -74,11 +74,11 @@ public class TelaGerente extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblUnidadeLoja = new JLabel("Unidade Loja");
-		lblUnidadeLoja.setBounds(189, 36, 96, 14);
+		lblUnidadeLoja.setBounds(189, 4, 96, 14);
 		contentPane.add(lblUnidadeLoja);
 
 		JLabel lblFuncionarios = new JLabel("Funcionarios");
-		lblFuncionarios.setBounds(474, 36, 75, 14);
+		lblFuncionarios.setBounds(474, 4, 75, 14);
 		contentPane.add(lblFuncionarios);
 
 		JButton button_1 = new JButton("Adicionar");
@@ -92,11 +92,11 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_1.setBackground(SystemColor.inactiveCaption);
-		button_1.setBounds(460, 680, 89, 23);
+		button_1.setBounds(460, 648, 89, 23);
 		contentPane.add(button_1);
 
 		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(357, 63, 301, 572);
+		scrollPane_3.setBounds(357, 31, 301, 572);
 		contentPane.add(scrollPane_3);
 		table_1 = new JTable();
 		DefaultTableModel modelFunc = (DefaultTableModel) table_1.getModel();
@@ -111,7 +111,7 @@ public class TelaGerente extends JFrame {
 		scrollPane_3.setViewportView(table_1);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(28, 63, 301, 572);
+		scrollPane_1.setBounds(28, 31, 301, 572);
 		contentPane.add(scrollPane_1);
 
 		table = new JTable();
@@ -125,7 +125,7 @@ public class TelaGerente extends JFrame {
 		scrollPane_1.setViewportView(table);
 
 		JLabel lblFornecedores = new JLabel("Fornecedores");
-		lblFornecedores.setBounds(738, 36, 89, 14);
+		lblFornecedores.setBounds(738, 4, 89, 14);
 		contentPane.add(lblFornecedores);
 
 		JButton button_4 = new JButton("Remover");
@@ -151,7 +151,7 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_4.setBackground(SystemColor.inactiveCaption);
-		button_4.setBounds(460, 705, 89, 23);
+		button_4.setBounds(460, 673, 89, 23);
 		contentPane.add(button_4);
 
 		JButton button_5 = new JButton("Adicionar");
@@ -165,11 +165,11 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_5.setBackground(SystemColor.inactiveCaption);
-		button_5.setBounds(738, 680, 89, 23);
+		button_5.setBounds(738, 648, 89, 23);
 		contentPane.add(button_5);
 
 		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(686, 63, 301, 572);
+		scrollPane_4.setBounds(686, 31, 301, 572);
 		contentPane.add(scrollPane_4);
 
 		table_2 = new JTable();
@@ -191,12 +191,12 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		LojaRemoverButton.setBackground(SystemColor.inactiveCaption);
-		LojaRemoverButton.setBounds(185, 705, 89, 23);
+		LojaRemoverButton.setBounds(185, 673, 89, 23);
 		contentPane.add(LojaRemoverButton);
 
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBackground(SystemColor.inactiveCaption);
-		btnEditar.setBounds(185, 729, 89, 23);
+		btnEditar.setBounds(185, 697, 89, 23);
 		contentPane.add(btnEditar);
 
 		JButton button = new JButton("Editar");
@@ -235,17 +235,17 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button.setBackground(SystemColor.inactiveCaption);
-		button.setBounds(460, 729, 89, 23);
+		button.setBounds(460, 697, 89, 23);
 		contentPane.add(button);
 
 		JButton button_2 = new JButton("Editar");
 		button_2.setBackground(SystemColor.inactiveCaption);
-		button_2.setBounds(738, 729, 89, 23);
+		button_2.setBounds(738, 697, 89, 23);
 		contentPane.add(button_2);
 
 		JButton button_3 = new JButton("Remover");
 		button_3.setBackground(SystemColor.inactiveCaption);
-		button_3.setBounds(738, 705, 89, 23);
+		button_3.setBounds(738, 673, 89, 23);
 		contentPane.add(button_3);
 
 		JButton button_6 = new JButton("Adicionar");
@@ -255,12 +255,12 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_6.setBackground(SystemColor.inactiveCaption);
-		button_6.setBounds(185, 680, 89, 23);
+		button_6.setBounds(185, 648, 89, 23);
 		contentPane.add(button_6);
 
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setBackground(SystemColor.inactiveCaption);
-		btnVoltar.setBounds(0, 32, 89, 23);
+		btnVoltar.setBounds(0, 0, 89, 23);
 		contentPane.add(btnVoltar);
 
 		JButton btnAtualizar = new JButton("Atualizar");
@@ -275,12 +275,12 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		btnAtualizar.setBackground(SystemColor.inactiveCaption);
-		btnAtualizar.setBounds(460, 644, 89, 23);
+		btnAtualizar.setBounds(460, 612, 89, 23);
 		contentPane.add(btnAtualizar);
 
 		JButton button_7 = new JButton("Atualizar");
 		button_7.setBackground(SystemColor.inactiveCaption);
-		button_7.setBounds(185, 644, 89, 23);
+		button_7.setBounds(185, 612, 89, 23);
 		contentPane.add(button_7);
 
 		JButton button_8 = new JButton("Atualizar");
@@ -295,7 +295,7 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_8.setBackground(SystemColor.inactiveCaption);
-		button_8.setBounds(738, 643, 89, 23);
+		button_8.setBounds(738, 611, 89, 23);
 		contentPane.add(button_8);
 	}
 }
