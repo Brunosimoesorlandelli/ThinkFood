@@ -87,15 +87,24 @@ public class TelaPedidoDel extends JFrame {
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(
-				new DefaultComboBoxModel(new String[] { "ENTREGUE", "A CAMINHO", "PREPARANDO", "CANCELANDO" }));
+				new DefaultComboBoxModel(new String[] { "ENTREGUE", "A CAMINHO", "PREPARANDO", "CANCELADO" }));
 		comboBox.setBounds(190, 192, 331, 20);
 		contentPane.add(comboBox);
 
+		String[] entregadoresCombo = new String[f.listarEntregadores().length];
+		for (int i = 0; i < entregadoresCombo.length; i++) {
+			entregadoresCombo[i] = f.listarEntregadores()[i].getCpf();
+		}
 		JComboBox comboBox_1 = new JComboBox();
 		DefaultComboBoxModel modelBox = (DefaultComboBoxModel) comboBox_1.getModel();
 		comboBox_1.setModel(modelBox);
 		for (int i = 0; i < f.listarEntregadores().length; i++) {
-			modelBox.addElement(new Object[] { f.listarEntregadores()[i].getCpf() });
+			try {
+				modelBox.addElement(entregadoresCombo[i]);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		comboBox_1.setBounds(189, 152, 332, 20);
 		contentPane.add(comboBox_1);
@@ -103,9 +112,9 @@ public class TelaPedidoDel extends JFrame {
 		JButton btnCadastrarPedido = new JButton("Cadastrar Pedido");
 		btnCadastrarPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PedidoDelivery p = new PedidoDelivery(0, Enum.valueOf(null, comboBox.getSelectedItem().toString()),
+				PedidoDelivery p = new PedidoDelivery(0, Enum.valueOf(null, String.valueOf(comboBox.getSelectedItem())),
 						cep.getText(), Time.valueOf(hrSaida.getText()), Date.valueOf(dtSaida.getText()), 0,
-						Complemento.getText(), comboBox_1.getSelectedItem().toString());
+						Complemento.getText(), String.valueOf(comboBox_1.getSelectedItem()));
 
 				try {
 					f.cadastrarPedidoDel(p);

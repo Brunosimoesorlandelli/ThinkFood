@@ -91,8 +91,13 @@ public class TelaSecretario extends JFrame {
 		modelSec.addColumn("Cpf_Entregador");
 		modelSec.addColumn("Cep_Cliente");
 		for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
-			modelSec.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getCpfEntregador(),
-					f.listarPedidoDelivery()[i].getCEP()});
+			try {
+				modelSec.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getCpfEntregador(),
+						f.listarPedidoDelivery()[i].getCEP()});
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		scrollPane_1.setViewportView(table);
 
