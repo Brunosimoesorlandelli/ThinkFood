@@ -65,8 +65,24 @@ public class TelaGerente extends JFrame {
 		JMenu mnGerenciamentoDeEstoque = new JMenu("Gerenciamento de Estoque");
 		menuBar.add(mnGerenciamentoDeEstoque);
 
+		JMenu mnGerenciamentoDeCardapio = new JMenu("Gerenciamento de Cardapio");
+		menuBar.add(mnGerenciamentoDeCardapio);
+
 		JMenuItem mntmGerenciar_1 = new JMenuItem("Gerenciar");
+		mntmGerenciar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaCadastroItemEstoque tela = new TelaCadastroItemEstoque(FG);
+				tela.setVisible(true);
+				tela.setResizable(false);
+				tela.setLocationRelativeTo(null);
+			}
+		});
 		mnGerenciamentoDeEstoque.add(mntmGerenciar_1);
+
+		JMenuItem mntmGerenciar_2 = new JMenuItem("Gerenciar");
+		mnGerenciamentoDeCardapio.add(mntmGerenciar_2);
+
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -203,25 +219,33 @@ public class TelaGerente extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
+				Funcionario funcionario = null;
 				String cpf = String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1));
+				System.out.println(cpf);
+				for (int i = 0; i < f.listarFuncionarios().length; i++) {
+					if (f.listarFuncionarios()[i].getCpf().equals(cpf))
+						funcionario = f.listarFuncionarios()[i];
+				}
+
 				try {
+
 					if (f.procurarEntregador(cpf) != null) {
-						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, f.procurarEntregador(cpf));
+						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, funcionario);
 						tela.setVisible(true);
 						tela.setResizable(false);
 						tela.setLocationRelativeTo(null);
 					} else if (f.procurarGarcom(cpf) != null) {
-						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, f.procurarGarcom(cpf));
+						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, funcionario);
 						tela.setVisible(true);
 						tela.setResizable(false);
 						tela.setLocationRelativeTo(null);
 					} else if (f.procurarGerente(cpf) != null) {
-						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, f.procurarGerente(cpf));
+						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, funcionario);
 						tela.setVisible(true);
 						tela.setResizable(false);
 						tela.setLocationRelativeTo(null);
 					} else if (f.procurarSecretario(cpf) != null) {
-						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, f.procurarSecretario(cpf));
+						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, funcionario);
 						tela.setVisible(true);
 						tela.setResizable(false);
 						tela.setLocationRelativeTo(null);
@@ -259,6 +283,17 @@ public class TelaGerente extends JFrame {
 		contentPane.add(button_6);
 
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				dispose();
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setResizable(false);
+				tela.setLocationRelativeTo(null);
+
+			}
+		});
 		btnVoltar.setBackground(SystemColor.inactiveCaption);
 		btnVoltar.setBounds(0, 0, 89, 23);
 		contentPane.add(btnVoltar);
@@ -286,7 +321,7 @@ public class TelaGerente extends JFrame {
 		JButton button_8 = new JButton("Atualizar");
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				modelFunc.getDataVector().removeAllElements();
+				modelFornece.getDataVector().removeAllElements();
 				revalidate();
 				for (int i = 0; i < f.listarFornecedores().length; i++) {
 					modelFornece.addRow(new Object[] { f.listarFornecedores()[i].getEmail(),

@@ -22,6 +22,10 @@ public class ItemEstoque {
 		this.idEstoque = idEstoque;
 	}
 
+	public ItemEstoque() {
+		
+	}
+	
 	public int getCodProduto() {
 		return codProduto;
 	}

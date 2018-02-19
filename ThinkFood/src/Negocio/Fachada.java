@@ -545,7 +545,8 @@ public class Fachada implements IFachada, Serializable {
 			while (result.next()) {
 
 				ItemEstoque itemEstoque = new ItemEstoque();
-				itemEstoque.setId(result.getInt(1));
+				itemEstoque.setCodProduto(result.getInt(1));
+				itemEstoque.setIdEstoque(result.getInt(2));
 				itemEstoque.setDataEntrada(result.getDate(3));
 				itemEstoque.setLote(result.getInt(4));
 				itemEstoque.setQtd(result.getInt(5));

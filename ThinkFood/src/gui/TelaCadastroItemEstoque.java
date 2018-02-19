@@ -12,12 +12,12 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
+import beans.Funcionario_Gerente;
 import beans.ItemEstoque;
 
 public class TelaCadastroItemEstoque extends JFrame {
@@ -29,7 +29,7 @@ public class TelaCadastroItemEstoque extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 
-	public TelaCadastroItemEstoque() {
+	public TelaCadastroItemEstoque(Funcionario_Gerente FG) {
 		IFachada f = Fachada.getInstance();
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,15 +43,12 @@ public class TelaCadastroItemEstoque extends JFrame {
 		JLabel lblCdigoDoProduto = new JLabel("C\u00F3digo do Produto");
 		lblCdigoDoProduto.setBounds(109, 101, 102, 14);
 		contentPane.add(lblCdigoDoProduto);
-		String[] produtos = new String[f.listarProduto().length];
-		for (int i = 0; i < f.listarProduto().length; i++) {
-			produtos[i] = String.valueOf(f.listarProduto()[i].getCodigo());
-		}
+		
 		JComboBox comboBox = new JComboBox();
 		DefaultComboBoxModel modelBox = (DefaultComboBoxModel) comboBox.getModel();
 		comboBox.setModel(modelBox);
-		for (int i = 0; i < f.listarEntregadores().length; i++) {
-			modelBox.addElement(produtos[i]);
+		for (int i = 0; i < f.listarItemEstoque().length; i++) {
+			modelBox.addElement(f.listarItemEstoque()[i].getCodProduto());
 		}
 		comboBox.setBounds(320, 98, 354, 20);
 		contentPane.add(comboBox);
@@ -101,11 +98,16 @@ public class TelaCadastroItemEstoque extends JFrame {
 		Date dataVal = new Date(00, 03, 0200);
 		btnCadastrarItemNo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ItemEstoque p = new ItemEstoque(Integer.parseInt(String.valueOf(comboBox.getSelectedIndex())),
+				ItemEstoque p = new ItemEstoque(((Integer) comboBox.getSelectedItem()),
 						Integer.parseInt(textField.getText()), dataEn, Integer.parseInt(textField_1.getText()),
 						Integer.parseInt(textField_4.getText()), dataVal);
 				try {
 					f.cadastrarItemEstoque(p);
+					dispose();
+					TelaGerente tela = new TelaGerente(FG);
+					tela.setVisible(true);
+					tela.setResizable(false);
+					tela.setLocationRelativeTo(null);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

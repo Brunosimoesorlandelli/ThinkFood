@@ -133,7 +133,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	}
 
 	public boolean atualizarEntregador(Funcionario_Entregador f) throws Exception {
-		String query = "update nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ?";
+		String query = "update funcionario set nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ? where cpf =?";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 
@@ -146,6 +146,7 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 		ps.setString(6, f.getCEP());
 		ps.setInt(7, f.getSeq_loja());
 		ps.setString(8, f.getSenha());
+		ps.setString(9, f.getCpf());
 
 		ps.executeUpdate();
 
@@ -164,8 +165,8 @@ public class RepositorioEntregador implements IRepositorioEntregador {
 	 */
 	@Override
 	public boolean remover(Funcionario_Entregador f) throws SQLException {
-		String query = "delete from funcionario where cpf =?";
-		String query2 = "delete from funcionario_entregador where funcionario_cpf =?";
+		String query = "delete from funcionario_entregador where funcionario_cpf =?";
+		String query2 = "delete from funcionario where cpf =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
 		ps.setString(1, f.getCpf());

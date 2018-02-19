@@ -116,8 +116,8 @@ public class TelaEditarFuncionario extends JFrame {
 		contentPane.add(numero);
 		numero.setText(String.valueOf(func.getNumero()));
 		
-		JButton btnCadastrar = new JButton("Salvar");
-		btnCadastrar.addActionListener(new ActionListener() {
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaGerente tela = new TelaGerente(FG);
 				Date data = new Date(0, 00, 0000);
@@ -186,8 +186,8 @@ public class TelaEditarFuncionario extends JFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(248, 329, 96, 23);
-		contentPane.add(btnCadastrar);
+		btnSalvar.setBounds(248, 329, 96, 23);
+		contentPane.add(btnSalvar);
 
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {

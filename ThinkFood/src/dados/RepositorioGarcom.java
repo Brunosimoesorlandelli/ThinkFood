@@ -132,7 +132,7 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	}
 
 	public boolean atualizarGarcon(Funcionario_Garcon f) throws Exception {
-		String query = "update funcionario nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ?";
+		String query = "update funcionario set nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ? where cpf = " + "'" + f.getCpf() + "'";
 		
 
 		PreparedStatement ps = connection.prepareStatement(query);
@@ -147,6 +147,7 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 		ps.setString(6, f.getCEP());
 		ps.setInt(7, f.getSeq_loja());
 		ps.setString(8, f.getSenha());
+	
 		
 		ps.executeUpdate();
 		
@@ -166,14 +167,19 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	 */
 	@Override
 	public boolean remover(Funcionario_Garcon f) throws SQLException {
-		String query = "delete from funcionario where cpf =?";
+		String query = "update mesa set cpf_funcionario = ? where cpf_funcionario = ?";
 		String query2 = "delete from funcionario_garcon where cpf_funcionario =?";
+		String query3 = "delete from funcionario where cpf =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
+		PreparedStatement ps3 = connection.prepareStatement(query3);
 		ps.setString(1, f.getCpf());
+		ps.setString(2, f.getCpf());
 		ps2.setString(1, f.getCpf());
+		ps3.setString(1, f.getCpf());
 		ps.executeUpdate();
 		ps2.executeUpdate();
+		ps3.executeUpdate();
 		return true;
 	}
 	/*

@@ -130,7 +130,7 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	}
 
 	public boolean atualizarSecretario(Funcionario_Secretario f) throws Exception {
-		String query = "update funcionario nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ?";
+		String query = "update funcionario nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ? where cpf = " + "'" + f.getCpf() + "'";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 
@@ -143,6 +143,7 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 		ps.setString(6, f.getCEP());
 		ps.setInt(7, f.getSeq_loja());
 		ps.setString(8, f.getSenha());
+		
 
 		ps.executeUpdate();
 
@@ -161,8 +162,8 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	 */
 	@Override
 	public boolean remover(Funcionario_Secretario f) throws SQLException {
-		String query = "delete from funcionario where cpf =?";
-		String query2 = "delete from funcionario_secretario where cpf_funcionarioS =?";
+		String query = "delete from funcionario_secretario where cpf_funcionarioS =?";
+		String query2 = "delete from funcionario where cpf =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
 		ps.setString(1, f.getCpf());
