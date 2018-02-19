@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
@@ -17,10 +18,13 @@ import beans.Funcionario_Secretario;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JTable;
 
 public class TelaSecretario extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -31,21 +35,21 @@ public class TelaSecretario extends JFrame {
 	 */
 	public TelaSecretario(Funcionario_Secretario FS) {
 		setTitle("ThinkFood");
-		IFachada fachada = Fachada.getInstance();
+		IFachada f = Fachada.getInstance();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 574, 359);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblPedidos = new JLabel("Pedidos");
-		lblPedidos.setBounds(10, 43, 46, 14);
+		JLabel lblPedidos = new JLabel("Pedidos Delivery");
+		lblPedidos.setBounds(213, 43, 97, 14);
 		contentPane.add(lblPedidos);
 
 		JLabel lblReserva = new JLabel("Reserva");
-		lblReserva.setBounds(344, 43, 46, 14);
+		lblReserva.setBounds(523, 43, 46, 14);
 		contentPane.add(lblReserva);
 
 		JButton btnFazerReserva = new JButton("Cadastrar Reserva");
@@ -59,7 +63,7 @@ public class TelaSecretario extends JFrame {
 				tela.setResizable(false);
 			}
 		});
-		btnFazerReserva.setBounds(344, 215, 185, 23);
+		btnFazerReserva.setBounds(461, 463, 185, 23);
 		contentPane.add(btnFazerReserva);
 
 		JButton btnCadastrarPedido = new JButton("Cadastrar Pedido");
@@ -73,21 +77,60 @@ public class TelaSecretario extends JFrame {
 			}
 		});
 		btnCadastrarPedido.setBackground(SystemColor.inactiveCaption);
-		btnCadastrarPedido.setBounds(10, 215, 185, 23);
+		btnCadastrarPedido.setBounds(138, 463, 185, 23);
 		contentPane.add(btnCadastrarPedido);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(344, 68, 185, 132);
-		contentPane.add(scrollPane);
-
-		JList list_1 = new JList();
-		scrollPane.setViewportView(list_1);
-
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 68, 185, 132);
+		scrollPane_1.setBounds(54, 68, 310, 351);
 		contentPane.add(scrollPane_1);
 
-		JList list = new JList();
-		scrollPane_1.setViewportView(list);
+		table = new JTable();
+		DefaultTableModel modelSec = (DefaultTableModel) table.getModel();
+		table.setModel(modelSec);
+		modelSec.addColumn("Nome");
+		modelSec.addColumn("Cpf");
+		modelSec.addColumn("SeqLoja");
+		for (int i = 0; i < f.listarFuncionarios().length; i++) {
+			modelSec.addRow(new Object[] { f.listarPedidoDel()[i], f.listarFuncionarios()[i].getCpf(),
+					f.listarFuncionarios()[i].getSeq_loja() });
+		}
+		scrollPane_1.setViewportView(table);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(418, 68, 310, 351);
+		contentPane.add(scrollPane);
+
+		table_1 = new JTable();
+		scrollPane.setViewportView(table_1);
+
+		JButton btnRemoverPedido = new JButton("Remover Pedido");
+		btnRemoverPedido.setBackground(SystemColor.inactiveCaption);
+		btnRemoverPedido.setBounds(138, 497, 185, 23);
+		contentPane.add(btnRemoverPedido);
+
+		JButton btnEditarPedido = new JButton("Editar Pedido");
+		btnEditarPedido.setBackground(SystemColor.inactiveCaption);
+		btnEditarPedido.setBounds(138, 528, 185, 23);
+		contentPane.add(btnEditarPedido);
+
+		JButton btnAtualizarTabela = new JButton("Atualizar Tabela Pedidos");
+		btnAtualizarTabela.setBackground(SystemColor.inactiveCaption);
+		btnAtualizarTabela.setBounds(138, 430, 185, 23);
+		contentPane.add(btnAtualizarTabela);
+
+		JButton btnRemoverReserva = new JButton("Remover Reserva");
+		btnRemoverReserva.setBackground(SystemColor.inactiveCaption);
+		btnRemoverReserva.setBounds(461, 497, 185, 23);
+		contentPane.add(btnRemoverReserva);
+
+		JButton btnEditarReserva = new JButton("Editar Reserva");
+		btnEditarReserva.setBackground(SystemColor.inactiveCaption);
+		btnEditarReserva.setBounds(461, 528, 185, 23);
+		contentPane.add(btnEditarReserva);
+
+		JButton btnAtualizarTabelaReserva = new JButton("Atualizar Tabela Reserva");
+		btnAtualizarTabelaReserva.setBackground(SystemColor.inactiveCaption);
+		btnAtualizarTabelaReserva.setBounds(461, 430, 185, 23);
+		contentPane.add(btnAtualizarTabelaReserva);
 	}
 }

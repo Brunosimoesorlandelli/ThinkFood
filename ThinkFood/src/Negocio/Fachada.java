@@ -287,10 +287,6 @@ public class Fachada implements IFachada, Serializable {
 		cMesa.printar(p);
 	}
 
-	public ArrayList<Mesa> listarMesa() {
-		return cMesa.listar();
-	}
-
 	public boolean cadastrarClientePF(ClientePF p) throws Exception {
 		return cClientePF.cadastrar(p);
 	}
@@ -453,7 +449,6 @@ public class Fachada implements IFachada, Serializable {
 				fornecedor.setRazaoSocial(result.getString(3));
 				fornecedor.setCEP((result.getString(4)));
 				fornecedor.setFone(result.getInt(5));
-				
 
 				fornecedoresList.add(fornecedor);
 
@@ -471,7 +466,7 @@ public class Fachada implements IFachada, Serializable {
 		return fornecedores;
 
 	}
-	
+
 	public UnidadeLoja[] listarLojas() {
 		ArrayList<UnidadeLoja> unidadeLojaList = new ArrayList<UnidadeLoja>();
 		UnidadeLoja[] lojas = null;
@@ -486,7 +481,6 @@ public class Fachada implements IFachada, Serializable {
 				loja.setCep((result.getString(2)));
 				loja.setQtdFunc(result.getInt(4));
 				loja.setSeq(result.getInt(1));
-				
 
 				unidadeLojaList.add(loja);
 
@@ -504,7 +498,7 @@ public class Fachada implements IFachada, Serializable {
 		return lojas;
 
 	}
-	
+
 	public ItemEstoque[] listarItemEstoque() {
 		ArrayList<ItemEstoque> estoqueList = new ArrayList<ItemEstoque>();
 		ItemEstoque[] estoque = null;
@@ -520,7 +514,6 @@ public class Fachada implements IFachada, Serializable {
 				itemEstoque.setLote(result.getInt(4));
 				itemEstoque.setQtd(result.getInt(5));
 				itemEstoque.setDataValidade(result.getDate(6));
-				
 
 				estoqueList.add(itemEstoque);
 
@@ -538,8 +531,65 @@ public class Fachada implements IFachada, Serializable {
 		return estoque;
 
 	}
-	
 
-	
+	public Mesa[] listarMesa() {
+		ArrayList<Mesa> mesaList = new ArrayList<Mesa>();
+		Mesa[] mesa = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM mesa");
+			while (result.next()) {
+
+				Mesa mesa1 = new Mesa();
+				mesa1.setNum(result.getInt(1));
+				mesa1.setCpfGarcom(result.getString(5));
+				mesaList.add(mesa1);
+
+				tamanho = mesaList.size();
+				mesa = new Mesa[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (mesaList.get(i) != null)
+						mesa[i] = mesaList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return mesa;
+
+	}
+
+	public PedidoDelivery[] listarPedidoDelivery() {
+		ArrayList<PedidoDelivery> pedidoList = new ArrayList<PedidoDelivery>();
+		PedidoDelivery[] pedidos = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM pedidoDel");
+			while (result.next()) {
+
+				PedidoDelivery pedidoDel = new PedidoDelivery();
+				pedidoDel.setNumero(result.getInt(1));
+				pedidoDel.setCEP(result.getString(3));
+				pedidoDel.setStatus();
+
+				pedidoList.add(pedidoDel);
+
+				tamanho = pedidoList.size();
+				pedidos = new PedidoDelivery[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (pedidoList.get(i) != null)
+						pedidos[i] = pedidoList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return pedidos;
+
+	}
 
 }

@@ -26,6 +26,10 @@ public class PedidoDelivery {
 		this.cpfEntregador = cpfEntregador;
 	}
 
+	public PedidoDelivery() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getTaxa() {
 		return taxa;
 	}

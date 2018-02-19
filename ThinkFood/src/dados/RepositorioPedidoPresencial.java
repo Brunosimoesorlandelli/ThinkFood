@@ -9,9 +9,10 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import beans.Mesa;
+import beans.Pedido;
+import beans.PedidoPresencial;
 
-public class RepositorioMesa implements IRepositorioMesa, Serializable {
+public class RepositorioPedidoPresencial implements IRepositorioPedidoPresencial, Serializable {
 
 	/**
 	 *
@@ -21,24 +22,24 @@ public class RepositorioMesa implements IRepositorioMesa, Serializable {
 	 *
 	 */
 	private static Connection connection;
-	private static IRepositorioMesa instanceUser;
-	private ArrayList<Mesa> mesas;
+	private static IRepositorioPedidoPresencial instanceUser;
+	private ArrayList<PedidoPresencial> pedidos;
 	private int next;
 
-	public RepositorioMesa() {
-		this.mesas = new ArrayList<Mesa>();
+	public RepositorioPedidoPresencial() {
+		this.pedidos = new ArrayList<PedidoPresencial>();
 		this.next = 0;
 	}
 
-	public static synchronized IRepositorioMesa getInstance() {
+	public static synchronized IRepositorioPedidoPresencial getInstance() {
 		if (instanceUser == null) {
-			instanceUser = new RepositorioMesa();
+			instanceUser = new RepositorioPedidoPresencial();
 		}
 		return instanceUser;
 	}
 
 	public void conectar(Connection connect) {
-		RepositorioMesa.connection = connect;
+		RepositorioPedidoPresencial.connection = connect;
 	}
 
 	/*
@@ -69,15 +70,19 @@ public class RepositorioMesa implements IRepositorioMesa, Serializable {
 	 * 
 	 * @see Dados.IRepositorioProdutos#cadastrar(Beans.Produto)
 	 */
-	public boolean cadastrar(Mesa p) throws SQLException {
-		String query = "insert into mesa (num, qtd_lugares, esta_livre, cpf_funcionario) values(?,?,?,?)";
+	public boolean cadastrar(PedidoPresencial p) throws SQLException {
+		String query = "insert into pedido_presencial (id_pedido, num_mesa) values(?,?)";
+		String query2 = "insert into garcon_atende (cpf_funcionario, mesa_num, data_hora) values(?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, p.getNum());
-		ps.setInt(2, p.getQtdLugares());
-		ps.setBoolean(3, p.getEstaLivre());
-		ps.setString(5, p.getCpfGarcom());
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		ps.setInt(1, p.getIdPedido());
+		ps.setInt(2, p.getNum_Mesa());
+		ps2.setString(1, p.getCpfFuncionario());
+		ps2.setInt(2, p.getNum_Mesa());
+		ps2.setTime(3, p.getHora());
 
 		ps.executeUpdate();
+		ps2.executeUpdate();
 		return true;
 	}
 
@@ -100,15 +105,16 @@ public class RepositorioMesa implements IRepositorioMesa, Serializable {
 	 * @see Dados.IRepositorioProdutos#procurar(int)
 	 */
 
-	public Mesa procurar(int num) throws SQLException {
-		Mesa p = null;
-		String query = "select * from mesa where num = ?";
+	public PedidoPresencial procurar(int id) throws SQLException {
+		PedidoPresencial p = null;
+		String query = "select * from pedido_presencial where id_pedido = ?";
+		String query2 = "select * from garcon_atende where ";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, num);
+		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
-			p = new Mesa(rs.getInt("num"), rs.getInt("qtd_lugares"), rs.getBoolean("esta_livre"));
+			// p = new PedidoPresencial(rs.getInt("id_pedido"), rs.getInt("num_mesa"));
 		}
 		return p;
 
@@ -120,10 +126,10 @@ public class RepositorioMesa implements IRepositorioMesa, Serializable {
 	 * @see Dados.IRepositorioProdutos#remover(int)
 	 */
 
-	public boolean remover(Mesa p) throws SQLException {
-		String query = "delete from mesa where num =?";
+	public boolean remover(PedidoPresencial p) throws SQLException {
+		String query = "delete from pedido_presencial where id_pedido =?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, p.getNum());
+		ps.setInt(1, p.getIdPedido());
 		ps.executeUpdate();
 		return true;
 	}
@@ -154,7 +160,7 @@ public class RepositorioMesa implements IRepositorioMesa, Serializable {
 	// return existe;
 	// }
 
-	public void printar(Mesa p) {
+	public void printar(Pedido p) {
 		try {
 			JOptionPane.showMessageDialog(null, p.toString());
 		} catch (Exception e) {
@@ -167,8 +173,8 @@ public class RepositorioMesa implements IRepositorioMesa, Serializable {
 	 * 
 	 * @see Dados.IRepositorioProdutos#listar()
 	 */
-	public ArrayList<Mesa> listar() {
-		return this.mesas;
+	public ArrayList<PedidoPresencial> listar() {
+		return this.pedidos;
 
 	}
 

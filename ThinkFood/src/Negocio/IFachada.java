@@ -123,7 +123,7 @@ public interface IFachada {
 
 	public void printarMesa(Mesa p);
 
-	public ArrayList<Mesa> listarMesa();
+	public Mesa[] listarMesa();
 
 	public boolean cadastrarClientePF(ClientePF p) throws Exception;
 

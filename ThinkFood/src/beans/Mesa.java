@@ -5,12 +5,17 @@ public class Mesa {
 
 	private int num;
 	private int qtdLugares;
+	private String CpfGarcom;
 	private boolean estaLivre;
 
 	public Mesa(int num, int qtdLugares, boolean estaLivre) {
 		this.num = num;
 		this.qtdLugares = qtdLugares;
 		this.estaLivre = estaLivre;
+	}
+
+	public Mesa() {
+
 	}
 
 	public int getNum() {
@@ -35,6 +40,14 @@ public class Mesa {
 
 	public void setEstaLivre(boolean estaLivre) {
 		this.estaLivre = estaLivre;
+	}
+
+	public String getCpfGarcom() {
+		return CpfGarcom;
+	}
+
+	public void setCpfGarcom(String garcom) {
+		this.CpfGarcom = garcom;
 	}
 
 }
