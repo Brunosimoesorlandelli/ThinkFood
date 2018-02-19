@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Funcionario_Garcon;
+import beans.Funcionario_Gerente;
 
 public interface IControladorGarcom {
 
@@ -19,4 +20,6 @@ public interface IControladorGarcom {
 	public void printar(Funcionario_Garcon p);
 
 	public ArrayList<Funcionario_Garcon> listarGarcon();
+	
+	boolean atualizarGarcon(Funcionario_Garcon f) throws Exception;
 }

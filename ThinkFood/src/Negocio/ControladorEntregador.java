@@ -54,4 +54,10 @@ public class ControladorEntregador implements IControladorEntregador, Serializab
 		return rep.toString();
 	}
 
+	public boolean atualizarEntregador(Funcionario_Entregador f) throws Exception {
+		return rep.atualizarEntregador(f);
+	}
+	
+	
+
 }

@@ -167,6 +167,14 @@ public interface IFachada {
 
 	public void printarPedido(Pedido p);
 	
+	boolean atualizarEntregador(Funcionario_Entregador f) throws Exception;
+	
+	boolean atualizarGarcon(Funcionario_Garcon f) throws Exception;
+	
+	boolean atualizarGerente(Funcionario_Gerente f) throws Exception;
+	
+	boolean atualizarSecretario(Funcionario_Secretario f) throws Exception;
+	
 	public Funcionario[] listarFuncionarios();
 	
 	public Fornecedor[] listarFornecedores();

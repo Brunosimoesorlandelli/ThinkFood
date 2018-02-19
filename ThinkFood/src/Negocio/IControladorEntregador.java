@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Funcionario_Entregador;
+import beans.Funcionario_Gerente;
 
 public interface IControladorEntregador {
 
@@ -25,4 +26,6 @@ public interface IControladorEntregador {
 	public ArrayList<Funcionario_Entregador> listar();
 
 	public String toString();
+	
+	boolean atualizarEntregador(Funcionario_Entregador f) throws Exception;
 }

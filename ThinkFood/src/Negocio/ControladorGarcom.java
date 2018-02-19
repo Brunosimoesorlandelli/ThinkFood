@@ -41,6 +41,12 @@ public class ControladorGarcom implements  IControladorGarcom, Serializable{
 	public ArrayList<Funcionario_Garcon> listarGarcon() {
 		return repositorio.listar();
 	}
+
+	public boolean atualizarGarcon(Funcionario_Garcon f) throws Exception {
+		return repositorio.atualizarGarcon(f);
+	}
+	
+	
 	
 	
 }

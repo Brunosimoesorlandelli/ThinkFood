@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Funcionario_Garcon;
+import beans.Funcionario_Gerente;
 
 public interface IRepositorioGarcom {
 
@@ -40,5 +41,7 @@ public interface IRepositorioGarcom {
 	/*
 	 * public void salvarFornecedor() { salvar(); }
 	 */
+	
+	boolean atualizarGarcon(Funcionario_Garcon f) throws Exception;
 
 }

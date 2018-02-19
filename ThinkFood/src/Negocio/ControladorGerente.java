@@ -41,6 +41,11 @@ public class ControladorGerente implements IControladorGerente, Serializable{
 	public ArrayList<Funcionario_Gerente> listar() {
 		return repositorio.listar();
 	}
+
+	public boolean atualizarGerente(Funcionario_Gerente f) throws Exception {
+		return repositorio.atualizarGerente(f);
+	}
+	
 	
 	
 }

@@ -41,6 +41,10 @@ public class ControladorSecretario implements IControladorSecretario, Serializab
 	public ArrayList<Funcionario_Secretario> listarSecretario() {
 		return repositorio.listar();
 	}
+
+	public boolean atualizarSecretario(Funcionario_Secretario f) throws Exception {
+		return repositorio.atualizarSecretario(f);
+	}
 	
 	
 }

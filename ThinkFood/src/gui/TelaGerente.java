@@ -106,6 +106,7 @@ public class TelaGerente extends JFrame {
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cpf = String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1));
+				System.out.println(cpf);
 				try {
 					if (f.procurarEntregador(cpf) != null) {
 						f.removerEntregador(f.procurarEntregador(cpf));
@@ -117,7 +118,7 @@ public class TelaGerente extends JFrame {
 						f.removerSecretario(f.procurarSecretario(cpf));
 					} else {
 						JOptionPane.showMessageDialog(null,
-								"Esta combinação de CPF e Senha não existe. Tente novamente.");
+								"Este CPF não existe. Tente novamente.");
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -169,6 +170,42 @@ public class TelaGerente extends JFrame {
 		contentPane.add(btnEditar);
 
 		JButton button = new JButton("Editar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				String cpf = String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1));
+				try {
+					if (f.procurarEntregador(cpf) != null) {
+						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, f.procurarEntregador(cpf));
+						tela.setVisible(true);
+						tela.setResizable(false);
+						tela.setLocationRelativeTo(null);
+					} else if (f.procurarGarcom(cpf) != null) {
+						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, f.procurarGarcom(cpf));
+						tela.setVisible(true);
+						tela.setResizable(false);
+						tela.setLocationRelativeTo(null);
+					} else if (f.procurarGerente(cpf) != null) {
+						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, f.procurarGerente(cpf));
+						tela.setVisible(true);
+						tela.setResizable(false);
+						tela.setLocationRelativeTo(null);
+					} else if (f.procurarSecretario(cpf) != null) {
+						TelaEditarFuncionario tela = new TelaEditarFuncionario(FG, f.procurarSecretario(cpf));
+						tela.setVisible(true);
+						tela.setResizable(false);
+						tela.setLocationRelativeTo(null);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Este CPF não existe. Tente novamente.");
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
 		button.setBackground(SystemColor.inactiveCaption);
 		button.setBounds(460, 729, 89, 23);
 		contentPane.add(button);

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 
 public interface IRepositorioSecretario {
@@ -19,6 +20,7 @@ public interface IRepositorioSecretario {
 	void printar(Funcionario_Secretario p);
 
 	ArrayList<Funcionario_Secretario> listar();
-
+	
+	boolean atualizarSecretario(Funcionario_Secretario f) throws Exception;
 	
 }

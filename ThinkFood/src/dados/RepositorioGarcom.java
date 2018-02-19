@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import beans.Fornecedor;
 import beans.Funcionario_Garcon;
+import beans.Funcionario_Gerente;
 
 public class RepositorioGarcom implements IRepositorioGarcom {
 
@@ -81,7 +82,9 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	@Override
 	public boolean cadastrar(Funcionario_Garcon p) throws Exception {
 		String query = "insert into funcionario (cpf, nome, data_nasc, salario,complemento, numero,cep_endereco,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
+		String query2 = "insert into funcionario_garcon(cpf_funcionario) values(?)";
 		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
 		ps.setString(2, p.getNome());
 		ps.setString(1, p.getCpf());
 		ps.setDate(3, p.getDataNasc());
@@ -91,8 +94,11 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 		ps.setInt(6, p.getNumero());
 		ps.setInt(8, p.getSeq_loja());
 		ps.setString(9, p.getSenha());
-
+		
+		ps2.setString(1, p.getCpf());
+		
 		ps.executeUpdate();
+		ps2.executeUpdate();
 		return true;
 	}
 
@@ -125,6 +131,29 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 
 	}
 
+	public boolean atualizarGarcon(Funcionario_Garcon f) throws Exception {
+		String query = "update funcionario set cpf = ?, nome = ?,data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ?";
+		String query2 = "update funcionario_garcon set cpf_funcionario = ? where cpf_funcionario = " + f.getCpf(); 
+
+		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		
+		ps.setString(1, f.getCpf());
+		ps.setString(2, f.getNome());
+		ps.setDate(3, f.getDataNasc());
+		ps.setDouble(4, f.getSalario());
+		ps.setString(5, f.getCompl());
+		ps.setInt(6, f.getNumero());
+		ps.setString(7, f.getCEP());
+		ps.setInt(8, f.getSeq_loja());
+		ps.setString(9, f.getSenha());
+		
+		ps.executeUpdate();
+		ps2.executeUpdate();
+		
+		return true;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -138,9 +167,13 @@ public class RepositorioGarcom implements IRepositorioGarcom {
 	@Override
 	public boolean remover(Funcionario_Garcon f) throws SQLException {
 		String query = "delete from funcionario where cpf =?";
+		String query2 = "delete from funcionario_garcon where cpf_funcionario =?";
 		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
 		ps.setString(1, f.getCpf());
+		ps2.setString(1, f.getCpf());
 		ps.executeUpdate();
+		ps2.executeUpdate();
 		return true;
 	}
 	/*

@@ -4,8 +4,6 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -18,28 +16,25 @@ import javax.swing.border.EmptyBorder;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
+import beans.Funcionario;
 import beans.Funcionario_Entregador;
 import beans.Funcionario_Garcon;
 import beans.Funcionario_Gerente;
 import beans.Funcionario_Secretario;
 
-public class TelaCadastroFuncionario extends JFrame {
+public class TelaEditarFuncionario extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTextField nome;
-	private JTextField CPF;
-	private JTextField Dt_Nasc;
 	private JTextField CEP;
 	private JTextField Complemento;
 	private JTextField Salario;
-	private JTextField seq_loja;
 	private JTextField senha;
 	private JTextField numero;
 
-	/**
-	 * Create the frame.
-	 */
-	public TelaCadastroFuncionario(Funcionario_Gerente FG) {
+
+	public TelaEditarFuncionario(Funcionario_Gerente FG, Funcionario func) {
 		IFachada fachada = Fachada.getInstance();
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,69 +50,84 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblNome.setBounds(10, 33, 46, 14);
 		contentPane.add(lblNome);
 
-		JLabel lblCpf = new JLabel("CPF");
-		lblCpf.setBounds(10, 122, 46, 14);
-		contentPane.add(lblCpf);
-
-		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
-		lblDataDeNascimento.setBounds(10, 170, 96, 14);
-		contentPane.add(lblDataDeNascimento);
-
 		JLabel lblCep = new JLabel("CEP");
-		lblCep.setBounds(323, 122, 46, 14);
+		lblCep.setBounds(10, 152, 303, 14);
 		contentPane.add(lblCep);
 
 		JLabel lblPontoDeReferencia = new JLabel("Complemento");
-		lblPontoDeReferencia.setBounds(10, 223, 109, 14);
+		lblPontoDeReferencia.setBounds(10, 192, 109, 14);
 		contentPane.add(lblPontoDeReferencia);
 
 		nome = new JTextField();
 		nome.setBounds(66, 30, 247, 20);
 		contentPane.add(nome);
 		nome.setColumns(10);
-
-		CPF = new JTextField();
-		CPF.setColumns(10);
-		CPF.setBounds(66, 119, 247, 20);
-		contentPane.add(CPF);
-
-		Dt_Nasc = new JTextField();
-		Dt_Nasc.setColumns(10);
-		Dt_Nasc.setBounds(116, 167, 197, 20);
-		contentPane.add(Dt_Nasc);
+		nome.setText(func.getNome());
 
 		CEP = new JTextField();
 		CEP.setColumns(10);
-		CEP.setBounds(379, 119, 195, 20);
+		CEP.setBounds(66, 149, 247, 20);
 		contentPane.add(CEP);
+		CEP.setText(func.getCEP());
 
 		Complemento = new JTextField();
 		Complemento.setColumns(10);
-		Complemento.setBounds(116, 220, 197, 20);
+		Complemento.setBounds(116, 189, 197, 20);
 		contentPane.add(Complemento);
+		Complemento.setText(func.getCompl());
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(
 				new DefaultComboBoxModel(new String[] { "Entregador", "Gar\u00E7om", "Secretario", "Gerente" }));
-		comboBox.setBounds(379, 67, 128, 20);
+		comboBox.setBounds(81, 103, 128, 20);
 		contentPane.add(comboBox);
 
 		JLabel lblCargo = new JLabel("Cargo");
-		lblCargo.setBounds(323, 70, 46, 14);
+		lblCargo.setBounds(10, 106, 46, 14);
 		contentPane.add(lblCargo);
 
-		JButton btnCadastrar = new JButton("Cadastrar");
+		JLabel lblNewLabel_1 = new JLabel("Salario");
+		lblNewLabel_1.setBounds(10, 70, 46, 14);
+		contentPane.add(lblNewLabel_1);
+
+		Salario = new JTextField();
+		Salario.setBounds(66, 67, 247, 20);
+		contentPane.add(Salario);
+		Salario.setColumns(10);
+		Salario.setText(String.valueOf(func.getSalario()));
+
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(36, 290, 46, 14);
+		contentPane.add(lblSenha);
+
+		senha = new JTextField();
+		senha.setBounds(118, 287, 195, 20);
+		contentPane.add(senha);
+		senha.setColumns(10);
+		senha.setText(func.getSenha());
+
+		JLabel lblNumeroResidencia = new JLabel("Numero Residencia");
+		lblNumeroResidencia.setBounds(10, 237, 96, 14);
+		contentPane.add(lblNumeroResidencia);
+
+		numero = new JTextField();
+		numero.setColumns(10);
+		numero.setBounds(116, 234, 197, 20);
+		contentPane.add(numero);
+		numero.setText(String.valueOf(func.getNumero()));
+		
+		JButton btnCadastrar = new JButton("Salvar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaGerente tela = new TelaGerente(FG);
 				Date data = new Date(0, 00, 0000);
 				switch (comboBox.getSelectedIndex()) {
 				case 0:
-					Funcionario_Entregador funcEn = new Funcionario_Entregador(nome.getText(), CPF.getText(), data,
-							"37902028", Double.parseDouble(Salario.getText()), 1,
+					Funcionario_Entregador funcEn = new Funcionario_Entregador(nome.getText(), func.getCpf(), data,
+							"37902028", Double.parseDouble(Salario.getText()), func.getSeq_loja(),
 							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
 					try {
-						fachada.cadastrarEntregador(funcEn);
+						fachada.atualizarEntregador(funcEn);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -129,11 +139,11 @@ public class TelaCadastroFuncionario extends JFrame {
 					tela.setResizable(false);
 					break;
 				case 1:
-					Funcionario_Garcon funcGa = new Funcionario_Garcon(nome.getText(), CPF.getText(), data, "67105072",
+					Funcionario_Garcon funcGa = new Funcionario_Garcon(nome.getText(), func.getCpf(), data, "67105072",
 							Double.parseDouble(Salario.getText()), 1, Complemento.getText(),
 							Integer.parseInt(numero.getText()), senha.getText());
 					try {
-						fachada.cadastrarGarcon(funcGa);
+						fachada.atualizarGarcon(funcGa);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -144,11 +154,11 @@ public class TelaCadastroFuncionario extends JFrame {
 					tela.setResizable(false);
 					break;
 				case 2:
-					Funcionario_Secretario funcSe = new Funcionario_Secretario(nome.getText(), CPF.getText(), data,
+					Funcionario_Secretario funcSe = new Funcionario_Secretario(nome.getText(), func.getCpf(), data,
 							"64215317", Double.parseDouble(Salario.getText()), 1, Complemento.getText(),
 							Integer.parseInt(numero.getText()), senha.getText());
 					try {
-						fachada.cadastrarSecretario(funcSe);
+						fachada.atualizarSecretario(funcSe);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -159,11 +169,11 @@ public class TelaCadastroFuncionario extends JFrame {
 					tela.setResizable(false);
 					break;
 				case 3:
-					Funcionario_Gerente funcGe = new Funcionario_Gerente(nome.getText(), CPF.getText(), data,
+					Funcionario_Gerente funcGe = new Funcionario_Gerente(nome.getText(), func.getCpf(), data,
 							"38304274", Double.parseDouble(Salario.getText()), 1, Complemento.getText(),
 							Integer.parseInt(numero.getText()), senha.getText());
 					try {
-						fachada.cadastrarGerente(funcGe);
+						fachada.atualizarGerente(funcGe);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -176,44 +186,8 @@ public class TelaCadastroFuncionario extends JFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(247, 327, 89, 23);
+		btnCadastrar.setBounds(248, 329, 96, 23);
 		contentPane.add(btnCadastrar);
-
-		JLabel lblNewLabel_1 = new JLabel("Salario");
-		lblNewLabel_1.setBounds(10, 70, 46, 14);
-		contentPane.add(lblNewLabel_1);
-
-		Salario = new JTextField();
-		Salario.setBounds(66, 67, 247, 20);
-		contentPane.add(Salario);
-		Salario.setColumns(10);
-
-		JLabel lblSeqloja = new JLabel("Seq_Loja");
-		lblSeqloja.setBounds(323, 170, 46, 14);
-		contentPane.add(lblSeqloja);
-
-		seq_loja = new JTextField();
-		seq_loja.setBounds(379, 167, 195, 20);
-		contentPane.add(seq_loja);
-		seq_loja.setColumns(10);
-
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(323, 223, 46, 14);
-		contentPane.add(lblSenha);
-
-		senha = new JTextField();
-		senha.setBounds(379, 220, 195, 20);
-		contentPane.add(senha);
-		senha.setColumns(10);
-
-		JLabel lblNumeroResidencia = new JLabel("Numero Residencia");
-		lblNumeroResidencia.setBounds(10, 266, 96, 14);
-		contentPane.add(lblNumeroResidencia);
-
-		numero = new JTextField();
-		numero.setColumns(10);
-		numero.setBounds(116, 263, 197, 20);
-		contentPane.add(numero);
 
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -228,4 +202,5 @@ public class TelaCadastroFuncionario extends JFrame {
 		btnVoltar.setBounds(514, 330, 70, 20);
 		contentPane.add(btnVoltar);
 	}
+	
 }

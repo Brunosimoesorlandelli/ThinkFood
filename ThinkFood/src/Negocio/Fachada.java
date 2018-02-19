@@ -26,6 +26,7 @@ import beans.Pedido;
 import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
+import beans.StatusDelivery;
 import beans.UnidadeLoja;
 
 public class Fachada implements IFachada, Serializable {
@@ -370,6 +371,24 @@ public class Fachada implements IFachada, Serializable {
 	public void printarPedido(Pedido p) {
 		cPedido.printar(p);
 	}
+	
+	
+
+	public boolean atualizarEntregador(Funcionario_Entregador f) throws Exception {
+		return cEntregador.atualizarEntregador(f);
+	}
+
+	public boolean atualizarGarcon(Funcionario_Garcon f) throws Exception {
+		return cGarcom.atualizarGarcon(f);
+	}
+
+	public boolean atualizarGerente(Funcionario_Gerente f) throws Exception {
+		return cGerente.atualizarGerente(f);
+	}
+
+	public boolean atualizarSecretario(Funcionario_Secretario f) throws Exception {
+		return cSecretario.atualizarSecretario(f);
+	}
 
 	public Funcionario logar(String cpf) throws Exception {
 		Conectar(conexaoLogin);
@@ -573,7 +592,7 @@ public class Fachada implements IFachada, Serializable {
 				PedidoDelivery pedidoDel = new PedidoDelivery();
 				pedidoDel.setNumero(result.getInt(1));
 				pedidoDel.setCEP(result.getString(3));
-				pedidoDel.setStatus();
+				pedidoDel.setStatus(StatusDelivery.valueOf(result.getString(4)));
 
 				pedidoList.add(pedidoDel);
 

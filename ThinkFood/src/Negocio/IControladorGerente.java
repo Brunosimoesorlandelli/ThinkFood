@@ -19,5 +19,7 @@ public interface IControladorGerente {
 	public void printar(Funcionario_Gerente p);
 
 	public ArrayList<Funcionario_Gerente> listar();
+	
+	boolean atualizarGerente(Funcionario_Gerente f) throws Exception;
 
 }

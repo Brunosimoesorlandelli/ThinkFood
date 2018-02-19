@@ -84,7 +84,9 @@ public class RepositorioGerente implements IRepositorioGerente {
 	@Override
 	public boolean cadastrar(Funcionario_Gerente p) throws Exception {
 		String query = "insert into funcionario (cpf, nome, data_nasc, salario,complemento, numero,cep_endereco,seq_loja, senha)values(?,?,?,?,?,?,?,?,?)";
+		String query2 = "insert into funcionario_gerente(cpf_funcionario) values(?)";
 		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
 		ps.setString(1, p.getCpf());
 		ps.setString(2, p.getNome());
 		ps.setDate(3, p.getDataNasc());
@@ -95,13 +97,12 @@ public class RepositorioGerente implements IRepositorioGerente {
 		ps.setInt(8, p.getSeq_loja());
 		ps.setString(9, p.getSenha());
 
-		int res = ps.executeUpdate();
-		if (res > 0) {
-			return true;
-		} else {
-			return false;
-		}
-
+		ps2.setString(1, p.getCpf());
+		
+		ps.executeUpdate();
+		ps2.executeUpdate();
+		
+		return true;
 	}
 
 	/*
@@ -118,6 +119,7 @@ public class RepositorioGerente implements IRepositorioGerente {
 	public Funcionario_Gerente procurar(String cpf) throws Exception {
 		Funcionario_Gerente f = null;
 		String query = "select * from (funcionario join funcionario_gerente on funcionario.cpf = funcionario_gerente.cpf_funcionario) where cpf_funcionario = ?";
+		
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, cpf);
 		ResultSet rs = ps.executeQuery();
@@ -130,6 +132,29 @@ public class RepositorioGerente implements IRepositorioGerente {
 
 		return f;
 
+	}
+	
+	public boolean atualizarGerente(Funcionario_Gerente f) throws Exception {
+		String query = "update funcionario set cpf = ?, nome = ?,data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ?";
+		String query2 = "update funcionario_gerente set cpf_funcionario = ? where cpf_funcionario = " + f.getCpf(); 
+
+		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		
+		ps.setString(1, f.getCpf());
+		ps.setString(2, f.getNome());
+		ps.setDate(3, f.getDataNasc());
+		ps.setDouble(4, f.getSalario());
+		ps.setString(5, f.getCompl());
+		ps.setInt(6, f.getNumero());
+		ps.setString(7, f.getCEP());
+		ps.setInt(8, f.getSeq_loja());
+		ps.setString(9, f.getSenha());
+		
+		ps.executeUpdate();
+		ps2.executeUpdate();
+		
+		return true;
 	}
 
 	/*
@@ -145,9 +170,13 @@ public class RepositorioGerente implements IRepositorioGerente {
 	@Override
 	public boolean remover(Funcionario_Gerente f) throws SQLException {
 		String query = "delete from funcionario where cpf =?";
+		String query2 = "delete from funcionario_gerente where cpf_funcionario =?";
 		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
 		ps.setString(1, f.getCpf());
+		ps2.setString(1, f.getCpf());
 		ps.executeUpdate();
+		ps2.executeUpdate();
 		return true;
 	}
 	/*
