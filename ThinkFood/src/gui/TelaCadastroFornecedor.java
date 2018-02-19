@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import Negocio.Fachada;
 import Negocio.IFachada;
 import beans.Fornecedor;
+import beans.Funcionario_Gerente;
 
 public class TelaCadastroFornecedor extends JFrame {
 
@@ -33,7 +34,7 @@ public class TelaCadastroFornecedor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroFornecedor() {
+	public TelaCadastroFornecedor(Funcionario_Gerente FG) {
 		IFachada f = Fachada.getInstance();
 		setTitle("ThinkFood");
 		setResizable(false);
@@ -114,7 +115,7 @@ public class TelaCadastroFornecedor extends JFrame {
 				try {
 					f.cadastrarFornecedor(new Fornecedor(cnpj.getText(), email.getText(), rSocial.getText(), "37902028",
 							Integer.parseInt(telefone.getText())));
-					TelaLogin tela = new TelaLogin();
+					TelaGerente tela = new TelaGerente(FG);
 					dispose();
 					tela.setVisible(true);
 					tela.setLocationRelativeTo(null);

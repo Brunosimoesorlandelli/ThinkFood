@@ -35,7 +35,7 @@ public interface IFachada {
 
 	public void printarEntregador(Funcionario_Entregador p);
 
-	public Funcionario[] listarEntregador();
+	public Funcionario[] listarEntregadores();
 
 	public boolean cadastrarFornecedor(Fornecedor p) throws Exception;
 
@@ -182,5 +182,7 @@ public interface IFachada {
 	public UnidadeLoja[] listarLojas();
 
 	public ItemEstoque[] listarItemEstoque();
+	
+	public PedidoDelivery[] listarPedidoDelivery();
 
 }

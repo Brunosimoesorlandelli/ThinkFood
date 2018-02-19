@@ -586,7 +586,7 @@ public class Fachada implements IFachada, Serializable {
 				PedidoDelivery pedidoDel = new PedidoDelivery();
 				pedidoDel.setNumero(result.getInt(1));
 				pedidoDel.setCEP(result.getString(3));
-				pedidoDel.setStatus(StatusDelivery.valueOf(result.getString(4)));
+				pedidoDel.setStatus(StatusDelivery.valueOf(result.getString(2).toUpperCase()));
 
 				pedidoList.add(pedidoDel);
 

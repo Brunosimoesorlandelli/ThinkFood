@@ -91,11 +91,11 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 		ps.setString(5, p.getCompl());
 		ps.setDouble(4, p.getSalario());
 		ps.setInt(6, p.getNumero());
-		ps.setInt(8,1);
+		ps.setInt(8, 1);
 		ps.setString(9, p.getSenha());
 
 		ps2.setString(1, p.getCpf());
-		
+
 		ps.executeUpdate();
 		ps2.executeUpdate();
 		return true;
@@ -128,27 +128,24 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 		return f;
 
 	}
-	
+
 	public boolean atualizarSecretario(Funcionario_Secretario f) throws Exception {
-		String query = "update funcionario set cpf = ?, nome = ?,data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ?";
-		String query2 = "update funcionario_secretario set cpf_funcionarioS = ? where cpf_funcionarioS = " + f.getCpf(); 
+		String query = "update funcionario nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ?";
 
 		PreparedStatement ps = connection.prepareStatement(query);
-		PreparedStatement ps2 = connection.prepareStatement(query2);
+
 		
-		ps.setString(1, f.getCpf());
-		ps.setString(2, f.getNome());
-		ps.setDate(3, f.getDataNasc());
-		ps.setDouble(4, f.getSalario());
-		ps.setString(5, f.getCompl());
-		ps.setInt(6, f.getNumero());
-		ps.setString(7, f.getCEP());
-		ps.setInt(8, f.getSeq_loja());
-		ps.setString(9, f.getSenha());
-		
+		ps.setString(1, f.getNome());
+		ps.setDate(2, f.getDataNasc());
+		ps.setDouble(3, f.getSalario());
+		ps.setString(4, f.getCompl());
+		ps.setInt(5, f.getNumero());
+		ps.setString(6, f.getCEP());
+		ps.setInt(7, f.getSeq_loja());
+		ps.setString(8, f.getSenha());
+
 		ps.executeUpdate();
-		ps2.executeUpdate();
-		
+
 		return true;
 	}
 

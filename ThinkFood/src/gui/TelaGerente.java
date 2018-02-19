@@ -132,7 +132,7 @@ public class TelaGerente extends JFrame {
 		JButton button_5 = new JButton("Adicionar");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroFornecedor tela = new TelaCadastroFornecedor();
+				TelaCadastroFornecedor tela = new TelaCadastroFornecedor(FG);
 				dispose();
 				tela.setVisible(true);
 				tela.setLocationRelativeTo(null);
@@ -149,20 +149,26 @@ public class TelaGerente extends JFrame {
 
 		table_2 = new JTable();
 		scrollPane_4.setViewportView(table_2);
-		String[] fornecedores = new String[f.listarFornecedores().length];
-		for (int j = 0; j < fornecedores.length; j++) {
-			fornecedores[j] = f.listarFornecedores()[j].getEmail();
+		DefaultTableModel modelFornece = (DefaultTableModel) table_2.getModel();
+		table_2.setModel(modelFornece);
+		modelFornece.addColumn("Email");
+		modelFornece.addColumn("Cnpj");
+		modelFornece.addColumn("Fone");
+		for (int i = 0; i < f.listarFornecedores().length; i++) {
+			modelFornece.addRow(new Object[] { f.listarFornecedores()[i].getEmail(),
+					f.listarFornecedores()[i].getCnpj(), f.listarFornecedores()[i].getFone() });
 		}
+	
 
-		JButton FuncRemoverButton = new JButton("Remover");
-		FuncRemoverButton.addActionListener(new ActionListener() {
+		JButton LojaRemoverButton = new JButton("Remover");
+		LojaRemoverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 			}
 		});
-		FuncRemoverButton.setBackground(SystemColor.inactiveCaption);
-		FuncRemoverButton.setBounds(185, 705, 89, 23);
-		contentPane.add(FuncRemoverButton);
+		LojaRemoverButton.setBackground(SystemColor.inactiveCaption);
+		LojaRemoverButton.setBounds(185, 705, 89, 23);
+		contentPane.add(LojaRemoverButton);
 
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBackground(SystemColor.inactiveCaption);
@@ -256,6 +262,16 @@ public class TelaGerente extends JFrame {
 		contentPane.add(button_7);
 
 		JButton button_8 = new JButton("Atualizar");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				modelFunc.getDataVector().removeAllElements();
+				revalidate();
+				for (int i = 0; i < f.listarFornecedores().length; i++) {
+					modelFornece.addRow(new Object[] { f.listarFornecedores()[i].getEmail(),
+							f.listarFornecedores()[i].getCnpj(), f.listarFornecedores()[i].getFone() });
+				}
+			}
+		});
 		button_8.setBackground(SystemColor.inactiveCaption);
 		button_8.setBounds(738, 643, 89, 23);
 		contentPane.add(button_8);

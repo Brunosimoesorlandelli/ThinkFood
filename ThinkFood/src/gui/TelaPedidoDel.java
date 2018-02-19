@@ -94,8 +94,8 @@ public class TelaPedidoDel extends JFrame {
 		JComboBox comboBox_1 = new JComboBox();
 		DefaultComboBoxModel modelBox = (DefaultComboBoxModel) comboBox_1.getModel();
 		comboBox_1.setModel(modelBox);
-		for (int i = 0; i < f.listarEntregador().length; i++) {
-			modelBox.addElement(new Object[] { f.listarEntregador()[i].getCpf() });
+		for (int i = 0; i < f.listarEntregadores().length; i++) {
+			modelBox.addElement(new Object[] { f.listarEntregadores()[i].getCpf() });
 		}
 		comboBox_1.setBounds(189, 152, 332, 20);
 		contentPane.add(comboBox_1);

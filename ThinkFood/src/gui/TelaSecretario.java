@@ -87,12 +87,12 @@ public class TelaSecretario extends JFrame {
 		table = new JTable();
 		DefaultTableModel modelSec = (DefaultTableModel) table.getModel();
 		table.setModel(modelSec);
-		modelSec.addColumn("Nome");
-		modelSec.addColumn("Cpf");
-		modelSec.addColumn("SeqLoja");
-		for (int i = 0; i < f.listarFuncionarios().length; i++) {
-			modelSec.addRow(new Object[] { f.listarPedidoDel()[i], f.listarFuncionarios()[i].getCpf(),
-					f.listarFuncionarios()[i].getSeq_loja() });
+		modelSec.addColumn("Id");
+		modelSec.addColumn("Cpf_Entregador");
+		modelSec.addColumn("Cep_Cliente");
+		for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
+			modelSec.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getCpfEntregador(),
+					f.listarPedidoDelivery()[i].getCEP()});
 		}
 		scrollPane_1.setViewportView(table);
 
