@@ -47,13 +47,13 @@ public class TelaGerente extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnGerenciamentoDeProduto = new JMenu("Gerenciamento de Produto");
+		JMenu mnGerenciamentoDeProduto = new JMenu("Gerenciamento de Produto e Estoque");
 		menuBar.add(mnGerenciamentoDeProduto);
 
 		JMenuItem mntmGerenciar = new JMenuItem("Gerenciar");
 		mntmGerenciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaCadastroProduto tela = new TelaCadastroProduto(FG);
+				TelaEstoque tela = new TelaEstoque(FG);
 				dispose();
 				tela.setVisible(true);
 				tela.setLocationRelativeTo(null);
@@ -62,23 +62,8 @@ public class TelaGerente extends JFrame {
 		});
 		mnGerenciamentoDeProduto.add(mntmGerenciar);
 
-		JMenu mnGerenciamentoDeEstoque = new JMenu("Gerenciamento de Estoque");
-		menuBar.add(mnGerenciamentoDeEstoque);
-
 		JMenu mnGerenciamentoDeCardapio = new JMenu("Gerenciamento de Cardapio");
 		menuBar.add(mnGerenciamentoDeCardapio);
-
-		JMenuItem mntmGerenciar_1 = new JMenuItem("Gerenciar");
-		mntmGerenciar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TelaCadastroItemEstoque tela = new TelaCadastroItemEstoque(FG);
-				tela.setVisible(true);
-				tela.setResizable(false);
-				tela.setLocationRelativeTo(null);
-			}
-		});
-		mnGerenciamentoDeEstoque.add(mntmGerenciar_1);
 
 		JMenuItem mntmGerenciar_2 = new JMenuItem("Gerenciar");
 		mnGerenciamentoDeCardapio.add(mntmGerenciar_2);
