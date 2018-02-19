@@ -23,6 +23,9 @@ import beans.Funcionario;
 import beans.Funcionario_Gerente;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class TelaGerente extends JFrame {
 
@@ -37,10 +40,33 @@ public class TelaGerente extends JFrame {
 	 */
 	public TelaGerente(Funcionario_Gerente FG) {
 		IFachada f = Fachada.getInstance();
-		setResizable(false);
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 800);
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JMenu mnGerenciamentoDeProduto = new JMenu("Gerenciamento de Produto");
+		menuBar.add(mnGerenciamentoDeProduto);
+
+		JMenuItem mntmGerenciar = new JMenuItem("Gerenciar");
+		mntmGerenciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastroProduto tela = new TelaCadastroProduto(FG);
+				dispose();
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
+			}
+		});
+		mnGerenciamentoDeProduto.add(mntmGerenciar);
+
+		JMenu mnGerenciamentoDeEstoque = new JMenu("Gerenciamento de Estoque");
+		menuBar.add(mnGerenciamentoDeEstoque);
+
+		JMenuItem mntmGerenciar_1 = new JMenuItem("Gerenciar");
+		mnGerenciamentoDeEstoque.add(mntmGerenciar_1);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -117,8 +143,7 @@ public class TelaGerente extends JFrame {
 					} else if (f.procurarSecretario(cpf) != null) {
 						f.removerSecretario(f.procurarSecretario(cpf));
 					} else {
-						JOptionPane.showMessageDialog(null,
-								"Este CPF não existe. Tente novamente.");
+						JOptionPane.showMessageDialog(null, "Este CPF não existe. Tente novamente.");
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -158,7 +183,6 @@ public class TelaGerente extends JFrame {
 			modelFornece.addRow(new Object[] { f.listarFornecedores()[i].getEmail(),
 					f.listarFornecedores()[i].getCnpj(), f.listarFornecedores()[i].getFone() });
 		}
-	
 
 		JButton LojaRemoverButton = new JButton("Remover");
 		LojaRemoverButton.addActionListener(new ActionListener() {
@@ -202,14 +226,12 @@ public class TelaGerente extends JFrame {
 						tela.setResizable(false);
 						tela.setLocationRelativeTo(null);
 					} else {
-						JOptionPane.showMessageDialog(null,
-								"Este CPF não existe. Tente novamente.");
+						JOptionPane.showMessageDialog(null, "Este CPF não existe. Tente novamente.");
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
-				
+
 			}
 		});
 		button.setBackground(SystemColor.inactiveCaption);
@@ -238,7 +260,7 @@ public class TelaGerente extends JFrame {
 
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setBackground(SystemColor.inactiveCaption);
-		btnVoltar.setBounds(0, 13, 89, 23);
+		btnVoltar.setBounds(0, 32, 89, 23);
 		contentPane.add(btnVoltar);
 
 		JButton btnAtualizar = new JButton("Atualizar");
