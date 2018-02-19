@@ -1,24 +1,24 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.SQLException;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
-
-import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import beans.ItemEstoque;
 
 public class TelaCadastroItemEstoque extends JFrame {
 
@@ -27,6 +27,7 @@ public class TelaCadastroItemEstoque extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField textField_4;
 
 	public TelaCadastroItemEstoque() {
 		IFachada f = Fachada.getInstance();
@@ -73,45 +74,9 @@ public class TelaCadastroItemEstoque extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 
-		JSpinner Milhares = new JSpinner();
-		Milhares.setBackground(SystemColor.inactiveCaption);
-		Milhares.setBounds(256, 260, 34, 20);
-		contentPane.add(Milhares);
-
 		JLabel lblQuantidade = new JLabel("Quantidade");
-		lblQuantidade.setBounds(36, 263, 102, 14);
+		lblQuantidade.setBounds(109, 264, 102, 14);
 		contentPane.add(lblQuantidade);
-
-		JLabel lblMilhares = new JLabel("Milhares");
-		lblMilhares.setBounds(174, 263, 46, 14);
-		contentPane.add(lblMilhares);
-
-		JLabel lblCentenas = new JLabel("Centenas");
-		lblCentenas.setBounds(326, 263, 46, 14);
-		contentPane.add(lblCentenas);
-
-		JSpinner Centenas = new JSpinner();
-		Centenas.setBackground(SystemColor.inactiveCaption);
-		Centenas.setBounds(408, 260, 34, 20);
-		contentPane.add(Centenas);
-
-		JLabel lblDezenas = new JLabel("Dezenas");
-		lblDezenas.setBounds(478, 263, 46, 14);
-		contentPane.add(lblDezenas);
-
-		JSpinner Dezenas = new JSpinner();
-		Dezenas.setBackground(SystemColor.inactiveCaption);
-		Dezenas.setBounds(560, 260, 34, 20);
-		contentPane.add(Dezenas);
-
-		JLabel lblUnidades = new JLabel("Unidades");
-		lblUnidades.setBounds(630, 263, 46, 14);
-		contentPane.add(lblUnidades);
-
-		JSpinner Unidades = new JSpinner();
-		Unidades.setBackground(SystemColor.inactiveCaption);
-		Unidades.setBounds(712, 260, 34, 20);
-		contentPane.add(Unidades);
 
 		JLabel lblDataDeEntrada = new JLabel("Data de Entrada");
 		lblDataDeEntrada.setBounds(109, 345, 102, 14);
@@ -132,13 +97,28 @@ public class TelaCadastroItemEstoque extends JFrame {
 		contentPane.add(textField_3);
 
 		JButton btnCadastrarItemNo = new JButton("Cadastrar Item no Estoque");
+		Date dataEn = new Date(00, 00, 0200);
+		Date dataVal = new Date(00, 03, 0200);
 		btnCadastrarItemNo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				ItemEstoque p = new ItemEstoque(Integer.parseInt(String.valueOf(comboBox.getSelectedIndex())),
+						Integer.parseInt(textField.getText()), dataEn, Integer.parseInt(textField_1.getText()),
+						Integer.parseInt(textField_4.getText()), dataVal);
+				try {
+					f.cadastrarItemEstoque(p);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnCadastrarItemNo.setBackground(SystemColor.inactiveCaption);
 		btnCadastrarItemNo.setBounds(283, 466, 218, 23);
 		contentPane.add(btnCadastrarItemNo);
+
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(320, 261, 354, 20);
+		contentPane.add(textField_4);
 	}
 }

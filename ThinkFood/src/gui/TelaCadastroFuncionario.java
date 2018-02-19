@@ -110,12 +110,12 @@ public class TelaCadastroFuncionario extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaGerente tela = new TelaGerente(FG);
-				Date data = new Date(0, 00, 0000);
+				Date data = new Date(00, 02, 0200);
 				switch (comboBox.getSelectedIndex()) {
 				case 0:
 					Funcionario_Entregador funcEn = new Funcionario_Entregador(nome.getText(), CPF.getText(), data,
-							"37902028", Double.parseDouble(Salario.getText()), 1,
-							Complemento.getText(), Integer.parseInt(numero.getText()), senha.getText());
+							"37902028", Double.parseDouble(Salario.getText()), 1, Complemento.getText(),
+							Integer.parseInt(numero.getText()), senha.getText());
 					try {
 						fachada.cadastrarEntregador(funcEn);
 					} catch (Exception e1) {
