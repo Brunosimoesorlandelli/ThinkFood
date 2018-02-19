@@ -35,7 +35,7 @@ public interface IFachada {
 
 	public void printarEntregador(Funcionario_Entregador p);
 
-	public ArrayList<Funcionario_Entregador> listarEntregador();
+	public Funcionario[] listarEntregador();
 
 	public boolean cadastrarFornecedor(Fornecedor p) throws Exception;
 
@@ -166,21 +166,21 @@ public interface IFachada {
 	public boolean removerPedido(Pedido p) throws SQLException;
 
 	public void printarPedido(Pedido p);
-	
+
 	boolean atualizarEntregador(Funcionario_Entregador f) throws Exception;
-	
+
 	boolean atualizarGarcon(Funcionario_Garcon f) throws Exception;
-	
+
 	boolean atualizarGerente(Funcionario_Gerente f) throws Exception;
-	
+
 	boolean atualizarSecretario(Funcionario_Secretario f) throws Exception;
-	
+
 	public Funcionario[] listarFuncionarios();
-	
+
 	public Fornecedor[] listarFornecedores();
-	
+
 	public UnidadeLoja[] listarLojas();
-	
+
 	public ItemEstoque[] listarItemEstoque();
 
 }

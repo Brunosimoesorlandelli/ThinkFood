@@ -116,10 +116,6 @@ public class Fachada implements IFachada, Serializable {
 		cEntregador.printar(p);
 	}
 
-	public ArrayList<Funcionario_Entregador> listarEntregador() {
-		return cEntregador.listar();
-	}
-
 	public boolean cadastrarFornecedor(Fornecedor p) throws Exception {
 		return cFornecedor.cadastrar(p);
 	}
@@ -371,8 +367,6 @@ public class Fachada implements IFachada, Serializable {
 	public void printarPedido(Pedido p) {
 		cPedido.printar(p);
 	}
-	
-	
 
 	public boolean atualizarEntregador(Funcionario_Entregador f) throws Exception {
 		return cEntregador.atualizarEntregador(f);
@@ -608,6 +602,44 @@ public class Fachada implements IFachada, Serializable {
 			System.out.println(e.getMessage());
 		}
 		return pedidos;
+
+	}
+
+	public Funcionario[] listarEntregadores() {
+		ArrayList<Funcionario> funcionariosList = new ArrayList<Funcionario>();
+		Funcionario[] funcionarios = null;
+		int tamanho = 0;
+		try {
+			Statement stmt1 = connect.createStatement();
+			ResultSet result1 = stmt1.executeQuery(
+					"SELECT DISTINCT * FROM funcionario WHERE (cpf) IN (SELECT funcionario_cpf FROM funcionario_entregador)");
+			while (result1.next()) {
+
+				Funcionario funcionario = new Funcionario();
+				funcionario.setCpf(result1.getString(1));
+				funcionario.setNome(result1.getString(2));
+				funcionario.setDataNasc(result1.getDate(3));
+				funcionario.setSalario(result1.getFloat(4));
+				funcionario.setCompl((result1.getString(5)));
+				funcionario.setNumero(result1.getInt(6));
+				funcionario.setCEP((result1.getString(7)));
+				funcionario.setSeq_loja(result1.getInt(8));
+				funcionario.setSenha(result1.getString(9));
+
+				funcionariosList.add(funcionario);
+
+				tamanho = funcionariosList.size();
+				funcionarios = new Funcionario[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (funcionariosList.get(i) != null)
+						funcionarios[i] = funcionariosList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return funcionarios;
 
 	}
 

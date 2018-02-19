@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
@@ -27,14 +28,13 @@ public class TelaPedidoDel extends JFrame {
 	private JTextField cep;
 	private JTextField dtSaida;
 	private JTextField hrSaida;
-	private JTextField cpfEntregador;
 	private JTextField Complemento;
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaPedidoDel(Funcionario_Secretario FS) {
-		IFachada fachada = Fachada.getInstance();
+		IFachada f = Fachada.getInstance();
 		setTitle("ThinkFood");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,11 +76,6 @@ public class TelaPedidoDel extends JFrame {
 		lblCpfEntregador.setBounds(94, 155, 86, 14);
 		contentPane.add(lblCpfEntregador);
 
-		cpfEntregador = new JTextField();
-		cpfEntregador.setColumns(10);
-		cpfEntregador.setBounds(190, 152, 331, 20);
-		contentPane.add(cpfEntregador);
-
 		JLabel lblComplemento = new JLabel("Complemento");
 		lblComplemento.setBounds(94, 236, 72, 14);
 		contentPane.add(lblComplemento);
@@ -96,15 +91,24 @@ public class TelaPedidoDel extends JFrame {
 		comboBox.setBounds(190, 192, 331, 20);
 		contentPane.add(comboBox);
 
+		JComboBox comboBox_1 = new JComboBox();
+		DefaultComboBoxModel modelBox = (DefaultComboBoxModel) comboBox_1.getModel();
+		comboBox_1.setModel(modelBox);
+		for (int i = 0; i < f.listarEntregador().length; i++) {
+			modelBox.addElement(new Object[] { f.listarEntregador()[i].getCpf() });
+		}
+		comboBox_1.setBounds(189, 152, 332, 20);
+		contentPane.add(comboBox_1);
+
 		JButton btnCadastrarPedido = new JButton("Cadastrar Pedido");
 		btnCadastrarPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PedidoDelivery p = new PedidoDelivery(0, Enum.valueOf(null, comboBox.getSelectedItem().toString()),
 						cep.getText(), Time.valueOf(hrSaida.getText()), Date.valueOf(dtSaida.getText()), 0,
-						Complemento.getText(), cpfEntregador.getText());
+						Complemento.getText(), comboBox_1.getSelectedItem().toString());
 
 				try {
-					fachada.cadastrarPedidoDel(p);
+					f.cadastrarPedidoDel(p);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
