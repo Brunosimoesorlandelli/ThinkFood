@@ -1,23 +1,25 @@
 package beans;
+
 //
 //TALVEZ TENHA ALGO FALTANDO
 //
 import java.sql.Date;
 
 public class Estoque {
-	
-	private int id; 
+
+	private int id;
 	private String descr;
 	private Date dtUltimaEntrada;
-	
+
 	public Estoque(int id, String descr, Date dtUltimaEntrada) {
 		this.id = id;
 		this.descr = descr;
 		this.dtUltimaEntrada = dtUltimaEntrada;
-		
+
 	}
+
 	public Estoque() {
-		
+
 	}
 
 	public int getId() {
@@ -43,6 +45,5 @@ public class Estoque {
 	public void setDtUltimaEntrada(Date dtUltimaEntrada) {
 		this.dtUltimaEntrada = dtUltimaEntrada;
 	}
-	
 
 }

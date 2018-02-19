@@ -46,6 +46,7 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorClientePJ cClientePJ;
 	private IControladorFazReserva cFazReserva;
 	private IControladorPedido cPedido;
+	private IControladorItemEstoque cItemEstoque;
 
 	private static Connection connect;
 	private static Connection conexaoLogin;
@@ -68,6 +69,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cClientePJ = new ControladorClientePJ();
 		this.cFazReserva = new ControladorFazReserva();
 		this.cPedido = new ControladorPedido();
+		this.cItemEstoque = new ControladorItemEstoque();
 		this.conex = new ConexaoDB();
 		try {
 			this.conexaoLogin = conex.getConexao("God", "senha");
@@ -98,6 +100,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cClientePF.conectar(connect);
 		this.cClientePJ.conectar(connect);
 		this.cFazReserva.conectar(connect);
+		this.cItemEstoque.conectar(connect);
 	}
 
 	public boolean cadastrarEntregador(Funcionario_Entregador p) throws Exception {
@@ -384,6 +387,26 @@ public class Fachada implements IFachada, Serializable {
 		return cSecretario.atualizarSecretario(f);
 	}
 
+	public void conectarItemEstoque(Connection connect) {
+		cItemEstoque.conectar(connect);
+	}
+
+	public boolean cadastrarItemEstoque(ItemEstoque p) throws SQLException {
+		return cItemEstoque.cadastrar(p);
+	}
+
+	public ItemEstoque procurarItemEstoque(int id) throws SQLException {
+		return cItemEstoque.procurar(id);
+	}
+
+	public boolean removerItemEstoque(ItemEstoque p) throws SQLException {
+		return cItemEstoque.remover(p);
+	}
+
+	public void printarItemEstoque(ItemEstoque p) {
+		cItemEstoque.printar(p);
+	}
+
 	public Funcionario logar(String cpf) throws Exception {
 		Conectar(conexaoLogin);
 		Funcionario func = null;
@@ -592,7 +615,6 @@ public class Fachada implements IFachada, Serializable {
 				pedidoDel.setCpfEntregador(result.getString(6));
 				pedidoDel.setComplemento(result.getString(7));
 				pedidoDel.setTaxa(result.getInt(8));
-				
 
 				pedidoList.add(pedidoDel);
 

@@ -167,6 +167,16 @@ public interface IFachada {
 
 	public void printarPedido(Pedido p);
 
+	public void conectarItemEstoque(Connection connect);
+
+	public boolean cadastrarItemEstoque(ItemEstoque p) throws SQLException;
+
+	public ItemEstoque procurarItemEstoque(int id) throws SQLException;
+
+	public boolean removerItemEstoque(ItemEstoque p) throws SQLException;
+
+	public void printarItemEstoque(ItemEstoque p);
+
 	boolean atualizarEntregador(Funcionario_Entregador f) throws Exception;
 
 	boolean atualizarGarcon(Funcionario_Garcon f) throws Exception;
