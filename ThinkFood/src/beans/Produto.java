@@ -15,7 +15,8 @@ public class Produto {
 	private int qtd_atual_estoque;
 	private int freq_pedido;
 
-	public Produto(int unidade, int codigo, String descr, int qtdMinStk, Date dt_inicio, Date dt_fim, String cnpj_fornecedor, int cod_categ, double preco_ult_compra, int qtd_atual_estoque, int freq_pedido) {
+	public Produto(int unidade, int codigo, String descr, int qtdMinStk, Date dt_inicio, Date dt_fim,
+			String cnpj_fornecedor, int cod_categ, double preco_ult_compra, int qtd_atual_estoque, int freq_pedido) {
 		this.unidade = unidade;
 		this.codigo = codigo;
 		this.descr = descr;
@@ -27,7 +28,20 @@ public class Produto {
 		this.preco_ult_compra = preco_ult_compra;
 		this.qtd_atual_estoque = qtd_atual_estoque;
 		this.freq_pedido = freq_pedido;
-		
+
+	}
+
+	public Produto(int unidade, String descr, int qtdMinStk, String cnpj_fornecedor, int cod_categ) {
+		this.unidade = unidade;
+		this.descr = descr;
+		this.qtdMinStk = qtdMinStk;
+		this.cnpj_fornecedor = cnpj_fornecedor;
+		this.cod_categ = cod_categ;
+
+	}
+
+	public Produto() {
+
 	}
 
 	public int getUnidade() {
@@ -118,5 +132,4 @@ public class Produto {
 		this.freq_pedido = freq_pedido;
 	}
 
-	
 }

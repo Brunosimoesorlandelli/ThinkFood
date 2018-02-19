@@ -643,4 +643,32 @@ public class Fachada implements IFachada, Serializable {
 
 	}
 
+	public Produto[] listarProduto() {
+		ArrayList<Produto> produtosList = new ArrayList<Produto>();
+		Produto[] produtos = null;
+		int tamanho = 0;
+		try {
+			Statement stmt1 = connect.createStatement();
+			ResultSet result1 = stmt1.executeQuery("SELECT * FROM produtoRef");
+			while (result1.next()) {
+
+				Produto produto = new Produto();
+
+				produtosList.add(produto);
+
+				tamanho = produtosList.size();
+				produtos = new Produto[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (produtosList.get(i) != null)
+						produtos[i] = produtosList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return produtos;
+
+	}
+
 }

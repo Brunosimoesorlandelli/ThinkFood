@@ -182,7 +182,9 @@ public interface IFachada {
 	public UnidadeLoja[] listarLojas();
 
 	public ItemEstoque[] listarItemEstoque();
-	
+
 	public PedidoDelivery[] listarPedidoDelivery();
+
+	public Produto[] listarProduto();
 
 }
