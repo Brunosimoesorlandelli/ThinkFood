@@ -16,6 +16,8 @@ public interface IRepositorioProdutos {
 
 	boolean remover(Produto p) throws SQLException;
 
+	public boolean atualizarProduto(Produto p) throws Exception;
+
 	void printar(Produto p);
 
 	ArrayList<Produto> listar();

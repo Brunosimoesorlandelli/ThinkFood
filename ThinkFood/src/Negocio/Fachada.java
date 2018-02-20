@@ -714,6 +714,12 @@ public class Fachada implements IFachada, Serializable {
 		return cFornecedor.atualizarFornecedor(f);
 	}
 
+	public boolean atualizarProduto(Produto p) throws Exception {
+		return cProduto.atualizarProduto(p);
+	}
+	
+	
+
 	
 
 }

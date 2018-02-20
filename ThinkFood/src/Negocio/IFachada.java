@@ -199,4 +199,6 @@ public interface IFachada {
 
 	public boolean atualizarFornecedor(Fornecedor forn) throws Exception;
 
+	public boolean atualizarProduto(Produto p) throws Exception;
+
 }

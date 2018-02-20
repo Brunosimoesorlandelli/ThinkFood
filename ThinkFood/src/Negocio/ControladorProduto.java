@@ -36,6 +36,10 @@ public class ControladorProduto implements IControladorProduto, Serializable {
 		return repositorio.remover(p);
 	}
 
+	public boolean atualizarProduto(Produto p) throws Exception {
+		return repositorio.atualizarProduto(p);
+	}
+
 	public void printar(Produto p) {
 		repositorio.printar(p);
 	}

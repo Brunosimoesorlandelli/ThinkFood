@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import beans.Fornecedor;
 import beans.Produto;
 
 public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
@@ -172,6 +173,25 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 * 
 	 * @see Dados.IRepositorioProdutos#printar(Beans.Produto)
 	 */
+
+	public boolean atualizarProduto(Produto p) throws Exception {
+		String query = "update produtoRef set produtoRef_unit = ?, produtoRef_cod = ?, produtoRef_desc = ?, produtoRef_qtdMinStk = ?, cnpj_fornecedor = ?, cod_categ = ? where produtoRef_cod = "
+				+ "'" + p.getCodigo() + "'";
+
+		PreparedStatement ps = connection.prepareStatement(query);
+
+		ps.setInt(1, p.getUnidade());
+		ps.setString(2, p.getCnpj_fornecedor());
+		ps.setString(3, p.getDescr());
+		ps.setInt(4, p.getQtdMinStk());
+		ps.setString(5, p.getCnpj_fornecedor());
+		ps.setInt(6, p.getCod_categ());
+
+		ps.executeUpdate();
+
+		return true;
+	}
+
 	@Override
 	public void printar(Produto p) {
 		try {

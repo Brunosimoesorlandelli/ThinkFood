@@ -171,20 +171,20 @@ public class TelaEstoque extends JFrame {
 				Produto produto = null;
 				int cod = Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 1)));
 				System.out.println(cod);
-				for (int i = 0; i < f.listarFornecedores().length; i++) {
-					if (f.listarFornecedores()[i].getCnpj().equals(cod))
-						produto = f.listarFornecedores()[i];
+				for (int i = 0; i < f.listarProduto().length; i++) {
+					if (f.listarProduto()[i].getCodigo() == cod)
+						produto = f.listarProduto()[i];
 				}
 
 				try {
 
-					if (f.procurarFornecedor(cod) != null) {
-						TelaEditarFornecedor tela = new TelaEditarFornecedor(FG, produto);
+					if (f.procurarProduto(cod) != null) {
+						TelaEditarProduto tela = new TelaEditarProduto(FG, produto);
 						tela.setVisible(true);
 						tela.setResizable(false);
 						tela.setLocationRelativeTo(null);
 					} else {
-						JOptionPane.showMessageDialog(null, "Este CNPJ não existe. Tente novamente.");
+						JOptionPane.showMessageDialog(null, "Este codigo não existe. Tente novamente.");
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();

@@ -16,6 +16,8 @@ public interface IControladorProduto {
 
 	public boolean remover(Produto p) throws SQLException;
 
+	public boolean atualizarProduto(Produto p) throws Exception;
+
 	public void printar(Produto p);
 
 	public ArrayList<Produto> listar();
