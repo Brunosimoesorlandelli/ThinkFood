@@ -51,6 +51,7 @@ public class TelaReserva extends JFrame {
 		CPFFunc.setBounds(290, 172, 268, 20);
 		contentPane.add(CPFFunc);
 		CPFFunc.setColumns(10);
+		CPFFunc.setEnabled(false);
 
 		JLabel lblCpfFuncion = new JLabel("CPF funcionario:");
 		lblCpfFuncion.setBounds(194, 175, 86, 14);

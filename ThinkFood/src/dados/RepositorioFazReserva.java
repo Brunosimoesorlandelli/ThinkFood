@@ -89,7 +89,7 @@ public class RepositorioFazReserva implements IRepositorioFazReserva {
 	 */
 
 	public boolean cadastrar(FazReserva r) throws SQLException {
-		String query = "insert into faz_reserva ()values(?,?,?,?,?)";
+		String query = "insert into faz_reserva (cpf_funcionario, seq_reserva, id_cliente, data_reserva, dt_validade)values(?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, r.getCpfFuncionario());
 		ps.setInt(2, r.getSeqReserva());
@@ -119,7 +119,7 @@ public class RepositorioFazReserva implements IRepositorioFazReserva {
 
 	public FazReserva procurar(int seq) throws SQLException {
 		FazReserva f = null;
-		String query = "select * from faz_reserva where seq = ?";
+		String query = "select * from faz_reserva where seq_reserva = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(2, seq);
 		ResultSet rs = ps.executeQuery();
@@ -148,7 +148,7 @@ public class RepositorioFazReserva implements IRepositorioFazReserva {
 	 * @see dados.IRepositorioReserva#remover(beans.Funcionario_Gerente)
 	 */
 	public boolean remover(FazReserva f) throws SQLException {
-		String query = "delete from faz_reserva where seq =?";
+		String query = "delete from faz_reserva where seq_reserva =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(2, f.getSeqReserva());
 		ps.executeUpdate();

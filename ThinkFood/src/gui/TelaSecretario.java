@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,18 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
-import beans.Funcionario;
 import beans.Funcionario_Secretario;
-import java.awt.SystemColor;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.JTable;
 
 public class TelaSecretario extends JFrame {
 
@@ -85,14 +82,14 @@ public class TelaSecretario extends JFrame {
 		contentPane.add(scrollPane_1);
 
 		table = new JTable();
-		DefaultTableModel modelSec = (DefaultTableModel) table.getModel();
-		table.setModel(modelSec);
-		modelSec.addColumn("Id");
-		modelSec.addColumn("Cpf_Entregador");
-		modelSec.addColumn("Cep_Cliente");
+		DefaultTableModel modelPedido = (DefaultTableModel) table.getModel();
+		table.setModel(modelPedido);
+		modelPedido.addColumn("Id");
+		modelPedido.addColumn("Cpf_Entregador");
+		modelPedido.addColumn("Cep_Cliente");
 		for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
 			try {
-				modelSec.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getCpfEntregador(),
+				modelPedido.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getCpfEntregador(),
 						f.listarPedidoDelivery()[i].getCEP()});
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -106,6 +103,16 @@ public class TelaSecretario extends JFrame {
 		contentPane.add(scrollPane);
 
 		table_1 = new JTable();
+		DefaultTableModel modelReserva = (DefaultTableModel) table_1.getModel();
+		table_1.setModel(modelReserva);
+		modelReserva.addColumn("Hora_Inicio");
+		modelReserva.addColumn("Hora_Fim");
+		modelReserva.addColumn("Status");
+		modelReserva.addColumn("Num_Pessoas");
+		for (int i = 0; i < f.listarFuncionarios().length; i++) {
+			modelReserva.addRow(new Object[] { f.listarFuncionarios()[i].getNome(), f.listarFuncionarios()[i].getCpf(),
+					f.listarFuncionarios()[i].getSeq_loja() });
+		}
 		scrollPane.setViewportView(table_1);
 
 		JButton btnRemoverPedido = new JButton("Remover Pedido");
