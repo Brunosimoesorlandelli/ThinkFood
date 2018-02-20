@@ -109,16 +109,15 @@ public class RepositorioFornecedores implements Serializable, IRepositorioFornec
 	}
 	
 	public boolean atualizarFornecedor(Fornecedor f) throws Exception {
-		String query = "update fornecedor cnpj_fornecedor = ?, email_fornecedor = ?, razao_fornecedor = ?, fornecedor_end = ?, fone = ? where cnpj_fornecedor = " + "'" + f.getCnpj() + "'";
+		String query = "update fornecedor set email_fornecedor = ?, razao_fornecedor = ?, fornecedor_end = ?, fone = ? where cnpj_fornecedor = " + "'" + f.getCnpj() + "'";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 
 		
-		ps.setString(1, f.getCnpj());
-		ps.setString(2, f.getEmail());
-		ps.setString(3, f.getRazaoSocial());
-		ps.setString(4, f.getCEP());
-		ps.setInt(5, f.getFone());
+		ps.setString(1, f.getEmail());
+		ps.setString(2, f.getRazaoSocial());
+		ps.setString(3, f.getCEP());
+		ps.setInt(4, f.getFone());
 		
 		
 
@@ -134,7 +133,7 @@ public class RepositorioFornecedores implements Serializable, IRepositorioFornec
 	 * @see dados.IRepositorioFornecedores#remover(java.lang.String)
 	 */
 	public boolean remover(Fornecedor f) throws SQLException {
-		String query = "delete from fornecedor where cnpj =?";
+		String query = "delete from fornecedor where cnpj_fornecedor =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, f.getCnpj());
 		ps.executeUpdate();

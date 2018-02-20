@@ -4,28 +4,26 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
+import beans.Fornecedor;
 import beans.Funcionario;
 import beans.Funcionario_Gerente;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 public class TelaGerente extends JFrame {
 
@@ -248,11 +246,54 @@ public class TelaGerente extends JFrame {
 		contentPane.add(button);
 
 		JButton button_2 = new JButton("Editar");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Fornecedor fornecedor = null;
+				String cnpj = String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 1));
+				System.out.println(cnpj);
+				for (int i = 0; i < f.listarFornecedores().length; i++) {
+					if (f.listarFornecedores()[i].getCnpj().equals(cnpj))
+						fornecedor = f.listarFornecedores()[i];
+				}
+
+				try {
+
+					if (f.procurarFornecedor(cnpj) != null) {
+						TelaEditarFornecedor tela = new TelaEditarFornecedor(FG, fornecedor);
+						tela.setVisible(true);
+						tela.setResizable(false);
+						tela.setLocationRelativeTo(null);
+					} else {
+						JOptionPane.showMessageDialog(null, "Este CNPJ não existe. Tente novamente.");
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		button_2.setBackground(SystemColor.inactiveCaption);
 		button_2.setBounds(738, 697, 89, 23);
 		contentPane.add(button_2);
 
 		JButton button_3 = new JButton("Remover");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cnpj = String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 1));
+				System.out.println(cnpj);
+
+				try {
+					if (f.procurarFornecedor(cnpj) != null) {
+						f.removerFornecedor(f.procurarFornecedor(cnpj));
+					}  else {
+						JOptionPane.showMessageDialog(null, "Este CPF não existe. Tente novamente.");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		button_3.setBackground(SystemColor.inactiveCaption);
 		button_3.setBounds(738, 673, 89, 23);
 		contentPane.add(button_3);

@@ -197,4 +197,6 @@ public interface IFachada {
 
 	public Produto[] listarProduto();
 
+	public boolean atualizarFornecedor(Fornecedor forn) throws Exception;
+
 }

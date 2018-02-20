@@ -682,7 +682,17 @@ public class Fachada implements IFachada, Serializable {
 			while (result1.next()) {
 
 				Produto produto = new Produto();
-
+				produto.setUnidade(result1.getInt(1));
+				produto.setCodigo(result1.getInt(2));
+				produto.setDescr(result1.getString(3));
+				produto.setQtdMinStk(result1.getInt(4));
+				produto.setDt_inicio(result1.getDate(5));
+				produto.setDt_fim(result1.getDate(6));
+				produto.setCnpj_fornecedor(result1.getString(7));
+				produto.setCod_categ(result1.getInt(8));
+				produto.setPreco_ult_compra(result1.getDouble(9));
+				produto.setQtd_atual_estoque(result1.getInt(10));
+				produto.setFreq_pedido(result1.getInt(11));
 				produtosList.add(produto);
 
 				tamanho = produtosList.size();
@@ -699,5 +709,11 @@ public class Fachada implements IFachada, Serializable {
 		return produtos;
 
 	}
+
+	public boolean atualizarFornecedor(Fornecedor f) throws Exception {
+		return cFornecedor.atualizarFornecedor(f);
+	}
+
+	
 
 }

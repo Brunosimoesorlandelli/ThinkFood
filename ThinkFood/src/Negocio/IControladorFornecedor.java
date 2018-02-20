@@ -21,4 +21,6 @@ public interface IControladorFornecedor {
 	public void printar(Fornecedor p);
 
 	public ArrayList<Fornecedor> listar();
+	
+	public boolean atualizarFornecedor(Fornecedor f) throws Exception;
 }

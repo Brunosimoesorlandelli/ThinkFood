@@ -23,6 +23,7 @@ public interface IRepositorioFornecedores {
 	 * 
 	 * }
 	 */
+	boolean atualizarFornecedor(Fornecedor f) throws Exception;
 
 	// boolean existe(String cnpj);
 

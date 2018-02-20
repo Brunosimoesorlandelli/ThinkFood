@@ -26,7 +26,6 @@ public class TelaCadastroProduto extends JFrame {
 	private JTextField unidade;
 	private JTextField descr;
 	private JTextField qtdMinStk;
-	private JTextField codCateg;
 
 	/**
 	 * Create the frame.
@@ -68,9 +67,9 @@ public class TelaCadastroProduto extends JFrame {
 		contentPane.add(qtdMinStk);
 		qtdMinStk.setColumns(10);
 
-		JLabel lblFornecedor = new JLabel("Fornecedor");
-		lblFornecedor.setBounds(133, 196, 68, 14);
-		contentPane.add(lblFornecedor);
+		JLabel lblCodCateg = new JLabel("Categoria");
+		lblCodCateg.setBounds(133, 196, 68, 14);
+		contentPane.add(lblCodCateg);
 
 		String[] produtos = new String[f.listarProduto().length];
 		for (int i = 0; i < f.listarProduto().length; i++) {
@@ -85,36 +84,43 @@ public class TelaCadastroProduto extends JFrame {
 		}
 		contentPane.add(comboBox);
 
-		JLabel lblCodigoCategoria = new JLabel("Codigo Categoria");
-		lblCodigoCategoria.setBounds(133, 250, 91, 14);
-		contentPane.add(lblCodigoCategoria);
-
-		codCateg = new JTextField();
-		codCateg.setBounds(312, 247, 338, 20);
-		contentPane.add(codCateg);
-		codCateg.setColumns(10);
+		JLabel lblFornecedor = new JLabel("Fornecedor");
+		lblFornecedor.setBounds(133, 250, 91, 14);
+		contentPane.add(lblFornecedor);
 
 		JButton btnCadastrarProduto = new JButton("Cadastrar Produto");
-		btnCadastrarProduto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Produto p = new Produto(Integer.parseInt(unidade.getText()), descr.getText(),
-						Integer.parseInt(qtdMinStk.getText()), String.valueOf(comboBox.getSelectedItem()),
-						Integer.parseInt(codCateg.getText()));
-				try {
-					f.cadastrarProduto(p);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				TelaGerente tela = new TelaGerente(FG);
-				dispose();
-				tela.setVisible(true);
-				tela.setLocationRelativeTo(null);
-				tela.setResizable(false);
-			}
-		});
 		btnCadastrarProduto.setBackground(SystemColor.inactiveCaption);
 		btnCadastrarProduto.setBounds(331, 490, 121, 23);
 		contentPane.add(btnCadastrarProduto);
-	}
-}
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(312, 247, 338, 20);
+		
+		DefaultComboBoxModel modelBox1 = (DefaultComboBoxModel) comboBox_1.getModel();
+		comboBox_1.setModel(modelBox1);
+		for (int i = 0; i < f.listarProduto().length; i++) {
+			modelBox1.addElement(f.listarProduto()[i].getCnpj_fornecedor());
+		}
+		contentPane.add(comboBox_1);
+	
+	
+	
+	btnCadastrarProduto.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Produto p = new Produto(Integer.parseInt(unidade.getText()), descr.getText(),
+					Integer.parseInt(qtdMinStk.getText()), String.valueOf(comboBox.getSelectedItem()),
+					Integer.parseInt(String.valueOf(comboBox_1.getSelectedItem())));
+			try {
+				f.cadastrarProduto(p);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			TelaGerente tela = new TelaGerente(FG);
+			dispose();
+			tela.setVisible(true);
+			tela.setLocationRelativeTo(null);
+			tela.setResizable(false);
+		}
+	});
+}}

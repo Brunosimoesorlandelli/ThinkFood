@@ -44,4 +44,10 @@ public class ControladorFornecedor implements IControladorFornecedor, Serializab
 		return repositorio.listar();
 	}
 
+	public boolean atualizarFornecedor(Fornecedor f) throws Exception {
+		return repositorio.atualizarFornecedor(f);
+	}
+	
+	
+
 }
