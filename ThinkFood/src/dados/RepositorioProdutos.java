@@ -115,7 +115,7 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 		Produto p = null;
 		String query = "select * from produtoRef where produtoRef_cod = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(2, id);
+		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
@@ -181,7 +181,7 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 		PreparedStatement ps = connection.prepareStatement(query);
 
 		ps.setInt(1, p.getUnidade());
-		ps.setString(2, p.getCnpj_fornecedor());
+		ps.setInt(2, p.getCodigo());
 		ps.setString(3, p.getDescr());
 		ps.setInt(4, p.getQtdMinStk());
 		ps.setString(5, p.getCnpj_fornecedor());

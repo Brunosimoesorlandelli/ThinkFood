@@ -169,7 +169,7 @@ public class TelaEstoque extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 				Produto produto = null;
-				int cod = Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 1)));
+				int cod = Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0)));
 				System.out.println(cod);
 				for (int i = 0; i < f.listarProduto().length; i++) {
 					if (f.listarProduto()[i].getCodigo() == cod)

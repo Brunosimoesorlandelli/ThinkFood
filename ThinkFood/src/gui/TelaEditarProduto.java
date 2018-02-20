@@ -110,16 +110,16 @@ public class TelaEditarProduto extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Produto p = new Produto(Integer.parseInt(unidade.getText()), descr.getText(),
-						Integer.parseInt(qtdMinStk.getText()), String.valueOf(comboBox.getSelectedItem()),
-						Integer.parseInt(String.valueOf(comboBox_1.getSelectedItem())));
-				
+						Integer.parseInt(qtdMinStk.getText()), String.valueOf(comboBox_1.getSelectedItem()),
+						Integer.parseInt(String.valueOf(comboBox.getSelectedItem())));
+
 				try {
 					f.atualizarProduto(p);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				TelaGerente tela = new TelaGerente(FG);
 				dispose();
 				tela.setVisible(true);
