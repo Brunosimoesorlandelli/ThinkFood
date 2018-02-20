@@ -10,25 +10,26 @@ public class ReservaOficial {
 	private StatusReserva status;
 	private int num_pessoas;
 	private String cpfFuncionario;
-	private int seqReserva;
 	private int idCliente;
 	private Date dataReserva;
 	private Date dataValidade;
 	
 	
-	public ReservaOficial(int seq, Time hora_inicio, Time hora_fim, StatusReserva status, int num_pessoas, String cpfFunc, int seqReserva, int idCliente, Date dtReserva, Date dtVal) {
+	public ReservaOficial(int seq, Time hora_inicio, Time hora_fim, StatusReserva status, int num_pessoas, String cpfFunc, int idCliente, Date dtReserva, Date dtVal) {
 		this.seq = seq;
 		this.hora_inicio = hora_inicio;
 		this.hora_fim = hora_fim;
 		this.status = status;
 		this.num_pessoas = num_pessoas;
 		this.cpfFuncionario = cpfFunc;
-		this.seqReserva = seqReserva;
 		this.idCliente = idCliente;
 		this.dataReserva = dtReserva;
 		this.dataValidade = dtVal;
 	}
 
+	public ReservaOficial() {
+		
+	}
 
 	public int getSeq() {
 		return seq;
@@ -87,16 +88,6 @@ public class ReservaOficial {
 
 	public void setCpfFuncionario(String cpfFuncionario) {
 		this.cpfFuncionario = cpfFuncionario;
-	}
-
-
-	public int getSeqReserva() {
-		return seqReserva;
-	}
-
-
-	public void setSeqReserva(int seqReserva) {
-		this.seqReserva = seqReserva;
 	}
 
 

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.Funcionario_Secretario;
 import beans.Reserva;
 import beans.ReservaOficial;
 import beans.StatusReserva;
@@ -25,7 +26,7 @@ public class RepositorioReservaOficial {
 		this.next = 0;
 	}
 
-	public static synchronized IRepositorioReserva getInstance() {
+	public static synchronized IRepositorioReservaOficial getInstance() {
 		if (instanceUser == null) {
 			instanceUser = new RepositorioReservaOficial();
 		}
@@ -52,23 +53,48 @@ public class RepositorioReservaOficial {
 	}
 
 	
-	public Reserva procurar(int seq) throws SQLException {
-		Reserva f = null;
+	public ReservaOficial procurarReservaOficial(int seq) throws SQLException {
+		ReservaOficial f = null;
 		String query = "select * from reserva where seq = ?";
+		String query2  = "select * from faz_reserva where seq_reserva = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		ps.setInt(1, seq);
 		ps.setInt(1, seq);
 		ResultSet rs = ps.executeQuery();
+		ResultSet rs2 = ps.executeQuery();
 
-		while (rs.next()) {
-			f = new Reserva(rs.getInt("seq"), rs.getTime("hora_inicio"), rs.getTime("hora_fim"),
-					StatusReserva.valueOf(rs.getString("status")), rs.getInt("num_pessoas"));
+		while (rs.next() && rs2.next()) {
+			f = new ReservaOficial(rs.getInt("seq"), rs.getTime("hora_inicio"), rs.getTime("hora_fim"),
+					StatusReserva.valueOf(rs.getString("status")), rs.getInt("num_pessoas"), rs2.getString("cpf_funcionario"), rs2.getInt("id_cliente"), rs2.getDate("data_reserva"), rs2.getDate("dt_validade"));
 		}
 		return f;
 
 	}
 
 
-	public boolean remover(Reserva f) throws SQLException {
+	public boolean atualizarReservaOficial(ReservaOficial f) throws Exception {
+		String query = "update funcionario nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ? where cpf = " + "'" + f.getCpf() + "'";
+		String query2 = "";
+		PreparedStatement ps = connection.prepareStatement(query);
+
+		
+		ps.setString(1, f.getNome());
+		ps.setDate(2, f.getDataNasc());
+		ps.setDouble(3, f.getSalario());
+		ps.setString(4, f.getCompl());
+		ps.setInt(5, f.getNumero());
+		ps.setString(6, f.getCEP());
+		ps.setInt(7, f.getSeq_loja());
+		ps.setString(8, f.getSenha());
+		
+
+		ps.executeUpdate();
+
+		return true;
+	}
+	
+	public boolean removerReservaOficial(ReservaOficial f) throws SQLException {
 		String query = "delete from reserva where seq =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, f.getSeq());
