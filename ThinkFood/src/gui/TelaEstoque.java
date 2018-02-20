@@ -1,10 +1,13 @@
 package gui;
 
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,8 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import Negocio.Fachada;
 import Negocio.IFachada;
 import beans.Funcionario_Gerente;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import beans.Produto;
 
 public class TelaEstoque extends JFrame {
 
@@ -141,11 +143,54 @@ public class TelaEstoque extends JFrame {
 		contentPane.add(btnCadastrarProduto);
 
 		btnRemoverProduto = new JButton("Remover Produto");
+		btnRemoverProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int cod = Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0)));
+				System.out.println(cod);
+
+				try {
+					if (f.procurarProduto(cod) != null) {
+						f.removerProduto(f.procurarProduto(cod));
+					} else {
+						JOptionPane.showMessageDialog(null, "Este Codigo não existe. Tente novamente.");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btnRemoverProduto.setBackground(SystemColor.inactiveCaption);
 		btnRemoverProduto.setBounds(167, 484, 141, 23);
 		contentPane.add(btnRemoverProduto);
 
 		btnEditarProduto = new JButton("Editar Produto");
+		btnEditarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Produto produto = null;
+				int cod = Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 1)));
+				System.out.println(cod);
+				for (int i = 0; i < f.listarFornecedores().length; i++) {
+					if (f.listarFornecedores()[i].getCnpj().equals(cod))
+						produto = f.listarFornecedores()[i];
+				}
+
+				try {
+
+					if (f.procurarFornecedor(cod) != null) {
+						TelaEditarFornecedor tela = new TelaEditarFornecedor(FG, produto);
+						tela.setVisible(true);
+						tela.setResizable(false);
+						tela.setLocationRelativeTo(null);
+					} else {
+						JOptionPane.showMessageDialog(null, "Este CNPJ não existe. Tente novamente.");
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnEditarProduto.setBackground(SystemColor.inactiveCaption);
 		btnEditarProduto.setBounds(167, 518, 141, 23);
 		contentPane.add(btnEditarProduto);
