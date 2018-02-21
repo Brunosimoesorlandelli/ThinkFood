@@ -72,14 +72,15 @@ public class RepositorioItemEstoque implements Serializable, IRepositorioItemEst
 	 * @see Dados.IRepositorioProdutos#cadastrar(Beans.Produto)
 	 */
 	public boolean cadastrar(ItemEstoque p) throws SQLException {
-		String query = "insert into item_estoque (produtoRef_cod, id_estoque, data_entrada, lote, qtd, data_validade)values(?,?,?,?,?,?)";
+		String query = "insert into item_estoque (seq, produtoRef_cod, id_estoque, data_entrada, lote, qtd, data_validade)values(?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, p.getCodProduto());
-		ps.setInt(2, p.getIdEstoque());
-		ps.setDate(3, p.getDataEntrada());
-		ps.setInt(4, p.getLote());
-		ps.setInt(5, p.getQtd());
-		ps.setDate(6, p.getDataValidade());
+		ps.setInt(1, p.getSeq());
+		ps.setInt(2, p.getCodProduto());
+		ps.setInt(3, p.getIdEstoque());
+		ps.setDate(4, p.getDataEntrada());
+		ps.setInt(5, p.getLote());
+		ps.setInt(6, p.getQtd());
+		ps.setDate(7, p.getDataValidade());
 
 		ps.executeUpdate();
 		return true;
@@ -104,11 +105,11 @@ public class RepositorioItemEstoque implements Serializable, IRepositorioItemEst
 	 * @see Dados.IRepositorioProdutos#procurar(int)
 	 */
 
-	public ItemEstoque procurar(int cod) throws SQLException {
+	public ItemEstoque procurar(int seq) throws SQLException {
 		ItemEstoque p = null;
-		String query = "select * from item_estoque where produtoRef_cod = ?";
+		String query = "select * from item_estoque where seq = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, cod);
+		ps.setInt(1, seq);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
@@ -126,9 +127,9 @@ public class RepositorioItemEstoque implements Serializable, IRepositorioItemEst
 	 */
 
 	public boolean remover(ItemEstoque p) throws SQLException {
-		String query = "delete from item_estoque where  produtoRef_cod=?";
+		String query = "delete from item_estoque where seq=?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, p.getCodProduto());
+		ps.setInt(1, p.getSeq());
 		ps.executeUpdate();
 		return true;
 	}
@@ -166,17 +167,18 @@ public class RepositorioItemEstoque implements Serializable, IRepositorioItemEst
 	 */
 
 	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception {
-		String query = "update item_estoque set produtoRef_cod = ?, id_estoque = ?, data_entrada = ?, lote = ?, qtd = ?, data_validade = ? where produtoRef_cod = "
-				+ "'" + i.getCodProduto() + "'";
+		String query = "update item_estoque set seq = ?, produtoRef_cod = ?, id_estoque = ?, data_entrada = ?, lote = ?, qtd = ?, data_validade = ? where seq = "
+				+ "'" + i.getSeq() + "'";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 
-		ps.setInt(1, i.getCodProduto());
-		ps.setInt(2, i.getIdEstoque());
-		ps.setDate(3, i.getDataEntrada());
-		ps.setInt(4, i.getLote());
-		ps.setInt(5, i.getQtd());
-		ps.setDate(6, i.getDataValidade());
+		ps.setInt(1, i.getSeq());
+		ps.setInt(2, i.getCodProduto());
+		ps.setInt(3, i.getIdEstoque());
+		ps.setDate(4, i.getDataEntrada());
+		ps.setInt(5, i.getLote());
+		ps.setInt(6, i.getQtd());
+		ps.setDate(7, i.getDataValidade());
 
 		ps.executeUpdate();
 

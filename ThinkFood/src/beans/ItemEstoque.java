@@ -6,6 +6,7 @@ import java.sql.Date;
 
 public class ItemEstoque {
 
+	private int seq;
 	private int codProduto;
 	private int idEstoque;
 	private int lote;
@@ -23,9 +24,17 @@ public class ItemEstoque {
 	}
 
 	public ItemEstoque() {
-		
+
 	}
-	
+
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
 	public int getCodProduto() {
 		return codProduto;
 	}

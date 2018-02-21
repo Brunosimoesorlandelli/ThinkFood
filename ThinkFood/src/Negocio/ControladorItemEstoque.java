@@ -26,8 +26,8 @@ public class ControladorItemEstoque implements IControladorItemEstoque, Serializ
 		return repositorio.cadastrar(p);
 	}
 
-	public ItemEstoque procurar(int id) throws SQLException {
-		return repositorio.procurar(id);
+	public ItemEstoque procurar(int seq) throws SQLException {
+		return repositorio.procurar(seq);
 	}
 
 	public boolean remover(ItemEstoque p) throws SQLException {

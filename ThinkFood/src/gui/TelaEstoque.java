@@ -3,6 +3,7 @@ package gui;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -71,14 +72,15 @@ public class TelaEstoque extends JFrame {
 		table_1 = new JTable();
 		DefaultTableModel modelTock = (DefaultTableModel) table_1.getModel();
 		table_1.setModel(modelTock);
+		modelTock.addColumn("Seq");
 		modelTock.addColumn("Codigo");
 		modelTock.addColumn("ID Estoque");
 		modelTock.addColumn("Lote");
 		modelTock.addColumn("Quantidade");
 		for (int i = 0; i < f.listarItemEstoque().length; i++) {
-			modelTock.addRow(
-					new Object[] { f.listarItemEstoque()[i].getCodProduto(), f.listarItemEstoque()[i].getIdEstoque(),
-							f.listarItemEstoque()[i].getLote(), f.listarItemEstoque()[i].getQtd() });
+			modelTock.addRow(new Object[] { f.listarItemEstoque()[i].getSeq(), f.listarItemEstoque()[i].getCodProduto(),
+					f.listarItemEstoque()[i].getIdEstoque(), f.listarItemEstoque()[i].getLote(),
+					f.listarItemEstoque()[i].getQtd() });
 		}
 		scrollPane_1.setViewportView(table_1);
 
@@ -121,15 +123,14 @@ public class TelaEstoque extends JFrame {
 		btnRemoverItemDo = new JButton("Remover Item");
 		btnRemoverItemDo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int codigo = Integer
-						.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1)));
-				System.out.println(codigo);
+				int seq = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1)));
+				System.out.println(seq);
 
 				try {
-					if (f.procurarItemEstoque(codigo) != null) {
-						f.removerItemEstoque(f.procurarItemEstoque(codigo));
+					if (f.procurarItemEstoque(seq) != null) {
+						f.removerItemEstoque(f.procurarItemEstoque(seq));
 					} else {
-						JOptionPane.showMessageDialog(null, "Este codigo não existe. Tente novamente.");
+						JOptionPane.showMessageDialog(null, "Este item não existe. Tente novamente.");
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -144,7 +145,19 @@ public class TelaEstoque extends JFrame {
 		btnEditarItemEstoque = new JButton("Editar Item");
 		btnEditarItemEstoque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				int seq = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1)));
+
+				try {
+					TelaEditarItemEstoque tela = new TelaEditarItemEstoque(FG, f.procurarItemEstoque(seq));
+					dispose();
+					tela.setVisible(true);
+					tela.setLocationRelativeTo(null);
+					tela.setResizable(false);
+				} catch (SQLException e1) {
+
+					e1.printStackTrace();
+				}
+
 			}
 		});
 		btnEditarItemEstoque.setBackground(SystemColor.inactiveCaption);

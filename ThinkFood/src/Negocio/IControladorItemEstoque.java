@@ -12,7 +12,7 @@ public interface IControladorItemEstoque {
 
 	public boolean cadastrar(ItemEstoque p) throws SQLException;
 
-	public ItemEstoque procurar(int id) throws SQLException;
+	public ItemEstoque procurar(int seq) throws SQLException;
 
 	public boolean remover(ItemEstoque p) throws SQLException;
 
