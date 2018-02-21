@@ -19,4 +19,6 @@ public interface IControladorPedidoDel {
 	public void printar(PedidoDelivery p);
 
 	public ArrayList<PedidoDelivery> listar();
+	
+	boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception;
 }

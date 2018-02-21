@@ -48,11 +48,11 @@ public class TelaEditarItemEstoque extends JFrame {
 		DefaultComboBoxModel modelBox = (DefaultComboBoxModel) comboBox.getModel();
 		comboBox.setModel(modelBox);
 		for (int i = 0; i < f.listarItemEstoque().length; i++) {
-			modelBox.addElement(f.listarItemEstoque()[i].getSeq());
+			modelBox.addElement(f.listarItemEstoque()[i].getCodProduto());
 		}
 		comboBox.setBounds(320, 98, 354, 20);
 		contentPane.add(comboBox);
-		comboBox.setSelectedItem(item.getSeq());
+		comboBox.setSelectedItem(item.getCodProduto());
 
 		JLabel lblNewLabel = new JLabel("ID do Estoque");
 		lblNewLabel.setBounds(109, 158, 102, 14);

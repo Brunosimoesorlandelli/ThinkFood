@@ -787,4 +787,10 @@ public class Fachada implements IFachada, Serializable {
 		return cItemEstoque.atualizarItemEstoque(i);
 	}
 
+	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception {
+		return cPedidoDel.atualizarPedidoDelivery(p);
+	}
+	
+	
+
 }

@@ -20,6 +20,6 @@ public interface IRepositorioPedidoDel {
 	
 	public ArrayList<PedidoDelivery> listar();
 	
-	
+	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception;
 	
 }

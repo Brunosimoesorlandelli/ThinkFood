@@ -72,8 +72,13 @@ public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable
 	 * @see Dados.IRepositorioProdutos#cadastrar(Beans.Produto)
 	 */
 	public boolean cadastrar(PedidoDelivery p) throws SQLException {
+		String query2 = "insert into contemdel(qtd, id_pedido_del, id_itemmenu) values(?,?,?)";
 		String query = "insert into pedidodel (pedidoDel_id, pedidoDel_Status, endereco_cep, entrega_hrSaida, entrega_data, entregador_cpf, complemento, taxa) values(?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		ps2.setInt(1, 10);
+		ps2.setInt(2, p.getNumero());
+		ps2.setInt(3, 853324876);
 		ps.setInt(1, p.getNumero());
 		ps.setString(2, p.getStatus().name());
 		ps.setString(3, p.getCEP());
@@ -83,6 +88,7 @@ public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable
 		ps.setString(7, p.getComplemento());
 		ps.setInt(8, p.getTaxa());
 
+		ps2.executeUpdate();
 		ps.executeUpdate();
 		return true;
 	}

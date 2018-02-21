@@ -21,6 +21,7 @@ import Negocio.IFachada;
 import beans.FazReserva;
 import beans.Funcionario_Secretario;
 import beans.Reserva;
+import beans.StatusReserva;
 
 public class TelaReserva extends JFrame {
 
@@ -104,7 +105,7 @@ public class TelaReserva extends JFrame {
 		btnFazerReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Reserva r = new Reserva(0, Time.valueOf(HoraInicio.getText()), Time.valueOf(HoraFim.getText()),
-						Enum.valueOf(null, status.getSelectedItem().toString()),
+						StatusReserva.valueOf(String.valueOf(status.getSelectedItem())),
 						Integer.parseInt(NumPessoas.getText()));
 				FazReserva fr = new FazReserva(CPFFunc.getText(), 0, Integer.parseInt(IdCliente.getText()),
 						Date.valueOf(Ano.getName() + "-" + Mes.getName() + "-" + Dia.getName()),

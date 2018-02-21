@@ -217,5 +217,7 @@ public interface IFachada {
 	public void printar(Cliente_Avalia p);
 
 	public ArrayList<Cliente_Avalia> listar();
+	
+	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception;
 
 }

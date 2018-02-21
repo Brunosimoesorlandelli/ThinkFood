@@ -286,7 +286,7 @@ public class TelaGerente extends JFrame {
 					if (f.procurarFornecedor(cnpj) != null) {
 						f.removerFornecedor(f.procurarFornecedor(cnpj));
 					}  else {
-						JOptionPane.showMessageDialog(null, "Este CPF não existe. Tente novamente.");
+						JOptionPane.showMessageDialog(null, "Este CNPJ não existe. Tente novamente.");
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

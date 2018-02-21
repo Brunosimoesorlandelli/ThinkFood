@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -116,16 +117,48 @@ public class TelaSecretario extends JFrame {
 		scrollPane.setViewportView(table_1);
 
 		JButton btnRemoverPedido = new JButton("Remover Pedido");
+		btnRemoverPedido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int cod = Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0)));
+				System.out.println(cod);
+
+				try {
+					if (f.procurarPedidoDel(cod) != null) {
+						f.removerPedidoDel(f.procurarPedidoDel(cod));
+					}  else {
+						JOptionPane.showMessageDialog(null, "Este Codigo não existe. Tente novamente.");
+					}
+				} catch (Exception e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+			}
+		});
 		btnRemoverPedido.setBackground(SystemColor.inactiveCaption);
 		btnRemoverPedido.setBounds(138, 497, 185, 23);
 		contentPane.add(btnRemoverPedido);
 
 		JButton btnEditarPedido = new JButton("Editar Pedido");
+		btnEditarPedido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnEditarPedido.setBackground(SystemColor.inactiveCaption);
 		btnEditarPedido.setBounds(138, 528, 185, 23);
 		contentPane.add(btnEditarPedido);
 
 		JButton btnAtualizarTabela = new JButton("Atualizar Tabela Pedidos");
+		btnAtualizarTabela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modelPedido.getDataVector().removeAllElements();
+				revalidate();
+				for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
+					modelPedido.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getCpfEntregador(),
+							f.listarPedidoDelivery()[i].getCEP() });
+				}
+			}
+		});
 		btnAtualizarTabela.setBackground(SystemColor.inactiveCaption);
 		btnAtualizarTabela.setBounds(138, 430, 185, 23);
 		contentPane.add(btnAtualizarTabela);

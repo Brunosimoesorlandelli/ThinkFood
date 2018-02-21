@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -15,12 +17,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
 import beans.Funcionario_Secretario;
 import beans.PedidoDelivery;
+import beans.StatusDelivery;
 
 public class TelaPedidoDel extends JFrame {
 
@@ -108,12 +110,21 @@ public class TelaPedidoDel extends JFrame {
 		}
 		comboBox_1.setBounds(189, 152, 332, 20);
 		contentPane.add(comboBox_1);
+		
+		List<Integer> codigos = new ArrayList<Integer>();
+		for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
+			codigos.add(f.listarPedidoDelivery()[i].getNumero());
+		}
+		
+		Date dataSaida = new Date(03, 00, 0317);
+		Time horaSaida = new Time(10, 20, 11);
+		
 
 		JButton btnCadastrarPedido = new JButton("Cadastrar Pedido");
 		btnCadastrarPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PedidoDelivery p = new PedidoDelivery(0, Enum.valueOf(null, String.valueOf(comboBox.getSelectedItem())),
-						cep.getText(), Time.valueOf(hrSaida.getText()), Date.valueOf(dtSaida.getText()), 0,
+				PedidoDelivery p = new PedidoDelivery(20, StatusDelivery.valueOf(String.valueOf(comboBox.getSelectedItem())),
+						cep.getText(), horaSaida, dataSaida, codigos.get(codigos.size()-1)+1,
 						Complemento.getText(), String.valueOf(comboBox_1.getSelectedItem()));
 
 				try {

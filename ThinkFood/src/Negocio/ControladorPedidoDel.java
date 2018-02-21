@@ -42,4 +42,10 @@ public class ControladorPedidoDel implements IControladorPedidoDel, Serializable
 		return repositorio.listar();
 	}
 
+	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception {
+		return repositorio.atualizarPedidoDelivery(p);
+	}
+
+	
+	
 }
