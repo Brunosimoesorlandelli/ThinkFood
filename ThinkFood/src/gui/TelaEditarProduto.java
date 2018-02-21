@@ -4,6 +4,8 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -73,15 +75,22 @@ public class TelaEditarProduto extends JFrame {
 		lblCodCateg.setBounds(133, 196, 68, 14);
 		contentPane.add(lblCodCateg);
 
-		String[] produtos = new String[f.listarProduto().length];
+		List<String> categList = new ArrayList<String>();
 		for (int i = 0; i < f.listarProduto().length; i++) {
-			produtos[i] = String.valueOf(f.listarProduto()[i].getCod_categ());
+			if(!(categList.contains(String.valueOf(f.listarProduto()[i].getCod_categ()))))
+			categList.add(String.valueOf(f.listarProduto()[i].getCod_categ()));
 		}
+		
+		String[] produtos = new String[categList.size()];
+		for (int i = 0; i < produtos.length; i++) {
+			produtos[i] = categList.get(i);
+		}
+		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(312, 193, 342, 20);
 		DefaultComboBoxModel modelBox = (DefaultComboBoxModel) comboBox.getModel();
 		comboBox.setModel(modelBox);
-		for (int i = 0; i < f.listarProduto().length; i++) {
+		for (int i = 0; i < produtos.length; i++) {
 			modelBox.addElement(produtos[i]);
 		}
 		contentPane.add(comboBox);
@@ -101,17 +110,17 @@ public class TelaEditarProduto extends JFrame {
 
 		DefaultComboBoxModel modelBox1 = (DefaultComboBoxModel) comboBox_1.getModel();
 		comboBox_1.setModel(modelBox1);
-		for (int i = 0; i < f.listarProduto().length; i++) {
-			modelBox1.addElement(f.listarProduto()[i].getCnpj_fornecedor());
+		for (int i = 0; i < f.listarFornecedores().length; i++) {
+			modelBox1.addElement(f.listarFornecedores()[i].getCnpj());
 		}
 		contentPane.add(comboBox_1);
 		comboBox_1.setSelectedItem(produto.getCnpj_fornecedor());
 
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Produto p = new Produto(Integer.parseInt(unidade.getText()), descr.getText(),
-						Integer.parseInt(qtdMinStk.getText()), String.valueOf(comboBox_1.getSelectedItem()),
-						Integer.parseInt(String.valueOf(comboBox.getSelectedItem())));
+				Produto p = new Produto(Integer.parseInt(unidade.getText()), produto.getCodigo(), descr.getText(),
+						Integer.parseInt(qtdMinStk.getText()), produto.getDt_inicio(), produto.getDt_fim(), String.valueOf(comboBox_1.getSelectedItem()),
+						Integer.parseInt(String.valueOf(comboBox.getSelectedItem())), produto.getPreco_ult_compra(), produto.getQtd_atual_estoque(), produto.getFreq_pedido());
 
 				try {
 					f.atualizarProduto(p);
@@ -120,7 +129,7 @@ public class TelaEditarProduto extends JFrame {
 					e1.printStackTrace();
 				}
 
-				TelaGerente tela = new TelaGerente(FG);
+				TelaEstoque tela = new TelaEstoque(FG);
 				dispose();
 				tela.setVisible(true);
 				tela.setLocationRelativeTo(null);

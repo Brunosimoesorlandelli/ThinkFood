@@ -74,7 +74,7 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	 */
 	@Override
 	public boolean cadastrar(Produto p) throws SQLException {
-		String query = "insert into produtoref (unidade, codigo, descricao, qtdMinStk, dtInicio, dtFim, cnpj_fornecedor, cod_categ, preco_ult_compra, qtd_atual_estoque, freq_pedido)values(?,?,?,?,?,?,?,?,?,?,?)";
+		String query = "insert into produtoref (produtoRef_unit, produtoRef_cod, produtoRef_desc, produtoRef_qtdMinStk, fornece_dtInicio, fornece_dtFim, cnpj_fornecedor, cod_categ, preco_ult_compra, qtd_atual_estoque, freq_pedido)values(?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, p.getUnidade());
 		ps.setInt(2, p.getCodigo());
@@ -137,7 +137,7 @@ public class RepositorioProdutos implements Serializable, IRepositorioProdutos {
 	public boolean remover(Produto p) throws SQLException {
 		String query = "delete from produtoRef where produtoRef_cod =?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(2, p.getCodigo());
+		ps.setInt(1, p.getCodigo());
 		ps.executeUpdate();
 		return true;
 	}
