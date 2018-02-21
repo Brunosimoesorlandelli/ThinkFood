@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import beans.ClientePF;
 import beans.ClientePJ;
+import beans.Cliente_Avalia;
 import beans.Estoque;
 import beans.FazReserva;
 import beans.Fornecedor;
@@ -22,6 +23,7 @@ import beans.Funcionario_Secretario;
 import beans.ItemEstoque;
 import beans.ItemMenu;
 import beans.Mesa;
+import beans.Nota;
 import beans.Pedido;
 import beans.PedidoDelivery;
 import beans.Produto;
@@ -47,6 +49,7 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorFazReserva cFazReserva;
 	private IControladorPedido cPedido;
 	private IControladorItemEstoque cItemEstoque;
+	private IControladorClienteAvalia cClienteAvalia;
 
 	private static Connection connect;
 	private static Connection conexaoLogin;
@@ -70,6 +73,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cFazReserva = new ControladorFazReserva();
 		this.cPedido = new ControladorPedido();
 		this.cItemEstoque = new ControladorItemEstoque();
+		this.cClienteAvalia = new ControladorClienteAvalia();
 		this.conex = new ConexaoDB();
 		try {
 			this.conexaoLogin = conex.getConexao("God", "senha");
@@ -101,6 +105,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cClientePJ.conectar(connect);
 		this.cFazReserva.conectar(connect);
 		this.cItemEstoque.conectar(connect);
+		this.cClienteAvalia.conectar(connect);
 	}
 
 	public boolean cadastrarEntregador(Funcionario_Entregador p) throws Exception {
@@ -407,6 +412,26 @@ public class Fachada implements IFachada, Serializable {
 		cItemEstoque.printar(p);
 	}
 
+	public void conectarClienteAvalia(Connection connect) {
+		cClienteAvalia.conectar(connect);
+	}
+
+	public boolean cadastrarClienteAvalia(ClientePF p) throws Exception {
+		return cClienteAvalia.cadastrar(p);
+	}
+
+	public ClientePF procurarClienteAvalia(int id) throws Exception {
+		return cClienteAvalia.procurar(id);
+	}
+
+	public boolean removerClienteAvalia(ClientePF f) throws SQLException {
+		return cClienteAvalia.remover(f);
+	}
+
+	public void printarClienteAvalia(ClientePF p) {
+		cClienteAvalia.printar(p);
+	}
+
 	public Funcionario logar(String cpf) throws Exception {
 		Conectar(conexaoLogin);
 		Funcionario func = null;
@@ -710,6 +735,38 @@ public class Fachada implements IFachada, Serializable {
 
 	}
 
+	public Cliente_Avalia[] listarClienteAvalia() {
+		ArrayList<Cliente_Avalia> clienteAvalia = new ArrayList<Cliente_Avalia>();
+		Cliente_Avalia[] avaliacoes = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM cliente_avalia");
+			while (result.next()) {
+
+				Cliente_Avalia avaliacao = new Cliente_Avalia();
+				avaliacao.setSeq_loja(result.getInt(1));
+				avaliacao.setId_cliente(result.getInt(2));
+				avaliacao.setNota(Nota.valueOf(result.getString(3)));
+				avaliacao.setData_avaliacao(result.getDate(4));
+				avaliacao.setComentario(result.getString(5));
+				clienteAvalia.add(avaliacao);
+
+				tamanho = clienteAvalia.size();
+				avaliacoes = new Cliente_Avalia[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (clienteAvalia.get(i) != null)
+						avaliacoes[i] = clienteAvalia.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return avaliacoes;
+
+	}
+
 	public boolean atualizarFornecedor(Fornecedor f) throws Exception {
 		return cFornecedor.atualizarFornecedor(f);
 	}
@@ -721,9 +778,5 @@ public class Fachada implements IFachada, Serializable {
 	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception {
 		return cItemEstoque.atualizarItemEstoque(i);
 	}
-	
-	
-
-	
 
 }
