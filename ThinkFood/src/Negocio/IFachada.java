@@ -22,6 +22,7 @@ import beans.Pedido;
 import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
+import beans.ReservaOficial;
 import beans.UnidadeLoja;
 
 public interface IFachada {
@@ -217,6 +218,16 @@ public interface IFachada {
 	public void printar(Cliente_Avalia p);
 
 	public ArrayList<Cliente_Avalia> listar();
+	
+	public void conectarReservaOficial(Connection c);
+	
+	public boolean cadastrarReservaOficial(ReservaOficial r) throws SQLException;
+	
+	public ReservaOficial procurarReservaOficial(int cod) throws SQLException;
+	
+	public boolean atualizarReservaOficial(ReservaOficial f) throws Exception;
+
+	public boolean removerReservaOficial(ReservaOficial f) throws SQLException;
 	
 	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception;
 

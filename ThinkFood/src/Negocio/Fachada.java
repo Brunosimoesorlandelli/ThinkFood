@@ -28,6 +28,7 @@ import beans.Pedido;
 import beans.PedidoDelivery;
 import beans.Produto;
 import beans.Reserva;
+import beans.ReservaOficial;
 import beans.StatusDelivery;
 import beans.UnidadeLoja;
 
@@ -50,6 +51,7 @@ public class Fachada implements IFachada, Serializable {
 	private IControladorPedido cPedido;
 	private IControladorItemEstoque cItemEstoque;
 	private IControladorClienteAvalia cClienteAvalia;
+	private IControladorReservaOficial cReservaOficial;
 
 	private static Connection connect;
 	private static Connection conexaoLogin;
@@ -74,6 +76,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cPedido = new ControladorPedido();
 		this.cItemEstoque = new ControladorItemEstoque();
 		this.cClienteAvalia = new ControladorClienteAvalia();
+		this.cReservaOficial = new ControladorReservaOficial();
 		this.conex = new ConexaoDB();
 		try {
 			this.conexaoLogin = conex.getConexao("God", "senha");
@@ -106,6 +109,7 @@ public class Fachada implements IFachada, Serializable {
 		this.cFazReserva.conectar(connect);
 		this.cItemEstoque.conectar(connect);
 		this.cClienteAvalia.conectar(connect);
+		this.cReservaOficial.conectarReservaOficial(connect);
 	}
 
 	public boolean cadastrarEntregador(Funcionario_Entregador p) throws Exception {
@@ -438,6 +442,28 @@ public class Fachada implements IFachada, Serializable {
 
 	public ArrayList<Cliente_Avalia> listar() {
 		return cClienteAvalia.listar();
+	}
+	
+	
+
+	public void conectarReservaOficial(Connection c) {
+		cReservaOficial.conectarReservaOficial(c);
+	}
+
+	public boolean cadastrarReservaOficial(ReservaOficial r) throws SQLException {
+		return cReservaOficial.cadastrarReservaOficial(r);
+	}
+
+	public ReservaOficial procurarReservaOficial(int cod) throws SQLException {
+		return cReservaOficial.procurarReservaOficial(cod);
+	}
+
+	public boolean atualizarReservaOficial(ReservaOficial f) throws Exception {
+		return cReservaOficial.atualizarReservaOficial(f);
+	}
+
+	public boolean removerReservaOficial(ReservaOficial f) throws SQLException {
+		return cReservaOficial.removerReservaOficial(f);
 	}
 
 	public Funcionario logar(String cpf) throws Exception {
@@ -774,6 +800,8 @@ public class Fachada implements IFachada, Serializable {
 		return avaliacoes;
 
 	}
+	
+	
 
 	public boolean atualizarFornecedor(Fornecedor f) throws Exception {
 		return cFornecedor.atualizarFornecedor(f);
