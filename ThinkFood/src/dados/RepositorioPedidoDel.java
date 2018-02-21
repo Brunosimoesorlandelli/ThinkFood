@@ -72,13 +72,12 @@ public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable
 	 * @see Dados.IRepositorioProdutos#cadastrar(Beans.Produto)
 	 */
 	public boolean cadastrar(PedidoDelivery p) throws SQLException {
-		String query2 = "insert into contemdel(qtd, id_pedido_del, id_itemmenu) values(?,?,?)";
+	
 		String query = "insert into pedidodel (pedidoDel_id, pedidoDel_Status, endereco_cep, entrega_hrSaida, entrega_data, entregador_cpf, complemento, taxa) values(?,?,?,?,?,?,?,?)";
+		String query2 = "insert into contemdel(qtd, id_pedido_del, id_itemmenu) values(?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
-		ps2.setInt(1, 10);
-		ps2.setInt(2, p.getNumero());
-		ps2.setInt(3, 853324876);
+		
 		ps.setInt(1, p.getNumero());
 		ps.setString(2, p.getStatus().name());
 		ps.setString(3, p.getCEP());
@@ -87,9 +86,13 @@ public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable
 		ps.setString(6, p.getCpfEntregador());
 		ps.setString(7, p.getComplemento());
 		ps.setInt(8, p.getTaxa());
-
-		ps2.executeUpdate();
 		ps.executeUpdate();
+		ps2.setInt(1, 10);
+		ps2.setInt(2, p.getNumero());
+		ps2.setInt(3, 853324876);
+		ps2.executeUpdate();
+		
+		
 		return true;
 	}
 
@@ -120,7 +123,7 @@ public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
-			p = new PedidoDelivery(rs.getInt("taxa"), StatusDelivery.valueOf(rs.getString("pedidoDel_status")),
+			p = new PedidoDelivery(rs.getInt("taxa"), StatusDelivery.valueOf(rs.getString("pedidoDel_status").toUpperCase()),
 					rs.getString("endereco_cep"), rs.getTime("entrega_hrSaida"), rs.getDate("entrega_data"),
 					rs.getInt("pedidoDel_id"), rs.getString("complemento"), rs.getString("entregador_cpf"));
 		}
@@ -169,7 +172,7 @@ public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable
 	// }
 
 	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception {
-		String query = "update pedidoDel pedidoDel_id = ?, pedidoDel_status = ?, endereco_cep = ?, entrega_hrSaida = ?, entrega_data = ?, entregador_cpf = ?, complemento = ?, taxa = ? where pedidoDel_id = "
+		String query = "update pedidoDel set pedidoDel_id = ?, pedidoDel_status = ?, endereco_cep = ?, entrega_hrSaida = ?, entrega_data = ?, entregador_cpf = ?, complemento = ?, taxa = ? where pedidoDel_id = "
 				+ "'" + p.getNumero() + "'";
 
 		PreparedStatement ps = connection.prepareStatement(query);

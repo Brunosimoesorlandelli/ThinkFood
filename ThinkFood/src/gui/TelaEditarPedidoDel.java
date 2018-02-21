@@ -46,32 +46,18 @@ public class TelaEditarPedidoDel extends JFrame {
 		lblStatus.setBounds(109, 129, 102, 14);
 		contentPane.add(lblStatus);
 
-		List<String> statusList = new ArrayList<String>();
-		for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
-			if(!(statusList.contains(String.valueOf(f.listarPedidoDelivery()[i].getStatus()))))
-			statusList.add((String.valueOf(f.listarPedidoDelivery()[i].getStatus())));
-		}
-		
-		String[] pedidosStatus = new String[statusList.size()];
-		for (int i = 0; i < pedidosStatus.length; i++) {
-			pedidosStatus[i] = statusList.get(i);
-		}
-		
 		
 		JComboBox comboStatus = new JComboBox();
 		DefaultComboBoxModel modelBox = (DefaultComboBoxModel) comboStatus.getModel();
-		comboStatus.setModel(modelBox);
-		for (int i = 0; i < pedidosStatus.length; i++) {
-			modelBox.addElement(pedidosStatus);
-		}
-		
+		comboStatus.setModel(
+				new DefaultComboBoxModel(new String[] { "ENTREGUE", "A_CAMINHO", "PREPARANDO", "CANCELADO" }));
 		comboStatus.setBounds(320, 126, 354, 20);
 		contentPane.add(comboStatus);
 		comboStatus.setSelectedItem(pedido.getStatus());
 
 		String[] pedidosEntregador = new String[f.listarEntregadores().length];
 		for (int i = 0; i < f.listarEntregadores().length; i++) {
-			pedidosEntregador[i] = String.valueOf(f.listarEntregadores()[i].getNumero());
+			pedidosEntregador[i] = String.valueOf(f.listarEntregadores()[i].getCpf());
 		}
 		
 		JComboBox comboEntregador = new JComboBox();

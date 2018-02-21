@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import Negocio.Fachada;
 import Negocio.IFachada;
 import beans.Funcionario_Secretario;
+import beans.PedidoDelivery;
 
 public class TelaSecretario extends JFrame {
 
@@ -141,6 +142,28 @@ public class TelaSecretario extends JFrame {
 		JButton btnEditarPedido = new JButton("Editar Pedido");
 		btnEditarPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PedidoDelivery pedidoDelivery = null;
+				int cod = Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0)));
+				System.out.println(cod);
+				for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
+					if (f.listarPedidoDelivery()[i].getNumero()==cod)
+						pedidoDelivery = f.listarPedidoDelivery()[i];
+				}
+
+				try {
+
+					if (f.procurarPedidoDel(cod) != null) {
+						TelaEditarPedidoDel tela = new TelaEditarPedidoDel(FS, pedidoDelivery);
+						tela.setVisible(true);
+						tela.setResizable(false);
+						tela.setLocationRelativeTo(null);
+					} else {
+						JOptionPane.showMessageDialog(null, "Este Codigo não existe. Tente novamente.");
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				
 			}
 		});
