@@ -89,7 +89,7 @@ public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable
 		ps.executeUpdate();
 		ps2.setInt(1, 10);
 		ps2.setInt(2, p.getNumero());
-		ps2.setInt(3, 853324876);
+		ps2.setInt(3, 213273085);
 		ps2.executeUpdate();
 		
 		

@@ -229,6 +229,10 @@ public interface IFachada {
 
 	public boolean removerReservaOficial(ReservaOficial f) throws SQLException;
 	
+	public ReservaOficial[] listarReservaOficial();
+	
 	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception;
+	
+	
 
 }

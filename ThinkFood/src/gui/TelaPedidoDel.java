@@ -110,22 +110,22 @@ public class TelaPedidoDel extends JFrame {
 		}
 		comboBox_1.setBounds(189, 152, 332, 20);
 		contentPane.add(comboBox_1);
-		
+
 		List<Integer> codigos = new ArrayList<Integer>();
 		for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
 			codigos.add(f.listarPedidoDelivery()[i].getNumero());
 		}
-		
+
 		Date dataSaida = new Date(03, 00, 0317);
 		Time horaSaida = new Time(10, 20, 11);
-		
 
 		JButton btnCadastrarPedido = new JButton("Cadastrar Pedido");
 		btnCadastrarPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PedidoDelivery p = new PedidoDelivery(20, StatusDelivery.valueOf(String.valueOf(comboBox.getSelectedItem())),
-						cep.getText(), horaSaida, dataSaida, codigos.get(codigos.size()-1)+1,
-						Complemento.getText(), String.valueOf(comboBox_1.getSelectedItem()));
+				PedidoDelivery p = new PedidoDelivery(20,
+						StatusDelivery.valueOf(String.valueOf(comboBox.getSelectedItem())), cep.getText(), horaSaida,
+						dataSaida, codigos.get(codigos.size() - 1) + 1, Complemento.getText(),
+						String.valueOf(comboBox_1.getSelectedItem()));
 
 				try {
 					f.cadastrarPedidoDel(p);

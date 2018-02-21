@@ -30,6 +30,7 @@ import beans.Produto;
 import beans.Reserva;
 import beans.ReservaOficial;
 import beans.StatusDelivery;
+import beans.StatusReserva;
 import beans.UnidadeLoja;
 
 public class Fachada implements IFachada, Serializable {
@@ -801,6 +802,43 @@ public class Fachada implements IFachada, Serializable {
 
 	}
 	
+	public ReservaOficial[] listarReservaOficial() {
+		ArrayList<ReservaOficial> reservas = new ArrayList<ReservaOficial>();
+		ReservaOficial[] reservasOficiais = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+			Statement stmt2 = connect.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM reserva");
+			ResultSet result2 = stmt2.executeQuery("SELECT * FROM faz_reserva");
+			while (result.next() && result2.next()) {
+
+				ReservaOficial reserva = new ReservaOficial();
+				reserva.setSeq(result.getInt(1));
+				reserva.setHora_inicio(result.getTime(2));
+				reserva.setHora_fim(result.getTime(3));
+				reserva.setStatus(StatusReserva.valueOf(result.getString(4).toUpperCase()));
+				reserva.setNum_pessoas(result.getInt(5));
+				reserva.setCpfFuncionario(result2.getString(1));
+				reserva.setIdCliente(result2.getInt(3));
+				reserva.setDataReserva(result2.getDate(4));
+				reserva.setDataValidade(result2.getDate(5));
+				reservas.add(reserva);
+
+				tamanho = reservas.size();
+				reservasOficiais = new ReservaOficial[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (reservas.get(i) != null)
+						reservasOficiais[i] = reservas.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return reservasOficiais;
+
+	}
 	
 
 	public boolean atualizarFornecedor(Fornecedor f) throws Exception {

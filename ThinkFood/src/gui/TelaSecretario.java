@@ -18,6 +18,7 @@ import Negocio.Fachada;
 import Negocio.IFachada;
 import beans.Funcionario_Secretario;
 import beans.PedidoDelivery;
+import beans.ReservaOficial;
 
 public class TelaSecretario extends JFrame {
 
@@ -87,11 +88,12 @@ public class TelaSecretario extends JFrame {
 		DefaultTableModel modelPedido = (DefaultTableModel) table.getModel();
 		table.setModel(modelPedido);
 		modelPedido.addColumn("Id");
+		modelPedido.addColumn("Status");
 		modelPedido.addColumn("Cpf_Entregador");
 		modelPedido.addColumn("Cep_Cliente");
 		for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
 			try {
-				modelPedido.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getCpfEntregador(),
+				modelPedido.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getStatus(), f.listarPedidoDelivery()[i].getCpfEntregador(),
 						f.listarPedidoDelivery()[i].getCEP()});
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -107,13 +109,14 @@ public class TelaSecretario extends JFrame {
 		table_1 = new JTable();
 		DefaultTableModel modelReserva = (DefaultTableModel) table_1.getModel();
 		table_1.setModel(modelReserva);
+		modelReserva.addColumn("Seq");
+		modelReserva.addColumn("Id_Cliente");
 		modelReserva.addColumn("Hora_Inicio");
-		modelReserva.addColumn("Hora_Fim");
 		modelReserva.addColumn("Status");
 		modelReserva.addColumn("Num_Pessoas");
-		for (int i = 0; i < f.listarFuncionarios().length; i++) {
-			modelReserva.addRow(new Object[] { f.listarFuncionarios()[i].getNome(), f.listarFuncionarios()[i].getCpf(),
-					f.listarFuncionarios()[i].getSeq_loja() });
+		for (int i = 0; i < f.listarReservaOficial().length; i++) {
+			modelReserva.addRow(new Object[] { f.listarReservaOficial()[i].getSeq(), f.listarReservaOficial()[i].getIdCliente(), f.listarReservaOficial()[i].getHora_inicio(),
+					f.listarReservaOficial()[i].getStatus(), f.listarReservaOficial()[i].getNum_pessoas() });
 		}
 		scrollPane.setViewportView(table_1);
 
@@ -177,7 +180,7 @@ public class TelaSecretario extends JFrame {
 				modelPedido.getDataVector().removeAllElements();
 				revalidate();
 				for (int i = 0; i < f.listarPedidoDelivery().length; i++) {
-					modelPedido.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getCpfEntregador(),
+					modelPedido.addRow(new Object[] { f.listarPedidoDelivery()[i].getNumero(), f.listarPedidoDelivery()[i].getStatus(), f.listarPedidoDelivery()[i].getCpfEntregador(),
 							f.listarPedidoDelivery()[i].getCEP() });
 				}
 			}
@@ -187,16 +190,70 @@ public class TelaSecretario extends JFrame {
 		contentPane.add(btnAtualizarTabela);
 
 		JButton btnRemoverReserva = new JButton("Remover Reserva");
+		btnRemoverReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int seq = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)));
+				System.out.println(seq);
+
+				try {
+					if (f.procurarReservaOficial(seq) != null) {
+						f.removerReservaOficial(f.procurarReservaOficial(seq));
+					} else {
+						JOptionPane.showMessageDialog(null, "Esta reserva não existe. Tente novamente.");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btnRemoverReserva.setBackground(SystemColor.inactiveCaption);
 		btnRemoverReserva.setBounds(461, 497, 185, 23);
 		contentPane.add(btnRemoverReserva);
 
 		JButton btnEditarReserva = new JButton("Editar Reserva");
+		btnEditarReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				ReservaOficial reserva = null;
+				int seq = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)));
+				System.out.println(seq);
+				for (int i = 0; i < f.listarReservaOficial().length; i++) {
+					if (f.listarReservaOficial()[i].getSeq() == seq)
+						reserva = f.listarReservaOficial()[i];
+				}
+
+				try {
+
+					if (f.procurarReservaOficial(seq) != null) {
+						TelaEditarReserva tela = new TelaEditarReserva(FS, reserva);
+						tela.setVisible(true);
+						tela.setResizable(false);
+						tela.setLocationRelativeTo(null);
+					} else {
+						JOptionPane.showMessageDialog(null, "Este codigo não existe. Tente novamente.");
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnEditarReserva.setBackground(SystemColor.inactiveCaption);
 		btnEditarReserva.setBounds(461, 528, 185, 23);
 		contentPane.add(btnEditarReserva);
 
 		JButton btnAtualizarTabelaReserva = new JButton("Atualizar Tabela Reserva");
+		btnAtualizarTabelaReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modelReserva.getDataVector().removeAllElements();
+				revalidate();
+				for (int i = 0; i < f.listarReservaOficial().length; i++) {
+					modelReserva.addRow(new Object[] { f.listarReservaOficial()[i].getSeq(), f.listarReservaOficial()[i].getIdCliente(), f.listarReservaOficial()[i].getHora_inicio(),
+							f.listarReservaOficial()[i].getStatus(), f.listarReservaOficial()[i].getNum_pessoas() });
+				}
+			}
+		});
 		btnAtualizarTabelaReserva.setBackground(SystemColor.inactiveCaption);
 		btnAtualizarTabelaReserva.setBounds(461, 430, 185, 23);
 		contentPane.add(btnAtualizarTabelaReserva);

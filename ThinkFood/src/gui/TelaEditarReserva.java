@@ -18,24 +18,21 @@ import javax.swing.border.EmptyBorder;
 
 import Negocio.Fachada;
 import Negocio.IFachada;
-import beans.FazReserva;
 import beans.Funcionario_Secretario;
 import beans.ReservaOficial;
 import beans.StatusReserva;
 
-public class TelaReserva extends JFrame {
-
+public class TelaEditarReserva extends JFrame{
 	private JPanel contentPane;
 	private JTextField CPFFunc;
 	private JTextField IdCliente;
 	private JTextField HoraInicio;
 	private JTextField HoraFim;
 	private JTextField NumPessoas;
+	private JTextField dataReservaField;
 
-	/**
-	 * Create the frame.
-	 */
-	public TelaReserva(Funcionario_Secretario FS) {
+
+	public TelaEditarReserva(Funcionario_Secretario FS, ReservaOficial r) {
 		setResizable(false);
 		IFachada fachada = Fachada.getInstance();
 		setTitle("ThinkFood");
@@ -48,7 +45,7 @@ public class TelaReserva extends JFrame {
 		contentPane.setLayout(null);
 
 		CPFFunc = new JTextField();
-		CPFFunc.setText(FS.getCpf());
+		CPFFunc.setText(r.getCpfFuncionario());
 		CPFFunc.setBounds(290, 172, 268, 20);
 		contentPane.add(CPFFunc);
 		CPFFunc.setColumns(10);
@@ -65,54 +62,20 @@ public class TelaReserva extends JFrame {
 		IdCliente = new JTextField();
 		IdCliente.setColumns(10);
 		IdCliente.setBounds(290, 196, 268, 20);
+		IdCliente.setText(String.valueOf(r.getIdCliente()));
 		contentPane.add(IdCliente);
 
 		JLabel lblDataReserva = new JLabel("Data Reserva:");
 		lblDataReserva.setBounds(194, 328, 86, 14);
 		contentPane.add(lblDataReserva);
 
-		JComboBox Dia = new JComboBox();
-		Dia.setBackground(SystemColor.inactiveCaption);
-		Dia.setModel(new DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
-				"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
-				"28", "29", "30", "31" }));
-		Dia.setBounds(331, 325, 61, 20);
-		contentPane.add(Dia);
-
-		JComboBox Mes = new JComboBox();
-		Mes.setBackground(SystemColor.inactiveCaption);
-		Mes.setModel(new DefaultComboBoxModel(
-				new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-		Mes.setBounds(443, 325, 61, 20);
-		contentPane.add(Mes);
-
-		JComboBox Ano = new JComboBox();
-		Ano.setBackground(SystemColor.inactiveCaption);
-		Ano.setModel(new DefaultComboBoxModel(new String[] { "2030", "2029", "2028", "2027", "2026", "2025", "2024",
-				"2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011",
-				"2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
-		Ano.setBounds(555, 325, 61, 20);
-		contentPane.add(Ano);
 
 		JComboBox status = new JComboBox();
 		status.setBackground(SystemColor.inactiveCaption);
 		status.setModel(new DefaultComboBoxModel(new String[] { "LIVRE", "OCUPADO", "RESERVADO", "RESERVA_EXPIRADA" }));
 		status.setBounds(290, 297, 268, 20);
+		status.setSelectedItem(r.getStatus());
 		contentPane.add(status);
-		
-
-
-		JLabel lblDia = new JLabel("Dia:");
-		lblDia.setBounds(290, 328, 31, 14);
-		contentPane.add(lblDia);
-
-		JLabel lblMs = new JLabel("M\u00EAs:");
-		lblMs.setBounds(402, 328, 31, 14);
-		contentPane.add(lblMs);
-
-		JLabel lblAno = new JLabel("Ano:");
-		lblAno.setBounds(514, 328, 31, 14);
-		contentPane.add(lblAno);
 
 		JLabel lblReserva = new JLabel("Reserva");
 		lblReserva.setBounds(326, 118, 46, 14);
@@ -129,11 +92,13 @@ public class TelaReserva extends JFrame {
 		HoraInicio = new JTextField();
 		HoraInicio.setColumns(10);
 		HoraInicio.setBounds(290, 221, 268, 20);
+		HoraInicio.setText(String.valueOf(r.getHora_inicio()));
 		contentPane.add(HoraInicio);
 
 		HoraFim = new JTextField();
 		HoraFim.setColumns(10);
 		HoraFim.setBounds(290, 246, 268, 20);
+		HoraFim.setText(String.valueOf(r.getHora_fim()));
 		contentPane.add(HoraFim);
 
 		JLabel lblNumPesooas = new JLabel("Num Pessoas:");
@@ -143,28 +108,33 @@ public class TelaReserva extends JFrame {
 		NumPessoas = new JTextField();
 		NumPessoas.setColumns(10);
 		NumPessoas.setBounds(290, 271, 268, 20);
+		NumPessoas.setText(String.valueOf(r.getNum_pessoas()));
 		contentPane.add(NumPessoas);
 
 		JLabel lblStatus = new JLabel("Status:");
 		lblStatus.setBounds(194, 300, 86, 14);
 		contentPane.add(lblStatus);
 		
-		JButton btnFazerReserva = new JButton("Fazer Reserva");
+
+		dataReservaField = new JTextField();
+		dataReservaField.setBounds(290, 325, 268, 20);
+		dataReservaField.setColumns(10);
+		dataReservaField.setText(String.valueOf(r.getDataReserva()));
+		contentPane.add(dataReservaField);
+		
+		
+		JButton btnFazerReserva = new JButton("Salvar");
 		btnFazerReserva.setBackground(SystemColor.inactiveCaption);
 		btnFazerReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Date dataReserva = new Date(11, 02, 0317);
-				Date dataValidade = new Date(12, 03, 0317);
-				Time horaInicio = new Time(10, 15, 11);
-				Time horaSaida = new Time(10, 15, 11);
 				
-				ReservaOficial r = new ReservaOficial(fachada.listarReservaOficial().length+1, horaInicio, horaSaida,
+				ReservaOficial reserva = new ReservaOficial(fachada.listarReservaOficial().length, r.getHora_inicio(), r.getHora_fim(),
 						StatusReserva.valueOf(String.valueOf(status.getSelectedItem())),
 						Integer.parseInt(NumPessoas.getText()), CPFFunc.getText(), Integer.parseInt(IdCliente.getText()),
-						dataReserva, dataValidade);
+						r.getDataReserva(), r.getDataValidade());
 				try {
-					fachada.cadastrarReservaOficial(r);
-				} catch (SQLException e) {
+					fachada.atualizarReservaOficial(reserva);
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -177,7 +147,10 @@ public class TelaReserva extends JFrame {
 			}
 		});
 
-		btnFazerReserva.setBounds(326, 356, 107, 23);
+		btnFazerReserva.setBounds(326, 376, 107, 23);
 		contentPane.add(btnFazerReserva);
+		
 	}
-}
+	}
+
+

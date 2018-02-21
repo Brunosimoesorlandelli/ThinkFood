@@ -123,7 +123,7 @@ public class TelaEstoque extends JFrame {
 		btnRemoverItemDo = new JButton("Remover Item");
 		btnRemoverItemDo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int seq = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1)));
+				int seq = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)));
 				System.out.println(seq);
 
 				try {

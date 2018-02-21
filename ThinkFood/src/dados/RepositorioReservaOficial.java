@@ -45,7 +45,7 @@ public class RepositorioReservaOficial implements IRepositorioReservaOficial {
 	 */
 	@Override
 	public boolean cadastrarReservaOficial(ReservaOficial r) throws SQLException {
-		String query = "insert into reserva (seq, hora_inicio, hora_fim, status, num_pessoas)values(?,?,?,?,?)";
+		String query = "insert into reserva (seq, hora_inicio, hora_fim, stats, num_pessoas)values(?,?,?,?,?)";
 		String query2 = "insert into faz_reserva (cpf_funcionario, seq_reserva, id_cliente, data_reserva, dt_validade)values(?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
@@ -84,7 +84,7 @@ public class RepositorioReservaOficial implements IRepositorioReservaOficial {
 
 		while (rs.next() && rs2.next()) {
 			f = new ReservaOficial(rs.getInt("seq"), rs.getTime("hora_inicio"), rs.getTime("hora_fim"),
-					StatusReserva.valueOf(rs.getString("status")), rs.getInt("num_pessoas"),
+					StatusReserva.valueOf(rs.getString("stats").toUpperCase()), rs.getInt("num_pessoas"),
 					rs2.getString("cpf_funcionario"), rs2.getInt("id_cliente"), rs2.getDate("data_reserva"),
 					rs2.getDate("dt_validade"));
 		}
@@ -100,7 +100,7 @@ public class RepositorioReservaOficial implements IRepositorioReservaOficial {
 	 */
 	@Override
 	public boolean atualizarReservaOficial(ReservaOficial f) throws Exception {
-		String query = "update reserva set seq = ?, hora_inicio = ?, hora_fim = ?, status = ?, num_pessoas = ? where seq = " + f.getSeq();
+		String query = "update reserva set seq = ?, hora_inicio = ?, hora_fim = ?, stats = ?, num_pessoas = ? where seq = " + f.getSeq();
 		String query2 = "update faz_reserva set cpf_funcionario = ?, seq_reserva = ?, id_cliente = ?, data_reserva = ?, dt_validade = ? where seq_reserva = " + f.getSeq();
 		PreparedStatement ps = connection.prepareStatement(query);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
