@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import beans.Funcionario_Secretario;
 import beans.PedidoDelivery;
 import beans.StatusDelivery;
 
@@ -160,6 +161,26 @@ public class RepositorioPedidoDel implements IRepositorioPedidoDel, Serializable
 	// }
 	// return existe;
 	// }
+
+	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception {
+		String query = "update pedidoDel pedidoDel_id = ?, pedidoDel_status = ?, endereco_cep = ?, entrega_hrSaida = ?, entrega_data = ?, entregador_cpf = ?, complemento = ?, taxa = ? where pedidoDel_id = "
+				+ "'" + p.getNumero() + "'";
+
+		PreparedStatement ps = connection.prepareStatement(query);
+
+		ps.setInt(1, p.getNumero());
+		ps.setString(2, p.getStatus().name());
+		ps.setString(3, p.getCEP());
+		ps.setTime(4, p.getHoraSaida());
+		ps.setDate(5, p.getData());
+		ps.setString(6, p.getCpfEntregador());
+		ps.setString(7, p.getComplemento());
+		ps.setInt(8, p.getTaxa());
+
+		ps.executeUpdate();
+
+		return true;
+	}
 
 	public void printar(PedidoDelivery p) {
 		try {
