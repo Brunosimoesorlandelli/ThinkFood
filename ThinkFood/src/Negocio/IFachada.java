@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import beans.ClientePF;
 import beans.ClientePJ;
+import beans.Cliente_Avalia;
 import beans.Estoque;
 import beans.FazReserva;
 import beans.Fornecedor;
@@ -202,5 +203,19 @@ public interface IFachada {
 	public boolean atualizarProduto(Produto p) throws Exception;
 
 	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception;
+
+	public void conectar(Connection connect);
+
+	public boolean cadastrar(Cliente_Avalia c) throws SQLException;
+
+	public Cliente_Avalia procurar(int id) throws SQLException;
+
+	public boolean remover(Cliente_Avalia p) throws SQLException;
+
+	public boolean atualizarCliente_Avalia(Cliente_Avalia c) throws Exception;
+
+	public void printar(Cliente_Avalia p);
+
+	public ArrayList<Cliente_Avalia> listar();
 
 }

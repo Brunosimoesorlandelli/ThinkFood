@@ -5,18 +5,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.ClientePF;
+import beans.Cliente_Avalia;
 
 public interface IControladorClienteAvalia {
 
 	public void conectar(Connection connect);
 
-	public boolean cadastrar(ClientePF p) throws Exception;
+	public boolean cadastrar(Cliente_Avalia c) throws SQLException;
 
-	public ClientePF procurar(int id) throws Exception;
+	public Cliente_Avalia procurar(int id) throws SQLException;
 
-	public boolean remover(ClientePF f) throws SQLException;
+	public boolean remover(Cliente_Avalia p) throws SQLException;
 
-	public void printar(ClientePF p);
+	public boolean atualizarCliente_Avalia(Cliente_Avalia c) throws Exception;
 
-	public ArrayList<ClientePF> listar();
+	public void printar(Cliente_Avalia p);
+
+	public ArrayList<Cliente_Avalia> listar();
 }

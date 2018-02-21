@@ -412,24 +412,32 @@ public class Fachada implements IFachada, Serializable {
 		cItemEstoque.printar(p);
 	}
 
-	public void conectarClienteAvalia(Connection connect) {
+	public void conectar(Connection connect) {
 		cClienteAvalia.conectar(connect);
 	}
 
-	public boolean cadastrarClienteAvalia(ClientePF p) throws Exception {
-		return cClienteAvalia.cadastrar(p);
+	public boolean cadastrar(Cliente_Avalia c) throws SQLException {
+		return cClienteAvalia.cadastrar(c);
 	}
 
-	public ClientePF procurarClienteAvalia(int id) throws Exception {
+	public Cliente_Avalia procurar(int id) throws SQLException {
 		return cClienteAvalia.procurar(id);
 	}
 
-	public boolean removerClienteAvalia(ClientePF f) throws SQLException {
-		return cClienteAvalia.remover(f);
+	public boolean remover(Cliente_Avalia p) throws SQLException {
+		return cClienteAvalia.remover(p);
 	}
 
-	public void printarClienteAvalia(ClientePF p) {
+	public boolean atualizarCliente_Avalia(Cliente_Avalia c) throws Exception {
+		return cClienteAvalia.atualizarCliente_Avalia(c);
+	}
+
+	public void printar(Cliente_Avalia p) {
 		cClienteAvalia.printar(p);
+	}
+
+	public ArrayList<Cliente_Avalia> listar() {
+		return cClienteAvalia.listar();
 	}
 
 	public Funcionario logar(String cpf) throws Exception {
