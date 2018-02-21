@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Estoque;
+import beans.ItemEstoque;
 
 public interface IRepositorioEstoque {
 
@@ -19,4 +20,5 @@ public interface IRepositorioEstoque {
 	public void printar(Estoque p);
 
 	public ArrayList<Estoque> listar();
+
 }

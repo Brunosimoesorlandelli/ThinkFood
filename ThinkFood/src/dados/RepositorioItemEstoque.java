@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import beans.Estoque;
+import beans.Funcionario_Gerente;
 import beans.ItemEstoque;
 
 public class RepositorioItemEstoque implements Serializable, IRepositorioItemEstoque {
@@ -163,6 +164,25 @@ public class RepositorioItemEstoque implements Serializable, IRepositorioItemEst
 	 * 
 	 * @see Dados.IRepositorioProdutos#printar(Beans.Produto)
 	 */
+
+	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception {
+		String query = "update item_estoque set produtoRef_cod = ?, id_estoque = ?, data_entrada = ?, lote = ?, qtd = ?, data_validade = ? where produtoRef_cod = "
+				+ "'" + i.getCodProduto() + "'";
+
+		PreparedStatement ps = connection.prepareStatement(query);
+
+		ps.setInt(1, i.getCodProduto());
+		ps.setInt(2, i.getIdEstoque());
+		ps.setDate(3, i.getDataEntrada());
+		ps.setInt(4, i.getLote());
+		ps.setInt(5, i.getQtd());
+		ps.setDate(6, i.getDataValidade());
+
+		ps.executeUpdate();
+
+		return true;
+	}
+
 	public void printar(ItemEstoque p) {
 		try {
 			JOptionPane.showMessageDialog(null, p.toString());

@@ -42,4 +42,8 @@ public class ControladorItemEstoque implements IControladorItemEstoque, Serializ
 		return repositorio.listar();
 	}
 
+	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception {
+		return repositorio.atualizarItemEstoque(i);
+	}
+
 }

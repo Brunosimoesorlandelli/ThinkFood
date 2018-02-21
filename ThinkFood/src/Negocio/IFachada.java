@@ -201,4 +201,6 @@ public interface IFachada {
 
 	public boolean atualizarProduto(Produto p) throws Exception;
 
+	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception;
+
 }

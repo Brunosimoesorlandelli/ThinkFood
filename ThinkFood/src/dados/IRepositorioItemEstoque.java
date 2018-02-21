@@ -19,4 +19,6 @@ public interface IRepositorioItemEstoque {
 	public void printar(ItemEstoque p);
 
 	public ArrayList<ItemEstoque> listar();
+
+	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception;
 }

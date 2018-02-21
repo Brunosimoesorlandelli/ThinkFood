@@ -119,11 +119,34 @@ public class TelaEstoque extends JFrame {
 		contentPane.add(btnVoltar);
 
 		btnRemoverItemDo = new JButton("Remover Item");
+		btnRemoverItemDo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int codigo = Integer
+						.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1)));
+				System.out.println(codigo);
+
+				try {
+					if (f.procurarItemEstoque(codigo) != null) {
+						f.removerItemEstoque(f.procurarItemEstoque(codigo));
+					} else {
+						JOptionPane.showMessageDialog(null, "Este codigo não existe. Tente novamente.");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btnRemoverItemDo.setBackground(SystemColor.inactiveCaption);
 		btnRemoverItemDo.setBounds(475, 484, 141, 23);
 		contentPane.add(btnRemoverItemDo);
 
 		btnEditarItemEstoque = new JButton("Editar Item");
+		btnEditarItemEstoque.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnEditarItemEstoque.setBackground(SystemColor.inactiveCaption);
 		btnEditarItemEstoque.setBounds(475, 518, 141, 23);
 		contentPane.add(btnEditarItemEstoque);
