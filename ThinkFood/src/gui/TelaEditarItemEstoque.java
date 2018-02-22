@@ -103,7 +103,7 @@ public class TelaEditarItemEstoque extends JFrame {
 		Date dataVal = new Date(00, 03, 0200);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ItemEstoque p = new ItemEstoque(((Integer) comboBox.getSelectedItem()),
+				ItemEstoque p = new ItemEstoque(item.getSeq(),((Integer) comboBox.getSelectedItem()),
 						Integer.parseInt(idEstoque.getText()), dataEn, Integer.parseInt(lote.getText()),
 						Integer.parseInt(quant.getText()), dataVal);
 

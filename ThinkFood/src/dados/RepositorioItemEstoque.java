@@ -113,7 +113,7 @@ public class RepositorioItemEstoque implements Serializable, IRepositorioItemEst
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
-			p = new ItemEstoque(rs.getInt("produtoRef_cod"), rs.getInt("id_estoque"), rs.getDate("data_entrada"),
+			p = new ItemEstoque(rs.getInt("seq"), rs.getInt("produtoRef_cod"), rs.getInt("id_estoque"), rs.getDate("data_entrada"),
 					rs.getInt("lote"), rs.getInt("qtd"), rs.getDate("data_validade"));
 		}
 		return p;

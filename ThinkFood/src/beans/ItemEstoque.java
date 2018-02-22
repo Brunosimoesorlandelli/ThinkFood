@@ -14,7 +14,8 @@ public class ItemEstoque {
 	private Date dataEntrada;
 	private Date dataValidade;
 
-	public ItemEstoque(int codProduto, int idEstoque, Date dataEntrada, int lote, int qtd, Date dataValidade) {
+	public ItemEstoque(int seq, int codProduto, int idEstoque, Date dataEntrada, int lote, int qtd, Date dataValidade) {
+		this.seq = seq;
 		this.dataEntrada = dataEntrada;
 		this.lote = lote;
 		this.qtd = qtd;

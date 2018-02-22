@@ -98,7 +98,7 @@ public class TelaCadastroItemEstoque extends JFrame {
 		Date dataVal = new Date(00, 03, 0200);
 		btnCadastrarItemNo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ItemEstoque p = new ItemEstoque(((Integer) comboBox.getSelectedItem()),
+				ItemEstoque p = new ItemEstoque(21, ((Integer) comboBox.getSelectedItem()),
 						Integer.parseInt(textField.getText()), dataEn, Integer.parseInt(textField_1.getText()),
 						Integer.parseInt(textField_4.getText()), dataVal);
 				try {

@@ -145,7 +145,7 @@ public class TelaEstoque extends JFrame {
 		btnEditarItemEstoque = new JButton("Editar Item");
 		btnEditarItemEstoque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int seq = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1)));
+				int seq = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)));
 
 				try {
 					TelaEditarItemEstoque tela = new TelaEditarItemEstoque(FG, f.procurarItemEstoque(seq));

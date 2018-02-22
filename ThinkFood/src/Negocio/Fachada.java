@@ -444,8 +444,6 @@ public class Fachada implements IFachada, Serializable {
 	public ArrayList<Cliente_Avalia> listar() {
 		return cClienteAvalia.listar();
 	}
-	
-	
 
 	public void conectarReservaOficial(Connection c) {
 		cReservaOficial.conectarReservaOficial(c);
@@ -605,12 +603,13 @@ public class Fachada implements IFachada, Serializable {
 			while (result.next()) {
 
 				ItemEstoque itemEstoque = new ItemEstoque();
-				itemEstoque.setCodProduto(result.getInt(1));
-				itemEstoque.setIdEstoque(result.getInt(2));
-				itemEstoque.setDataEntrada(result.getDate(3));
-				itemEstoque.setLote(result.getInt(4));
-				itemEstoque.setQtd(result.getInt(5));
-				itemEstoque.setDataValidade(result.getDate(6));
+				itemEstoque.setSeq(result.getInt(1));
+				itemEstoque.setCodProduto(result.getInt(2));
+				itemEstoque.setIdEstoque(result.getInt(3));
+				itemEstoque.setDataEntrada(result.getDate(4));
+				itemEstoque.setLote(result.getInt(5));
+				itemEstoque.setQtd(result.getInt(6));
+				itemEstoque.setDataValidade(result.getDate(7));
 
 				estoqueList.add(itemEstoque);
 
@@ -801,7 +800,7 @@ public class Fachada implements IFachada, Serializable {
 		return avaliacoes;
 
 	}
-	
+
 	public ReservaOficial[] listarReservaOficial() {
 		ArrayList<ReservaOficial> reservas = new ArrayList<ReservaOficial>();
 		ReservaOficial[] reservasOficiais = null;
@@ -839,7 +838,6 @@ public class Fachada implements IFachada, Serializable {
 		return reservasOficiais;
 
 	}
-	
 
 	public boolean atualizarFornecedor(Fornecedor f) throws Exception {
 		return cFornecedor.atualizarFornecedor(f);
@@ -856,7 +854,5 @@ public class Fachada implements IFachada, Serializable {
 	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception {
 		return cPedidoDel.atualizarPedidoDelivery(p);
 	}
-	
-	
 
 }
