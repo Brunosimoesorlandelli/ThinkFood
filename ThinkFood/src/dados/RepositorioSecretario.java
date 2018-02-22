@@ -130,7 +130,7 @@ public class RepositorioSecretario implements IRepositorioSecretario {
 	}
 
 	public boolean atualizarSecretario(Funcionario_Secretario f) throws Exception {
-		String query = "update funcionario nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ? where cpf = " + "'" + f.getCpf() + "'";
+		String query = "update funcionario set nome = ?, data_nasc = ?, salario = ?, complemento = ?, numero = ?, cep_endereco = ?, seq_loja = ?, senha = ? where cpf = " + "'" + f.getCpf() + "'";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 

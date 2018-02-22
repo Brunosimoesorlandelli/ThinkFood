@@ -177,7 +177,7 @@ public class RepositorioClientePF implements IRepositorioClientePF {
 	 */
 
 	public boolean atualizarClientePF(ClientePF c) throws Exception {
-		String query = "update clientepf set clientePF_nome = ?, cliente_PF_dt_nasc = ? where clientePF_id = " + c.getId();
+		String query = "update clientepf set clientePF_nome = ?, clientePF_dt_nasc = ? where clientePF_id = " + c.getId();
 
 		PreparedStatement ps = connection.prepareStatement(query);
 
