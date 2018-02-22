@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.Categoria;
 import beans.ClientePF;
 import beans.ClientePJ;
 import beans.Cliente_Avalia;
@@ -233,6 +234,6 @@ public interface IFachada {
 	
 	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception;
 	
-	
+	public Categoria[] listarCategoria();
 
 }

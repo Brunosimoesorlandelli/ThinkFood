@@ -10,6 +10,10 @@ public class Categoria {
 		this.descr = descr;
 		
 	}
+	
+	public Categoria() {
+		
+	}
 
 	public int getCodCateg() {
 		return codCateg;

@@ -25,6 +25,7 @@ public class TelaEstoque extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
+	private JTable table_2;
 	private JLabel lblProdutos;
 	private JLabel lblItensDoEstoque;
 	private JButton btnNewButton;
@@ -36,6 +37,7 @@ public class TelaEstoque extends JFrame {
 	private JButton btnEditarProduto;
 	private JButton btnAtualizarItens;
 	private JButton btnAtualizarProdutos;
+	private JScrollPane scrollPane_2;
 
 	public TelaEstoque(Funcionario_Gerente FG) {
 		IFachada f = Fachada.getInstance();
@@ -49,7 +51,7 @@ public class TelaEstoque extends JFrame {
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(53, 60, 312, 346);
+		scrollPane.setBounds(240, 60, 241, 346);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -66,7 +68,7 @@ public class TelaEstoque extends JFrame {
 		scrollPane.setViewportView(table);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(418, 60, 312, 346);
+		scrollPane_1.setBounds(523, 60, 227, 346);
 		contentPane.add(scrollPane_1);
 
 		table_1 = new JTable();
@@ -83,13 +85,27 @@ public class TelaEstoque extends JFrame {
 					f.listarItemEstoque()[i].getQtd() });
 		}
 		scrollPane_1.setViewportView(table_1);
+		
+		scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(24, 60, 187, 346);
+		contentPane.add(scrollPane_2);
+		table_2 = new JTable();
+		DefaultTableModel modelCateg = (DefaultTableModel) table_2.getModel();
+		table_2.setModel(modelCateg);
+		modelCateg.addColumn("Codigo");
+		modelCateg.addColumn("Descricao");
+		for (int i = 0; i < f.listarCategoria().length; i++) {
+			modelCateg.addRow(new Object[] { f.listarCategoria()[i].getCodCateg(), f.listarCategoria()[i].getDescr() });
+		}
 
+		scrollPane_2.setViewportView(table_2);
+		
 		lblProdutos = new JLabel("Produtos");
-		lblProdutos.setBounds(215, 35, 46, 14);
+		lblProdutos.setBounds(337, 35, 61, 14);
 		contentPane.add(lblProdutos);
 
 		lblItensDoEstoque = new JLabel("Itens do Estoque");
-		lblItensDoEstoque.setBounds(476, 35, 91, 14);
+		lblItensDoEstoque.setBounds(603, 35, 119, 14);
 		contentPane.add(lblItensDoEstoque);
 
 		btnNewButton = new JButton("Cadastrar Item");
@@ -103,7 +119,7 @@ public class TelaEstoque extends JFrame {
 			}
 		});
 		btnNewButton.setBackground(SystemColor.inactiveCaption);
-		btnNewButton.setBounds(475, 450, 141, 23);
+		btnNewButton.setBounds(571, 450, 141, 23);
 		contentPane.add(btnNewButton);
 
 		btnVoltar = new JButton("Voltar");
@@ -139,7 +155,7 @@ public class TelaEstoque extends JFrame {
 			}
 		});
 		btnRemoverItemDo.setBackground(SystemColor.inactiveCaption);
-		btnRemoverItemDo.setBounds(475, 484, 141, 23);
+		btnRemoverItemDo.setBounds(571, 484, 141, 23);
 		contentPane.add(btnRemoverItemDo);
 
 		btnEditarItemEstoque = new JButton("Editar Item");
@@ -161,7 +177,7 @@ public class TelaEstoque extends JFrame {
 			}
 		});
 		btnEditarItemEstoque.setBackground(SystemColor.inactiveCaption);
-		btnEditarItemEstoque.setBounds(475, 518, 141, 23);
+		btnEditarItemEstoque.setBounds(571, 518, 141, 23);
 		contentPane.add(btnEditarItemEstoque);
 
 		btnCadastrarProduto = new JButton("Cadastrar Produto");
@@ -175,7 +191,7 @@ public class TelaEstoque extends JFrame {
 			}
 		});
 		btnCadastrarProduto.setBackground(SystemColor.inactiveCaption);
-		btnCadastrarProduto.setBounds(167, 450, 141, 23);
+		btnCadastrarProduto.setBounds(286, 450, 141, 23);
 		contentPane.add(btnCadastrarProduto);
 
 		btnRemoverProduto = new JButton("Remover Produto");
@@ -197,7 +213,7 @@ public class TelaEstoque extends JFrame {
 			}
 		});
 		btnRemoverProduto.setBackground(SystemColor.inactiveCaption);
-		btnRemoverProduto.setBounds(167, 484, 141, 23);
+		btnRemoverProduto.setBounds(286, 484, 141, 23);
 		contentPane.add(btnRemoverProduto);
 
 		btnEditarProduto = new JButton("Editar Produto");
@@ -228,7 +244,7 @@ public class TelaEstoque extends JFrame {
 			}
 		});
 		btnEditarProduto.setBackground(SystemColor.inactiveCaption);
-		btnEditarProduto.setBounds(167, 518, 141, 23);
+		btnEditarProduto.setBounds(286, 518, 141, 23);
 		contentPane.add(btnEditarProduto);
 
 		btnAtualizarItens = new JButton("Atualizar Itens");
@@ -244,7 +260,7 @@ public class TelaEstoque extends JFrame {
 			}
 		});
 		btnAtualizarItens.setBackground(SystemColor.inactiveCaption);
-		btnAtualizarItens.setBounds(475, 417, 141, 23);
+		btnAtualizarItens.setBounds(571, 417, 141, 23);
 		contentPane.add(btnAtualizarItens);
 
 		btnAtualizarProdutos = new JButton("Atualizar Produtos");
@@ -260,8 +276,29 @@ public class TelaEstoque extends JFrame {
 			}
 		});
 		btnAtualizarProdutos.setBackground(SystemColor.inactiveCaption);
-		btnAtualizarProdutos.setBounds(167, 417, 141, 23);
+		btnAtualizarProdutos.setBounds(286, 417, 141, 23);
 		contentPane.add(btnAtualizarProdutos);
+		
+		JLabel lblCategoria = new JLabel("Categorias");
+		lblCategoria.setBounds(87, 35, 70, 14);
+		contentPane.add(lblCategoria);
+		
+		JButton btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				modelProd.getDataVector().removeAllElements();
+				revalidate();
+				for (int i = 0; i < f.listarProduto().length; i++) {
+					if(f.listarProduto()[i].getCod_categ() == Integer.parseInt(String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 0)))) {
+					modelProd.addRow(
+							new Object[] { f.listarProduto()[i].getCodigo(), f.listarProduto()[i].getCnpj_fornecedor(),
+									f.listarProduto()[i].getCod_categ(), f.listarProduto()[i].getUnidade() });
+					}}
+			}
+		});
+		btnFiltrar.setBounds(68, 417, 89, 23);
+		contentPane.add(btnFiltrar);
+		
+		
 	}
-
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import beans.Categoria;
 import beans.ClientePF;
 import beans.ClientePJ;
 import beans.Cliente_Avalia;
@@ -838,6 +839,38 @@ public class Fachada implements IFachada, Serializable {
 		return reservasOficiais;
 
 	}
+	
+	public Categoria[] listarCategoria() {
+		ArrayList<Categoria> categoriasList = new ArrayList<Categoria>();
+		Categoria[] categorias = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+			
+			ResultSet result = stmt.executeQuery("SELECT * FROM categoria");
+			
+			while (result.next()) {
+
+				Categoria categoria = new Categoria();
+				categoria.setCodCateg(result.getInt(1));
+				categoria.setDescr(result.getString(2));
+				categoriasList.add(categoria);
+
+				tamanho = categoriasList.size();
+				categorias = new Categoria[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (categoriasList.get(i) != null)
+						categorias[i] = categoriasList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return categorias;
+
+	}
+	
 
 	public boolean atualizarFornecedor(Fornecedor f) throws Exception {
 		return cFornecedor.atualizarFornecedor(f);
