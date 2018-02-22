@@ -866,7 +866,7 @@ public class Fachada implements IFachada, Serializable {
 		try {
 			Statement stmt = connect.createStatement();
 
-			ResultSet result = stmt.executeQuery("SELECT * FROM clientePF");
+			ResultSet result = stmt.executeQuery("SELECT * FROM clientePF ");
 
 			while (result.next()) {
 
@@ -891,7 +891,41 @@ public class Fachada implements IFachada, Serializable {
 
 	}
 
-	public ClientePJ[] listarClientePJ() {
+	public ClientePF[] listarClientePF2(int seq) {
+		ArrayList<ClientePF> clientePFList = new ArrayList<ClientePF>();
+		ClientePF[] clientesPF = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+
+			ResultSet result = stmt.executeQuery(
+					"SELECT * FROM clientePF JOIN cliente_avalia ON clientePF.clientePF_id = cliente_avalia.id_cliente WHERE cliente_avalia.seq_loja = "
+							+ seq);
+
+			while (result.next()) {
+
+				ClientePF cliente = new ClientePF();
+				cliente.setNome(result.getString(1));
+				cliente.setDataDeNascimento(result.getDate(2));
+				cliente.setId(result.getInt(3));
+				clientePFList.add(cliente);
+
+				tamanho = clientePFList.size();
+				clientesPF = new ClientePF[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (clientePFList.get(i) != null)
+						clientesPF[i] = clientePFList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return clientesPF;
+
+	}
+
+	public ClientePJ[] listarClientePJ(int seq) {
 		ArrayList<ClientePJ> clientePJList = new ArrayList<ClientePJ>();
 		ClientePJ[] clientesPJ = null;
 		int tamanho = 0;
@@ -899,6 +933,41 @@ public class Fachada implements IFachada, Serializable {
 			Statement stmt = connect.createStatement();
 
 			ResultSet result = stmt.executeQuery("SELECT * FROM cliente_pj");
+
+			while (result.next()) {
+
+				ClientePJ cliente = new ClientePJ();
+				cliente.setId(result.getInt(1));
+				cliente.setCnpj(result.getString(2));
+				cliente.setRazaoSocial(result.getString(3));
+				cliente.setNomeFantasia(result.getString(4));
+				clientePJList.add(cliente);
+
+				tamanho = clientePJList.size();
+				clientesPJ = new ClientePJ[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (clientePJList.get(i) != null)
+						clientesPJ[i] = clientePJList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return clientesPJ;
+
+	}
+
+	public ClientePJ[] listarClientePJ2(int seq) {
+		ArrayList<ClientePJ> clientePJList = new ArrayList<ClientePJ>();
+		ClientePJ[] clientesPJ = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+
+			ResultSet result = stmt.executeQuery(
+					"SELECT * FROM cliente_pj JOIN cliente_avalia ON cliente_pj.id_cliente = cliente_avalia.id_cliente WHERE cliente_avalia.seq_loja = "
+							+ seq);
 
 			while (result.next()) {
 

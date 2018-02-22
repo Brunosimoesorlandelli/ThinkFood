@@ -232,7 +232,11 @@ public interface IFachada {
 
 	public ClientePF[] listarClientePF();
 
+	public ClientePF[] listarClientePF2(int seq);
+
 	public ClientePJ[] listarClientePJ();
+
+	public ClientePJ[] listarClientePJ2(int seq);
 
 	public boolean atualizarClientePF(ClientePF c) throws Exception;
 

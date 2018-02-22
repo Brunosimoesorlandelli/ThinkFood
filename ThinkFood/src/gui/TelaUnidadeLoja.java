@@ -82,10 +82,11 @@ public class TelaUnidadeLoja extends JFrame {
 				modelClientePF.getDataVector().removeAllElements();
 				revalidate();
 				for (int i = 0; i < f.listarClientePF().length; i++) {
-					modelClientePF.addRow(new Object[] { f.listarClientePF()[i].getId(), f.listarClientePF()[i].getNome() });
+					modelClientePF
+							.addRow(new Object[] { f.listarClientePF()[i].getId(), f.listarClientePF()[i].getNome() });
 				}
 			}
-			
+
 		});
 		btnAtualizarClientes.setBackground(SystemColor.inactiveCaption);
 		btnAtualizarClientes.setBounds(149, 431, 124, 23);
@@ -131,7 +132,8 @@ public class TelaUnidadeLoja extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaEditarClientePF tela;
 				try {
-					tela = new TelaEditarClientePF(FG, f.procurarClientePF(Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)))));
+					tela = new TelaEditarClientePF(FG, f.procurarClientePF(Integer
+							.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)))));
 					dispose();
 					tela.setVisible(true);
 					tela.setLocationRelativeTo(null);
@@ -140,7 +142,7 @@ public class TelaUnidadeLoja extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		btnEditarCliente.setBackground(SystemColor.inactiveCaption);
@@ -196,7 +198,7 @@ public class TelaUnidadeLoja extends JFrame {
 							f.listarClientePJ()[i].getNomeFantasia(), f.listarClientePJ()[i].getRazaoSocial() });
 				}
 			}
-			
+
 		});
 		button.setBackground(SystemColor.inactiveCaption);
 		button.setBounds(508, 431, 124, 23);
@@ -242,7 +244,8 @@ public class TelaUnidadeLoja extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaEditarClientePJ tela;
 				try {
-					tela = new TelaEditarClientePJ(FG, f.procurarClientePJ(Integer.parseInt(String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 0)))));
+					tela = new TelaEditarClientePJ(FG, f.procurarClientePJ(Integer
+							.parseInt(String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 0)))));
 					dispose();
 					tela.setVisible(true);
 					tela.setLocationRelativeTo(null);
@@ -251,7 +254,7 @@ public class TelaUnidadeLoja extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		button_3.setBackground(SystemColor.inactiveCaption);
