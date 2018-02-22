@@ -97,15 +97,19 @@ public class TelaEditarItemEstoque extends JFrame {
 		DataVal.setBounds(320, 389, 354, 20);
 		contentPane.add(DataVal);
 		DataVal.setText(String.valueOf(item.getDataValidade()));
+		
+		quant = new JTextField();
+		quant.setColumns(10);
+		quant.setBounds(320, 261, 354, 20);
+		quant.setText(String.valueOf(item.getQtd()));
+		contentPane.add(quant);
 
 		JButton btnSalvar = new JButton("Salvar");
-		Date dataEn = new Date(13, 03, 0316);
-		Date dataVal = new Date(13, 03, 0317);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ItemEstoque p = new ItemEstoque(item.getSeq(),((Integer) comboBox.getSelectedItem()),
-						Integer.parseInt(idEstoque.getText()), dataEn, Integer.parseInt(lote.getText()),
-						Integer.parseInt(quant.getText()), dataVal);
+						Integer.parseInt(idEstoque.getText()), item.getDataEntrada(), Integer.parseInt(lote.getText()),
+						Integer.parseInt(quant.getText()),item.getDataValidade());
 
 				try {
 					f.atualizarItemEstoque(p);
@@ -124,9 +128,6 @@ public class TelaEditarItemEstoque extends JFrame {
 		btnSalvar.setBounds(283, 466, 218, 23);
 		contentPane.add(btnSalvar);
 
-		quant = new JTextField();
-		quant.setColumns(10);
-		quant.setBounds(320, 261, 354, 20);
-		contentPane.add(quant);
+		
 	}
 }

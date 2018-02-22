@@ -82,11 +82,10 @@ public class TelaUnidadeLoja extends JFrame {
 				modelClientePF.getDataVector().removeAllElements();
 				revalidate();
 				for (int i = 0; i < f.listarClientePF().length; i++) {
-					modelClientePF
-							.addRow(new Object[] { f.listarClientePF()[i].getId(), f.listarClientePF()[i].getNome() });
+					modelClientePF.addRow(new Object[] { f.listarClientePF()[i].getId(), f.listarClientePF()[i].getNome() });
 				}
 			}
-
+			
 		});
 		btnAtualizarClientes.setBackground(SystemColor.inactiveCaption);
 		btnAtualizarClientes.setBounds(149, 431, 124, 23);
@@ -132,8 +131,7 @@ public class TelaUnidadeLoja extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaEditarClientePF tela;
 				try {
-					tela = new TelaEditarClientePF(FG, f.procurarClientePF(Integer
-							.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)))));
+					tela = new TelaEditarClientePF(FG, f.procurarClientePF(Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)))));
 					dispose();
 					tela.setVisible(true);
 					tela.setLocationRelativeTo(null);
@@ -142,18 +140,14 @@ public class TelaUnidadeLoja extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
+				
 			}
 		});
 		btnEditarCliente.setBackground(SystemColor.inactiveCaption);
 		btnEditarCliente.setBounds(149, 528, 124, 23);
 		contentPane.add(btnEditarCliente);
 
-		JButton btnFiltrar = new JButton("Filtrar");
-		btnFiltrar.setBackground(SystemColor.inactiveCaption);
-		btnFiltrar.setBounds(347, 209, 89, 23);
-		contentPane.add(btnFiltrar);
-
+	
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -198,7 +192,7 @@ public class TelaUnidadeLoja extends JFrame {
 							f.listarClientePJ()[i].getNomeFantasia(), f.listarClientePJ()[i].getRazaoSocial() });
 				}
 			}
-
+			
 		});
 		button.setBackground(SystemColor.inactiveCaption);
 		button.setBounds(508, 431, 124, 23);
@@ -244,8 +238,7 @@ public class TelaUnidadeLoja extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaEditarClientePJ tela;
 				try {
-					tela = new TelaEditarClientePJ(FG, f.procurarClientePJ(Integer
-							.parseInt(String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 0)))));
+					tela = new TelaEditarClientePJ(FG, f.procurarClientePJ(Integer.parseInt(String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 0)))));
 					dispose();
 					tela.setVisible(true);
 					tela.setLocationRelativeTo(null);
@@ -254,12 +247,40 @@ public class TelaUnidadeLoja extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
+				
 			}
 		});
 		button_3.setBackground(SystemColor.inactiveCaption);
 		button_3.setBounds(508, 528, 124, 23);
 		contentPane.add(button_3);
+		
+		JButton btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modelClientePF.getDataVector().removeAllElements();
+				modelClientePJ.getDataVector().removeAllElements();
+				revalidate();
+				for (int i = 0; i < f.listarClientePF2(Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0)))).length; i++) {
+					
+					modelClientePF.addRow(
+							new Object[] { f.listarClientePF2(Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0))))[i].getId(), f.listarClientePF2(Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0))))[i].getNome() });
+					}
+				for (int i = 0; i < f.listarClientePJ2(Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0)))).length; i++) {
+					
+					modelClientePJ.addRow(
+							new Object[] { f.listarClientePJ2(Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0))))[i].getId(),
+									f.listarClientePJ2(Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0))))[i].getNomeFantasia(), f.listarClientePJ2(Integer.parseInt(String.valueOf(table.getModel().getValueAt(table.getSelectedRow(), 0))))[i].getRazaoSocial() });
+					}
+			}
+			
+		});
+		btnFiltrar.setBackground(SystemColor.inactiveCaption);
+		btnFiltrar.setBounds(347, 209, 89, 23);
+		contentPane.add(btnFiltrar);
+
 
 	}
+	
+	
+	
 }
