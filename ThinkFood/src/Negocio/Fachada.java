@@ -866,7 +866,7 @@ public class Fachada implements IFachada, Serializable {
 		try {
 			Statement stmt = connect.createStatement();
 
-			ResultSet result = stmt.executeQuery("SELECT * FROM clientePF ");
+			ResultSet result = stmt.executeQuery("SELECT * FROM clientePF");
 
 			while (result.next()) {
 
@@ -925,7 +925,7 @@ public class Fachada implements IFachada, Serializable {
 
 	}
 
-	public ClientePJ[] listarClientePJ(int seq) {
+	public ClientePJ[] listarClientePJ() {
 		ArrayList<ClientePJ> clientePJList = new ArrayList<ClientePJ>();
 		ClientePJ[] clientesPJ = null;
 		int tamanho = 0;
