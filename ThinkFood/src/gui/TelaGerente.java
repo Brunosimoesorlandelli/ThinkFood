@@ -60,11 +60,19 @@ public class TelaGerente extends JFrame {
 		});
 		mnGerenciamentoDeProduto.add(mntmGerenciar);
 
-		JMenu mnGerenciamentoDeCardapio = new JMenu("Gerenciamento de Cardapio");
-		menuBar.add(mnGerenciamentoDeCardapio);
+		JMenu mnGerenciamentoDeLojas = new JMenu("Gerenciamento de Clientes");
+		menuBar.add(mnGerenciamentoDeLojas);
 
 		JMenuItem mntmGerenciar_2 = new JMenuItem("Gerenciar");
-		mnGerenciamentoDeCardapio.add(mntmGerenciar_2);
+		mntmGerenciar_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaUnidadeLoja tela = new TelaUnidadeLoja(FG);
+				tela.setVisible(true);
+				tela.setLocationRelativeTo(null);
+				tela.setResizable(false);
+			}
+		});
+		mnGerenciamentoDeLojas.add(mntmGerenciar_2);
 
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
@@ -72,12 +80,8 @@ public class TelaGerente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblUnidadeLoja = new JLabel("Unidade Loja");
-		lblUnidadeLoja.setBounds(189, 4, 96, 14);
-		contentPane.add(lblUnidadeLoja);
-
 		JLabel lblFuncionarios = new JLabel("Funcionarios");
-		lblFuncionarios.setBounds(474, 4, 75, 14);
+		lblFuncionarios.setBounds(281, 4, 75, 14);
 		contentPane.add(lblFuncionarios);
 
 		JButton button_1 = new JButton("Adicionar");
@@ -91,11 +95,11 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_1.setBackground(SystemColor.inactiveCaption);
-		button_1.setBounds(460, 648, 89, 23);
+		button_1.setBounds(276, 648, 89, 23);
 		contentPane.add(button_1);
 
 		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(357, 31, 301, 572);
+		scrollPane_3.setBounds(135, 31, 301, 572);
 		contentPane.add(scrollPane_3);
 		table_1 = new JTable();
 		DefaultTableModel modelFunc = (DefaultTableModel) table_1.getModel();
@@ -109,22 +113,8 @@ public class TelaGerente extends JFrame {
 		}
 		scrollPane_3.setViewportView(table_1);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(28, 31, 301, 572);
-		contentPane.add(scrollPane_1);
-
-		table = new JTable();
-		DefaultTableModel modelSeqLoja = (DefaultTableModel) table.getModel();
-		table.setModel(modelSeqLoja);
-		modelSeqLoja.addColumn("SeqLoja");
-		modelSeqLoja.addColumn("Numero Funcionarios");
-		for (int i = 0; i < f.listarLojas().length; i++) {
-			modelSeqLoja.addRow(new Object[] { f.listarLojas()[i].getSeq(), f.listarLojas()[i].getQtdFunc() });
-		}
-		scrollPane_1.setViewportView(table);
-
 		JLabel lblFornecedores = new JLabel("Fornecedores");
-		lblFornecedores.setBounds(738, 4, 89, 14);
+		lblFornecedores.setBounds(637, 4, 89, 14);
 		contentPane.add(lblFornecedores);
 
 		JButton button_4 = new JButton("Remover");
@@ -150,7 +140,7 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_4.setBackground(SystemColor.inactiveCaption);
-		button_4.setBounds(460, 673, 89, 23);
+		button_4.setBounds(276, 673, 89, 23);
 		contentPane.add(button_4);
 
 		JButton button_5 = new JButton("Adicionar");
@@ -164,11 +154,11 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_5.setBackground(SystemColor.inactiveCaption);
-		button_5.setBounds(738, 648, 89, 23);
+		button_5.setBounds(641, 648, 89, 23);
 		contentPane.add(button_5);
 
 		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(686, 31, 301, 572);
+		scrollPane_4.setBounds(571, 31, 301, 572);
 		contentPane.add(scrollPane_4);
 
 		table_2 = new JTable();
@@ -182,21 +172,6 @@ public class TelaGerente extends JFrame {
 			modelFornece.addRow(new Object[] { f.listarFornecedores()[i].getEmail(),
 					f.listarFornecedores()[i].getCnpj(), f.listarFornecedores()[i].getFone() });
 		}
-
-		JButton LojaRemoverButton = new JButton("Remover");
-		LojaRemoverButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
-		LojaRemoverButton.setBackground(SystemColor.inactiveCaption);
-		LojaRemoverButton.setBounds(185, 673, 89, 23);
-		contentPane.add(LojaRemoverButton);
-
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBackground(SystemColor.inactiveCaption);
-		btnEditar.setBounds(185, 697, 89, 23);
-		contentPane.add(btnEditar);
 
 		JButton button = new JButton("Editar");
 		button.addActionListener(new ActionListener() {
@@ -242,7 +217,7 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button.setBackground(SystemColor.inactiveCaption);
-		button.setBounds(460, 697, 89, 23);
+		button.setBounds(276, 697, 89, 23);
 		contentPane.add(button);
 
 		JButton button_2 = new JButton("Editar");
@@ -273,7 +248,7 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_2.setBackground(SystemColor.inactiveCaption);
-		button_2.setBounds(738, 697, 89, 23);
+		button_2.setBounds(641, 697, 89, 23);
 		contentPane.add(button_2);
 
 		JButton button_3 = new JButton("Remover");
@@ -285,7 +260,7 @@ public class TelaGerente extends JFrame {
 				try {
 					if (f.procurarFornecedor(cnpj) != null) {
 						f.removerFornecedor(f.procurarFornecedor(cnpj));
-					}  else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Este CNPJ não existe. Tente novamente.");
 					}
 				} catch (Exception e) {
@@ -295,18 +270,8 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_3.setBackground(SystemColor.inactiveCaption);
-		button_3.setBounds(738, 673, 89, 23);
+		button_3.setBounds(641, 673, 89, 23);
 		contentPane.add(button_3);
-
-		JButton button_6 = new JButton("Adicionar");
-		button_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
-		button_6.setBackground(SystemColor.inactiveCaption);
-		button_6.setBounds(185, 648, 89, 23);
-		contentPane.add(button_6);
 
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -336,13 +301,8 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		btnAtualizar.setBackground(SystemColor.inactiveCaption);
-		btnAtualizar.setBounds(460, 612, 89, 23);
+		btnAtualizar.setBounds(276, 612, 89, 23);
 		contentPane.add(btnAtualizar);
-
-		JButton button_7 = new JButton("Atualizar");
-		button_7.setBackground(SystemColor.inactiveCaption);
-		button_7.setBounds(185, 612, 89, 23);
-		contentPane.add(button_7);
 
 		JButton button_8 = new JButton("Atualizar");
 		button_8.addActionListener(new ActionListener() {
@@ -356,7 +316,7 @@ public class TelaGerente extends JFrame {
 			}
 		});
 		button_8.setBackground(SystemColor.inactiveCaption);
-		button_8.setBounds(738, 611, 89, 23);
+		button_8.setBounds(641, 611, 89, 23);
 		contentPane.add(button_8);
 	}
 }

@@ -16,6 +16,8 @@ public interface IRepositorioClientePJ {
 
 	public boolean remover(ClientePJ f) throws SQLException;
 
+	public boolean atualizarClientePJ(ClientePJ c) throws Exception;
+
 	public void printar(ClientePJ p);
 
 	public ArrayList<ClientePJ> listar();

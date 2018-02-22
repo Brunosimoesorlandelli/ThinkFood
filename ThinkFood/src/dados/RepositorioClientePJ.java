@@ -167,6 +167,23 @@ public class RepositorioClientePJ implements IRepositorioClientePJ {
 	 * 
 	 * @see dados.IRepositorioGarcom#printar(beans.Funcionario_Garcon)
 	 */
+
+	public boolean atualizarClientePJ(ClientePJ c) throws Exception {
+		String query = "update cliente_pj id_cliente = ?, cnpj = ?, razao_social = ?, nome_fantasia = ? where id_cliente = "
+				+ "'" + c.getId() + "'";
+
+		PreparedStatement ps = connection.prepareStatement(query);
+
+		ps.setInt(1, c.getId());
+		ps.setString(2, c.getCnpj());
+		ps.setString(3, c.getRazaoSocial());
+		ps.setString(4, c.getNomeFantasia());
+
+		ps.executeUpdate();
+
+		return true;
+	}
+
 	@Override
 	public void printar(ClientePJ p) {
 		try {

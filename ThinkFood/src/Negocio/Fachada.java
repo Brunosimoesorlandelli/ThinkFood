@@ -314,10 +314,6 @@ public class Fachada implements IFachada, Serializable {
 		cClientePF.printar(p);
 	}
 
-	public ArrayList<ClientePF> listarClientePF() {
-		return cClientePF.listar();
-	}
-
 	public boolean cadastrarClientePJ(ClientePJ p) throws Exception {
 		return cClientePJ.cadastrar(p);
 	}
@@ -332,10 +328,6 @@ public class Fachada implements IFachada, Serializable {
 
 	public void printarClientePJ(ClientePJ p) {
 		cClientePJ.printar(p);
-	}
-
-	public ArrayList<ClientePJ> listarClientePJ() {
-		return cClientePJ.listar();
 	}
 
 	public ArrayList<Funcionario_Garcon> listarGarcon() {
@@ -418,19 +410,15 @@ public class Fachada implements IFachada, Serializable {
 		cItemEstoque.printar(p);
 	}
 
-	public void conectar(Connection connect) {
-		cClienteAvalia.conectar(connect);
-	}
-
-	public boolean cadastrar(Cliente_Avalia c) throws SQLException {
+	public boolean cadastrarCliente_Avalia(Cliente_Avalia c) throws SQLException {
 		return cClienteAvalia.cadastrar(c);
 	}
 
-	public Cliente_Avalia procurar(int id) throws SQLException {
+	public Cliente_Avalia procurarCliente_Avalia(int id) throws SQLException {
 		return cClienteAvalia.procurar(id);
 	}
 
-	public boolean remover(Cliente_Avalia p) throws SQLException {
+	public boolean removerCliente_Avalia(Cliente_Avalia p) throws SQLException {
 		return cClienteAvalia.remover(p);
 	}
 
@@ -438,11 +426,11 @@ public class Fachada implements IFachada, Serializable {
 		return cClienteAvalia.atualizarCliente_Avalia(c);
 	}
 
-	public void printar(Cliente_Avalia p) {
+	public void printarCliente_Avalia(Cliente_Avalia p) {
 		cClienteAvalia.printar(p);
 	}
 
-	public ArrayList<Cliente_Avalia> listar() {
+	public ArrayList<Cliente_Avalia> listarCliente_Avalia() {
 		return cClienteAvalia.listar();
 	}
 
@@ -839,16 +827,16 @@ public class Fachada implements IFachada, Serializable {
 		return reservasOficiais;
 
 	}
-	
+
 	public Categoria[] listarCategoria() {
 		ArrayList<Categoria> categoriasList = new ArrayList<Categoria>();
 		Categoria[] categorias = null;
 		int tamanho = 0;
 		try {
 			Statement stmt = connect.createStatement();
-			
+
 			ResultSet result = stmt.executeQuery("SELECT * FROM categoria");
-			
+
 			while (result.next()) {
 
 				Categoria categoria = new Categoria();
@@ -870,7 +858,71 @@ public class Fachada implements IFachada, Serializable {
 		return categorias;
 
 	}
-	
+
+	public ClientePF[] listarClientePF() {
+		ArrayList<ClientePF> clientePFList = new ArrayList<ClientePF>();
+		ClientePF[] clientesPF = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+
+			ResultSet result = stmt.executeQuery("SELECT * FROM clientePF");
+
+			while (result.next()) {
+
+				ClientePF cliente = new ClientePF();
+				cliente.setNome(result.getString(1));
+				cliente.setDataDeNascimento(result.getDate(2));
+				cliente.setId(result.getInt(3));
+				clientePFList.add(cliente);
+
+				tamanho = clientePFList.size();
+				clientesPF = new ClientePF[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (clientePFList.get(i) != null)
+						clientesPF[i] = clientePFList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return clientesPF;
+
+	}
+
+	public ClientePJ[] listarClientePJ() {
+		ArrayList<ClientePJ> clientePJList = new ArrayList<ClientePJ>();
+		ClientePJ[] clientesPJ = null;
+		int tamanho = 0;
+		try {
+			Statement stmt = connect.createStatement();
+
+			ResultSet result = stmt.executeQuery("SELECT * FROM cliente_pj");
+
+			while (result.next()) {
+
+				ClientePJ cliente = new ClientePJ();
+				cliente.setId(result.getInt(1));
+				cliente.setCnpj(result.getString(2));
+				cliente.setRazaoSocial(result.getString(3));
+				cliente.setNomeFantasia(result.getString(4));
+				clientePJList.add(cliente);
+
+				tamanho = clientePJList.size();
+				clientesPJ = new ClientePJ[tamanho];
+				for (int i = 0; i < tamanho; i++) {
+					if (clientePJList.get(i) != null)
+						clientesPJ[i] = clientePJList.get(i);
+				}
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return clientesPJ;
+
+	}
 
 	public boolean atualizarFornecedor(Fornecedor f) throws Exception {
 		return cFornecedor.atualizarFornecedor(f);
@@ -886,6 +938,14 @@ public class Fachada implements IFachada, Serializable {
 
 	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception {
 		return cPedidoDel.atualizarPedidoDelivery(p);
+	}
+
+	public boolean atualizarClientePF(ClientePF c) throws Exception {
+		return cClientePF.atualizarClientePF(c);
+	}
+
+	public boolean atualizarClientePJ(ClientePJ c) throws Exception {
+		return cClientePJ.atualizarClientePJ(c);
 	}
 
 }

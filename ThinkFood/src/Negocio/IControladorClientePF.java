@@ -16,6 +16,8 @@ public interface IControladorClientePF {
 
 	public boolean remover(ClientePF f) throws SQLException;
 
+	public boolean atualizarClientePF(ClientePF c) throws Exception;
+
 	public void printar(ClientePF p);
 
 	public ArrayList<ClientePF> listar();

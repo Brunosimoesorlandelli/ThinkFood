@@ -13,6 +13,10 @@ public class ClientePF extends Cliente {
 		this.dataDeNascimento = dtNas;
 	}
 
+	public ClientePF() {
+
+	}
+
 	public String getNome() {
 		return nome;
 	}

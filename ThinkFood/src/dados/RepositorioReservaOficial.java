@@ -54,7 +54,7 @@ public class RepositorioReservaOficial implements IRepositorioReservaOficial {
 		ps.setTime(3, r.getHora_fim());
 		ps.setString(4, r.getStatus().name());
 		ps.setInt(5, r.getNum_pessoas());
-		
+
 		ps2.setString(1, r.getCpfFuncionario());
 		ps2.setInt(2, r.getSeq());
 		ps2.setInt(3, r.getIdCliente());
@@ -100,8 +100,10 @@ public class RepositorioReservaOficial implements IRepositorioReservaOficial {
 	 */
 	@Override
 	public boolean atualizarReservaOficial(ReservaOficial f) throws Exception {
-		String query = "update reserva set seq = ?, hora_inicio = ?, hora_fim = ?, stats = ?, num_pessoas = ? where seq = " + f.getSeq();
-		String query2 = "update faz_reserva set cpf_funcionario = ?, seq_reserva = ?, id_cliente = ?, data_reserva = ?, dt_validade = ? where seq_reserva = " + f.getSeq();
+		String query = "update reserva set seq = ?, hora_inicio = ?, hora_fim = ?, stats = ?, num_pessoas = ? where seq = "
+				+ f.getSeq();
+		String query2 = "update faz_reserva set cpf_funcionario = ?, seq_reserva = ?, id_cliente = ?, data_reserva = ?, dt_validade = ? where seq_reserva = "
+				+ f.getSeq();
 		PreparedStatement ps = connection.prepareStatement(query);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
 
@@ -133,7 +135,7 @@ public class RepositorioReservaOficial implements IRepositorioReservaOficial {
 		String query2 = "delete from faz_reserva where seq_reserva =?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
-		
+
 		ps.setInt(1, f.getSeq());
 		ps2.setInt(1, f.getSeq());
 		ps.executeUpdate();

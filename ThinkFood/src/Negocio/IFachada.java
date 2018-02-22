@@ -136,8 +136,6 @@ public interface IFachada {
 
 	public void printarClientePF(ClientePF p);
 
-	public ArrayList<ClientePF> listarClientePF();
-
 	public boolean cadastrarClientePJ(ClientePJ p) throws Exception;
 
 	public ClientePJ procurarClientePJ(int id) throws Exception;
@@ -145,8 +143,6 @@ public interface IFachada {
 	public boolean removerClientePJ(ClientePJ f) throws SQLException;
 
 	public void printarClientePJ(ClientePJ p);
-
-	public ArrayList<ClientePJ> listarClientePJ();
 
 	public ArrayList<Funcionario_Secretario> listarSecretario();
 
@@ -206,34 +202,40 @@ public interface IFachada {
 
 	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception;
 
-	public void conectar(Connection connect);
+	public boolean cadastrarCliente_Avalia(Cliente_Avalia c) throws SQLException;
 
-	public boolean cadastrar(Cliente_Avalia c) throws SQLException;
+	public Cliente_Avalia procurarCliente_Avalia(int id) throws SQLException;
 
-	public Cliente_Avalia procurar(int id) throws SQLException;
-
-	public boolean remover(Cliente_Avalia p) throws SQLException;
+	public boolean removerCliente_Avalia(Cliente_Avalia p) throws SQLException;
 
 	public boolean atualizarCliente_Avalia(Cliente_Avalia c) throws Exception;
 
-	public void printar(Cliente_Avalia p);
+	public void printarCliente_Avalia(Cliente_Avalia p);
 
-	public ArrayList<Cliente_Avalia> listar();
-	
+	public ArrayList<Cliente_Avalia> listarCliente_Avalia();
+
 	public void conectarReservaOficial(Connection c);
-	
+
 	public boolean cadastrarReservaOficial(ReservaOficial r) throws SQLException;
-	
+
 	public ReservaOficial procurarReservaOficial(int cod) throws SQLException;
-	
+
 	public boolean atualizarReservaOficial(ReservaOficial f) throws Exception;
 
 	public boolean removerReservaOficial(ReservaOficial f) throws SQLException;
-	
+
 	public ReservaOficial[] listarReservaOficial();
-	
+
 	public boolean atualizarPedidoDelivery(PedidoDelivery p) throws Exception;
-	
+
 	public Categoria[] listarCategoria();
+
+	public ClientePF[] listarClientePF();
+
+	public ClientePJ[] listarClientePJ();
+
+	public boolean atualizarClientePF(ClientePF c) throws Exception;
+
+	public boolean atualizarClientePJ(ClientePJ c) throws Exception;
 
 }

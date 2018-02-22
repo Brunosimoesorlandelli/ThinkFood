@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import beans.ClientePF;
+import beans.Cliente_Avalia;
 import beans.Funcionario_Entregador;
 
 public class RepositorioClientePF implements IRepositorioClientePF {
@@ -166,6 +167,22 @@ public class RepositorioClientePF implements IRepositorioClientePF {
 	 * 
 	 * @see dados.IRepositorioGarcom#printar(beans.Funcionario_Garcon)
 	 */
+
+	public boolean atualizarClientePF(ClientePF c) throws Exception {
+		String query = "update clientePF clientePF_nome = ?, cliente_PF_dt_nasc = ?, clientePF_id = ? where clientePF_id = "
+				+ "'" + c.getId() + "'";
+
+		PreparedStatement ps = connection.prepareStatement(query);
+
+		ps.setString(1, c.getNome());
+		ps.setDate(2, c.getDataDeNascimento());
+		ps.setInt(3, c.getId());
+
+		ps.executeUpdate();
+
+		return true;
+	}
+
 	@Override
 	public void printar(ClientePF p) {
 		try {

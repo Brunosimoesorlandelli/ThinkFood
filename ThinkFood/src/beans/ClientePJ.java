@@ -13,6 +13,10 @@ public class ClientePJ extends Cliente {
 		this.cnpj = cnpj;
 	}
 
+	public ClientePJ() {
+
+	}
+
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}

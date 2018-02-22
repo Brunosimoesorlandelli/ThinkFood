@@ -15,8 +15,9 @@ public class UnidadeLoja {
 	}
 
 	public UnidadeLoja() {
-		
+
 	}
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -24,8 +25,6 @@ public class UnidadeLoja {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
-	
 
 	public String getCep() {
 		return cep;

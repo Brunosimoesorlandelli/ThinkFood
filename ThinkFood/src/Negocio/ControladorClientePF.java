@@ -34,6 +34,10 @@ public class ControladorClientePF implements IControladorClientePF, Serializable
 		return repositorio.remover(f);
 	}
 
+	public boolean atualizarClientePF(ClientePF c) throws Exception {
+		return repositorio.atualizarClientePF(c);
+	}
+
 	public void printar(ClientePF p) {
 		repositorio.printar(p);
 	}

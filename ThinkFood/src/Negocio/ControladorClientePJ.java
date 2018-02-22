@@ -30,6 +30,10 @@ public class ControladorClientePJ implements IControladorClientePJ, Serializable
 		return repositorio.procurar(id);
 	}
 
+	public boolean atualizarClientePJ(ClientePJ c) throws Exception {
+		return repositorio.atualizarClientePJ(c);
+	}
+
 	public boolean remover(ClientePJ f) throws SQLException {
 		return repositorio.remover(f);
 	}
