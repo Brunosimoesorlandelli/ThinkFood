@@ -48,8 +48,8 @@ public class TelaCadastroClientePF extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome = textField_1.getText();
-				Date data = new Date(00, 03, 0300);
-				ClientePF p = new ClientePF(nome, data, 0);
+				Date data = new Date(00, 03, 0200);
+				ClientePF p = new ClientePF(nome, data, 164309508 + f.listarClientePF().length * 42309567);
 				try {
 					f.cadastrarClientePF(p);
 				} catch (Exception e1) {

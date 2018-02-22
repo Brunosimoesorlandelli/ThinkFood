@@ -94,17 +94,17 @@ public class TelaCadastroItemEstoque extends JFrame {
 		contentPane.add(textField_3);
 
 		JButton btnCadastrarItemNo = new JButton("Cadastrar Item no Estoque");
-		Date dataEn = new Date(00, 00, 0200);
-		Date dataVal = new Date(00, 03, 0200);
+		Date dataEn = new Date(3, 03, 0416);
+		Date dataVal = new Date(3, 03, 0417);
 		btnCadastrarItemNo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ItemEstoque p = new ItemEstoque(21, ((Integer) comboBox.getSelectedItem()),
+				ItemEstoque p = new ItemEstoque(f.listarItemEstoque()[f.listarItemEstoque().length-1].getSeq()+1, ((Integer) comboBox.getSelectedItem()),
 						Integer.parseInt(textField.getText()), dataEn, Integer.parseInt(textField_1.getText()),
 						Integer.parseInt(textField_4.getText()), dataVal);
 				try {
 					f.cadastrarItemEstoque(p);
 					dispose();
-					TelaGerente tela = new TelaGerente(FG);
+					TelaEstoque tela = new TelaEstoque(FG);
 					tela.setVisible(true);
 					tela.setResizable(false);
 					tela.setLocationRelativeTo(null);

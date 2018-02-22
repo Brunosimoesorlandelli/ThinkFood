@@ -253,9 +253,9 @@ public class TelaEstoque extends JFrame {
 				modelTock.getDataVector().removeAllElements();
 				revalidate();
 				for (int i = 0; i < f.listarItemEstoque().length; i++) {
-					modelTock.addRow(new Object[] { f.listarItemEstoque()[i].getCodProduto(),
+					modelTock.addRow(new Object[] { f.listarItemEstoque()[i].getSeq(), f.listarItemEstoque()[i].getCodProduto(),
 							f.listarItemEstoque()[i].getIdEstoque(), f.listarItemEstoque()[i].getLote(),
-							f.listarItemEstoque()[i].getQtd() });
+							f.listarItemEstoque()[i].getQtd()});
 				}
 			}
 		});

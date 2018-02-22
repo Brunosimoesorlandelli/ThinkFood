@@ -24,7 +24,7 @@ public class TelaEditarClientePF extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 
-	public TelaEditarClientePF(Funcionario_Gerente FG) {
+	public TelaEditarClientePF(Funcionario_Gerente FG, ClientePF cliente) {
 		IFachada f = Fachada.getInstance();
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,13 +43,24 @@ public class TelaEditarClientePF extends JFrame {
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
 		lblDataDeNascimento.setBounds(10, 117, 106, 14);
 		contentPane.add(lblDataDeNascimento);
+		
+		textField = new JTextField();
+		textField.setBounds(126, 114, 248, 20);	
+		textField.setText(String.valueOf(cliente.getDataDeNascimento()));
+		textField.setColumns(10);
+		contentPane.add(textField);
+	
+
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(66, 46, 308, 20);
+		textField_1.setText(cliente.getNome());
+		contentPane.add(textField_1);
 
 		JButton btnCadastrar = new JButton("Salvar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nome = textField_1.getText();
-				Date data = new Date(00, 03, 0300);
-				ClientePF p = new ClientePF(nome, data, 0);
+				ClientePF p = new ClientePF(textField_1.getText(), cliente.getDataDeNascimento(), cliente.getId());
 				try {
 					f.atualizarClientePF(p);
 				} catch (Exception e1) {
@@ -68,14 +79,6 @@ public class TelaEditarClientePF extends JFrame {
 		btnCadastrar.setBounds(147, 211, 89, 23);
 		contentPane.add(btnCadastrar);
 
-		textField = new JTextField();
-		textField.setBounds(126, 114, 248, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(66, 46, 308, 20);
-		contentPane.add(textField_1);
+		
 	}
 }

@@ -23,7 +23,7 @@ public class TelaEditarClientePJ extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 
-	public TelaEditarClientePJ(Funcionario_Gerente FG) {
+	public TelaEditarClientePJ(Funcionario_Gerente FG, ClientePJ cliente) {
 		IFachada f = Fachada.getInstance();
 		setTitle("ThinkFood");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,6 +45,25 @@ public class TelaEditarClientePJ extends JFrame {
 		JLabel lblCnpj = new JLabel("CNPJ");
 		lblCnpj.setBounds(10, 145, 46, 14);
 		contentPane.add(lblCnpj);
+		
+		textField = new JTextField();
+		textField.setBounds(102, 36, 272, 20);
+		textField.setColumns(10);
+		textField.setText(cliente.getNomeFantasia());
+		contentPane.add(textField);
+		
+
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(88, 89, 286, 20);
+		textField_1.setText(cliente.getRazaoSocial());
+		contentPane.add(textField_1);
+
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(66, 142, 308, 20);
+		textField_2.setText(cliente.getCnpj());
+		contentPane.add(textField_2);
 
 		JButton btnCadastrar = new JButton("Salvar");
 		btnCadastrar.addActionListener(new ActionListener() {
@@ -53,7 +72,7 @@ public class TelaEditarClientePJ extends JFrame {
 				String rSocial = textField_1.getText();
 				String nFanta = textField.getText();
 
-				ClientePJ p = new ClientePJ(0, cnpj, rSocial, nFanta);
+				ClientePJ p = new ClientePJ(cliente.getId(), cnpj, rSocial, nFanta);
 				try {
 					f.atualizarClientePJ(p);
 				} catch (Exception e1) {
@@ -71,20 +90,6 @@ public class TelaEditarClientePJ extends JFrame {
 		btnCadastrar.setBounds(147, 198, 89, 23);
 		contentPane.add(btnCadastrar);
 
-		textField = new JTextField();
-		textField.setBounds(102, 36, 272, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(88, 89, 286, 20);
-		contentPane.add(textField_1);
-
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(66, 142, 308, 20);
-		contentPane.add(textField_2);
 	}
 
 }

@@ -80,14 +80,18 @@ public class RepositorioClientePJ implements IRepositorioClientePJ {
 	 */
 	@Override
 	public boolean cadastrar(ClientePJ p) throws Exception {
-		String query = "insert into cliente_pj (id_cliente, cnpj, razao_social, nome_fantasia)values(?,?,?,?)";
+		String query = "insert into cliente (id) values(?)";
+		String query2 = "insert into cliente_pj (id_cliente, cnpj, razao_social, nome_fantasia)values(?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
 		ps.setInt(1, p.getId());
-		ps.setString(2, p.getCnpj());
-		ps.setString(3, p.getRazaoSocial());
-		ps.setString(4, p.getNomeFantasia());
+		ps2.setInt(1, p.getId());
+		ps2.setString(2, p.getCnpj());
+		ps2.setString(3, p.getRazaoSocial());
+		ps2.setString(4, p.getNomeFantasia());
 
 		ps.executeUpdate();
+		ps2.executeUpdate();
 		return true;
 	}
 
@@ -129,10 +133,14 @@ public class RepositorioClientePJ implements IRepositorioClientePJ {
 	 */
 	@Override
 	public boolean remover(ClientePJ f) throws SQLException {
-		String query = "delete from cliente_pj where id_cliente =?";
+		String query = "delete from cliente where id =?";
+		String query2 = "delete from cliente_pj where id_cliente =?";
 		PreparedStatement ps = connection.prepareStatement(query);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
 		ps.setInt(1, f.getId());
+		ps2.setInt(1, f.getId());
 		ps.executeUpdate();
+		ps2.executeUpdate();
 		return true;
 	}
 	/*
@@ -169,15 +177,13 @@ public class RepositorioClientePJ implements IRepositorioClientePJ {
 	 */
 
 	public boolean atualizarClientePJ(ClientePJ c) throws Exception {
-		String query = "update cliente_pj id_cliente = ?, cnpj = ?, razao_social = ?, nome_fantasia = ? where id_cliente = "
-				+ "'" + c.getId() + "'";
+		String query = "update cliente_pj set cnpj = ?, razao_social = ?, nome_fantasia = ? where id_cliente = " + c.getId();
 
 		PreparedStatement ps = connection.prepareStatement(query);
 
-		ps.setInt(1, c.getId());
-		ps.setString(2, c.getCnpj());
-		ps.setString(3, c.getRazaoSocial());
-		ps.setString(4, c.getNomeFantasia());
+		ps.setString(1, c.getCnpj());
+		ps.setString(2, c.getRazaoSocial());
+		ps.setString(3, c.getNomeFantasia());
 
 		ps.executeUpdate();
 

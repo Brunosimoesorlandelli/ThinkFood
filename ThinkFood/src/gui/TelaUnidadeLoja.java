@@ -63,7 +63,7 @@ public class TelaUnidadeLoja extends JFrame {
 		table_1.setModel(modelClientePF);
 		modelClientePF.addColumn("Id");
 		modelClientePF.addColumn("Nome");
-		for (int i = 0; i < f.listarFornecedores().length; i++) {
+		for (int i = 0; i < f.listarClientePF().length; i++) {
 			modelClientePF.addRow(new Object[] { f.listarClientePF()[i].getId(), f.listarClientePF()[i].getNome() });
 		}
 		scrollPane_1.setViewportView(table_1);
@@ -77,6 +77,16 @@ public class TelaUnidadeLoja extends JFrame {
 		contentPane.add(lblClientes);
 
 		JButton btnAtualizarClientes = new JButton("Atualizar Clientes");
+		btnAtualizarClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modelClientePF.getDataVector().removeAllElements();
+				revalidate();
+				for (int i = 0; i < f.listarClientePF().length; i++) {
+					modelClientePF.addRow(new Object[] { f.listarClientePF()[i].getId(), f.listarClientePF()[i].getNome() });
+				}
+			}
+			
+		});
 		btnAtualizarClientes.setBackground(SystemColor.inactiveCaption);
 		btnAtualizarClientes.setBounds(149, 431, 124, 23);
 		contentPane.add(btnAtualizarClientes);
@@ -98,7 +108,7 @@ public class TelaUnidadeLoja extends JFrame {
 		JButton btnRemoverCliente = new JButton("Remover Cliente");
 		btnRemoverCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 1)));
+				int id = Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)));
 				System.out.println(id);
 
 				try {
@@ -119,11 +129,18 @@ public class TelaUnidadeLoja extends JFrame {
 		JButton btnEditarCliente = new JButton("Editar Cliente");
 		btnEditarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaEditarClientePF tela = new TelaEditarClientePF(FG);
-				dispose();
-				tela.setVisible(true);
-				tela.setLocationRelativeTo(null);
-				tela.setResizable(false);
+				TelaEditarClientePF tela;
+				try {
+					tela = new TelaEditarClientePF(FG, f.procurarClientePF(Integer.parseInt(String.valueOf(table_1.getModel().getValueAt(table_1.getSelectedRow(), 0)))));
+					dispose();
+					tela.setVisible(true);
+					tela.setLocationRelativeTo(null);
+					tela.setResizable(false);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnEditarCliente.setBackground(SystemColor.inactiveCaption);
@@ -159,7 +176,7 @@ public class TelaUnidadeLoja extends JFrame {
 		modelClientePJ.addColumn("Id");
 		modelClientePJ.addColumn("Nome Fantasia");
 		modelClientePJ.addColumn("Razao Social");
-		for (int i = 0; i < f.listarFornecedores().length; i++) {
+		for (int i = 0; i < f.listarClientePJ().length; i++) {
 			modelClientePJ.addRow(new Object[] { f.listarClientePJ()[i].getId(),
 					f.listarClientePJ()[i].getNomeFantasia(), f.listarClientePJ()[i].getRazaoSocial() });
 		}
@@ -170,6 +187,17 @@ public class TelaUnidadeLoja extends JFrame {
 		contentPane.add(lblClientesJuridicos);
 
 		JButton button = new JButton("Atualizar Clientes");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modelClientePJ.getDataVector().removeAllElements();
+				revalidate();
+				for (int i = 0; i < f.listarClientePJ().length; i++) {
+					modelClientePJ.addRow(new Object[] { f.listarClientePJ()[i].getId(),
+							f.listarClientePJ()[i].getNomeFantasia(), f.listarClientePJ()[i].getRazaoSocial() });
+				}
+			}
+			
+		});
 		button.setBackground(SystemColor.inactiveCaption);
 		button.setBounds(508, 431, 124, 23);
 		contentPane.add(button);
@@ -191,7 +219,7 @@ public class TelaUnidadeLoja extends JFrame {
 		JButton button_2 = new JButton("Remover Cliente");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 1)));
+				int id = Integer.parseInt(String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 0)));
 				System.out.println(id);
 
 				try {
@@ -212,11 +240,18 @@ public class TelaUnidadeLoja extends JFrame {
 		JButton button_3 = new JButton("Editar Cliente");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaEditarClientePJ tela = new TelaEditarClientePJ(FG);
-				dispose();
-				tela.setVisible(true);
-				tela.setLocationRelativeTo(null);
-				tela.setResizable(false);
+				TelaEditarClientePJ tela;
+				try {
+					tela = new TelaEditarClientePJ(FG, f.procurarClientePJ(Integer.parseInt(String.valueOf(table_2.getModel().getValueAt(table_2.getSelectedRow(), 0)))));
+					dispose();
+					tela.setVisible(true);
+					tela.setLocationRelativeTo(null);
+					tela.setResizable(false);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		button_3.setBackground(SystemColor.inactiveCaption);

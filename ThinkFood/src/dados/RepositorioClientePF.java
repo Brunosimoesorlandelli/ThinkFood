@@ -81,13 +81,17 @@ public class RepositorioClientePF implements IRepositorioClientePF {
 	 */
 	@Override
 	public boolean cadastrar(ClientePF p) throws Exception {
-		String query = "insert into clientepf (clientePF_nome, clientePF_dt_nasc, clientePF_id)values(?,?,?)";
+		String query = "insert into cliente(id) values(?)";
+		String query2 = "insert into clientepf (clientePF_nome, clientePF_dt_nasc, clientePF_id)values(?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, p.getNome());
-		ps.setDate(2, p.getDataDeNascimento());
-		ps.setInt(3, p.getId());
-
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		ps.setInt(1, p.getId());
+		ps2.setString(1, p.getNome());
+		ps2.setDate(2, p.getDataDeNascimento());
+		ps2.setInt(3, p.getId());
+		
 		ps.executeUpdate();
+		ps2.executeUpdate();
 		return true;
 	}
 
@@ -106,7 +110,7 @@ public class RepositorioClientePF implements IRepositorioClientePF {
 		ClientePF f = null;
 		String query = "select * from clientepf where clientePF_id = ?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(3, id);
+		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
@@ -129,10 +133,14 @@ public class RepositorioClientePF implements IRepositorioClientePF {
 	 */
 	@Override
 	public boolean remover(ClientePF f) throws SQLException {
-		String query = "delete from clientepf where clientePF_id =?";
+		String query = "delete from cliente where id =?";
+		String query2 = "delete from clientepf where clientePF_id =?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(3, f.getId());
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		ps.setInt(1, f.getId());
+		ps2.setInt(1, f.getId());
 		ps.executeUpdate();
+		ps2.executeUpdate();
 		return true;
 	}
 	/*
@@ -169,14 +177,12 @@ public class RepositorioClientePF implements IRepositorioClientePF {
 	 */
 
 	public boolean atualizarClientePF(ClientePF c) throws Exception {
-		String query = "update clientePF clientePF_nome = ?, cliente_PF_dt_nasc = ?, clientePF_id = ? where clientePF_id = "
-				+ "'" + c.getId() + "'";
+		String query = "update clientepf set clientePF_nome = ?, cliente_PF_dt_nasc = ? where clientePF_id = " + c.getId();
 
 		PreparedStatement ps = connection.prepareStatement(query);
 
 		ps.setString(1, c.getNome());
 		ps.setDate(2, c.getDataDeNascimento());
-		ps.setInt(3, c.getId());
 
 		ps.executeUpdate();
 

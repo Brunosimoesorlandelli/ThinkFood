@@ -53,7 +53,7 @@ public class TelaCadastroClientePJ extends JFrame {
 				String rSocial = textField_1.getText();
 				String nFanta = textField.getText();
 
-				ClientePJ p = new ClientePJ(0, cnpj, rSocial, nFanta);
+				ClientePJ p = new ClientePJ(255219508 + f.listarClientePJ().length * 42309567, cnpj, rSocial, nFanta);
 				try {
 					f.cadastrarClientePJ(p);
 				} catch (Exception e1) {

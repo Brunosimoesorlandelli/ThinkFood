@@ -167,8 +167,7 @@ public class RepositorioItemEstoque implements Serializable, IRepositorioItemEst
 	 */
 
 	public boolean atualizarItemEstoque(ItemEstoque i) throws Exception {
-		String query = "update item_estoque set seq = ?, produtoRef_cod = ?, id_estoque = ?, data_entrada = ?, lote = ?, qtd = ?, data_validade = ? where seq = "
-				+ "'" + i.getSeq() + "'";
+		String query = "update item_estoque set seq = ?, produtoRef_cod = ?, id_estoque = ?, data_entrada = ?, lote = ?, qtd = ?, data_validade = ? where seq = " + i.getSeq();
 
 		PreparedStatement ps = connection.prepareStatement(query);
 

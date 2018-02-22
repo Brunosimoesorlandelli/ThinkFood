@@ -99,8 +99,8 @@ public class TelaEditarItemEstoque extends JFrame {
 		DataVal.setText(String.valueOf(item.getDataValidade()));
 
 		JButton btnSalvar = new JButton("Salvar");
-		Date dataEn = new Date(00, 00, 0200);
-		Date dataVal = new Date(00, 03, 0200);
+		Date dataEn = new Date(13, 03, 0316);
+		Date dataVal = new Date(13, 03, 0317);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ItemEstoque p = new ItemEstoque(item.getSeq(),((Integer) comboBox.getSelectedItem()),
@@ -114,7 +114,7 @@ public class TelaEditarItemEstoque extends JFrame {
 					e1.printStackTrace();
 				}
 				dispose();
-				TelaGerente tela = new TelaGerente(FG);
+				TelaEstoque tela = new TelaEstoque(FG);
 				tela.setVisible(true);
 				tela.setResizable(false);
 				tela.setLocationRelativeTo(null);

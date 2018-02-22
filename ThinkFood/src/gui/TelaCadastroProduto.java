@@ -73,23 +73,13 @@ public class TelaCadastroProduto extends JFrame {
 		lblCodCateg.setBounds(133, 196, 68, 14);
 		contentPane.add(lblCodCateg);
 
-		List<String> categList = new ArrayList<String>();
-		for (int i = 0; i < f.listarProduto().length; i++) {
-			if(!(categList.contains(String.valueOf(f.listarProduto()[i].getCod_categ()))))
-			categList.add(String.valueOf(f.listarProduto()[i].getCod_categ()));
-		}
-		
-		String[] produtos = new String[categList.size()];
-		for (int i = 0; i < produtos.length; i++) {
-			produtos[i] = categList.get(i);
-		}
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(312, 193, 342, 20);
 		DefaultComboBoxModel modelBox = (DefaultComboBoxModel) comboBox.getModel();
 		comboBox.setModel(modelBox);
-		for (int i = 0; i < produtos.length; i++) {
-			modelBox.addElement(produtos[i]);
+		for (int i = 0; i < f.listarCategoria().length; i++) {
+			modelBox.addElement(f.listarCategoria()[i].getCodCateg());
 		}
 		contentPane.add(comboBox);
 

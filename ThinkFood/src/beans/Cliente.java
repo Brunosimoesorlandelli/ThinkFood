@@ -7,6 +7,10 @@ public class Cliente {
 	public Cliente(int id) {
 		this.id = id;
 	}
+	
+	public Cliente() {
+		
+	}
 
 	public int getId() {
 		return id;
